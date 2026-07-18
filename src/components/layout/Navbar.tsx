@@ -10,6 +10,7 @@ import {
   LogOut,
   Menu,
   X,
+  User,
 } from 'lucide-react';
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
@@ -24,6 +25,7 @@ const navItems = [
   { href: '/dashboard', label: 'Predicciones', icon: LayoutDashboard },
   { href: '/leaderboard', label: 'Clasificación', icon: Trophy },
   { href: '/leagues', label: 'Mis Ligas', icon: Users },
+  { href: '/profile', label: 'Mi Perfil', icon: User },
 ];
 
 export default function Navbar({ profile, isAdmin }: NavbarProps) {
@@ -97,13 +99,13 @@ export default function Navbar({ profile, isAdmin }: NavbarProps) {
         {/* User section */}
         <div className="flex items-center gap-3 ml-auto">
           {profile && (
-            <div className="flex items-center gap-3">
+            <Link href="/profile" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <div className="text-right hidden lg:block">
                 <p className="text-sm font-semibold text-white">{profile.nickname}</p>
                 <p className="text-xs text-slate-500">{profile.email}</p>
               </div>
               <div
-                className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ring-2 ring-emerald-500/30"
+                className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ring-2 ring-emerald-500/30 overflow-hidden"
                 style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}>
                 {profile.avatar_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -116,7 +118,7 @@ export default function Navbar({ profile, isAdmin }: NavbarProps) {
                   profile.nickname.charAt(0).toUpperCase()
                 )}
               </div>
-            </div>
+            </Link>
           )}
           <button
             onClick={handleSignOut}

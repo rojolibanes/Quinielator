@@ -35,6 +35,8 @@ export interface Profile {
   email: string;
   nickname: string;
   avatar_url: string | null;
+  favorite_team?: string | null;
+  tagline?: string | null;
   created_at: string;
 }
 
