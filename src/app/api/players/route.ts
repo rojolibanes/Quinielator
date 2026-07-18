@@ -52,20 +52,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(mockData);
   }
 
+  const host = process.env.RAPIDAPI_HOST || 'v3.football.api-sports.io';
+  const apiKey = process.env.RAPIDAPI_KEY!;
+  const baseUrl = host.includes('rapidapi') ? `https://${host}/v3` : `https://${host}`;
+  const headers: Record<string, string> = host.includes('rapidapi')
+    ? { 'X-RapidAPI-Key': apiKey, 'X-RapidAPI-Host': host }
+    : { 'x-apisports-key': apiKey };
+
   try {
     const [homeRes, awayRes] = await Promise.all([
-      fetch(`https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${homeId}`, {
-        headers: {
-          'X-RapidAPI-Key': process.env.RAPIDAPI_KEY!,
-          'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
-        },
-      }),
-      fetch(`https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${awayId}`, {
-        headers: {
-          'X-RapidAPI-Key': process.env.RAPIDAPI_KEY!,
-          'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
-        },
-      }),
+      fetch(`${baseUrl}/players/squads?team=${homeId}`, { headers }),
+      fetch(`${baseUrl}/players/squads?team=${awayId}`, { headers }),
     ]);
 
     const [homeData, awayData] = await Promise.all([homeRes.json(), awayRes.json()]);
