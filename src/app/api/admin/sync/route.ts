@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
+import { syncFixtures, syncResults } from '@/lib/api-football/sync';
 
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim());
 
@@ -19,34 +20,25 @@ export async function POST(request: Request) {
 
   const body = await request.json().catch(() => ({}));
   const action = body.action || 'all';
-  const matchday = body.matchday ? Number(body.matchday) : undefined;
-
-  const host = request.headers.get('host') || 'localhost:3000';
-  const protocol = host.includes('localhost') ? 'http' : 'https';
-
-  const cronUrl = new URL(`${protocol}://${host}/api/cron/sync-football`);
-  cronUrl.searchParams.append('action', action);
-  if (matchday) {
-    cronUrl.searchParams.append('matchday', String(matchday));
-  }
-  if (process.env.CRON_SECRET) {
-    cronUrl.searchParams.append('secret', process.env.CRON_SECRET);
-  }
+  const matchday = body.matchday ? Number(body.matchday) : null;
 
   try {
-    const res = await fetch(cronUrl.toString(), { method: 'GET' });
-    const json = await res.json();
+    const summary: Record<string, any> = {};
 
-    if (!res.ok) {
-      return NextResponse.json({ error: json.error || 'Error procesando la sincronización' }, { status: res.status });
+    if (action === 'fixtures' || action === 'all') {
+      summary.fixtures = await syncFixtures(matchday);
+    }
+
+    if (action === 'results' || action === 'all') {
+      summary.results = await syncResults();
     }
 
     return NextResponse.json({
       message: 'Sincronización completada',
-      details: json.summary,
+      details: summary,
     });
   } catch (err: any) {
-    console.error('Error al llamar sync-football desde admin:', err);
-    return NextResponse.json({ error: 'Error al conectar con la API de sincronización' }, { status: 500 });
+    console.error('Error en admin sync:', err);
+    return NextResponse.json({ error: err.message || 'Error en la sincronización' }, { status: 500 });
   }
 }
