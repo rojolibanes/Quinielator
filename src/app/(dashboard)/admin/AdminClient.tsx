@@ -5,7 +5,7 @@ import {
   ShieldCheck, Edit3, CheckCircle, X, Loader2,
   CalendarPlus, Trophy, Users, RefreshCw, Zap, Calendar, Trash2, AlertTriangle
 } from 'lucide-react';
-import type { Match, Scorer, MVPPlayer } from '@/types';
+import type { Match, Scorer, MVPPlayer, MatchStatus } from '@/types';
 import { createClient } from '@/lib/supabase/client';
 import ScorerSelector from '@/components/predictions/ScorerSelector';
 import MVPSelector from '@/components/predictions/MVPSelector';
@@ -22,6 +22,60 @@ import { SPANISH_TEAM_NAMES } from '@/lib/teams';
 export default function AdminClient({ matches: initialMatches }: AdminClientProps) {
   const supabase = createClient();
   const [matches, setMatches] = useState<Match[]>(initialMatches);
+  const [editingDetails, setEditingDetails] = useState<Match | null>(null);
+  const [detailsForm, setDetailsForm] = useState({
+    home_team: '',
+    away_team: '',
+    matchday: 1,
+    match_date: '',
+    status: 'pending' as MatchStatus,
+  });
+  const [savingDetails, setSavingDetails] = useState(false);
+
+  const startEditDetails = (match: Match) => {
+    setEditingDetails(match);
+    // Convert UTC/ISO date to local YYYY-MM-DDTHH:mm string for datetime-local input
+    const d = new Date(match.match_date);
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const localIso = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+    setDetailsForm({
+      home_team: match.home_team,
+      away_team: match.away_team,
+      matchday: match.matchday,
+      match_date: localIso,
+      status: match.status,
+    });
+  };
+
+  const handleSaveDetails = async () => {
+    if (!editingDetails) return;
+    setSavingDetails(true);
+
+    try {
+      const res = await fetch('/api/admin/matches', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          match_id: editingDetails.id,
+          ...detailsForm,
+        }),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        toast.error('Error al modificar partido: ' + json.error);
+      } else {
+        toast.success('✅ Partido modificado correctamente');
+        setMatches(prev => prev.map(m => m.id === editingDetails.id ? (json.match as Match) : m));
+        setEditingDetails(null);
+      }
+    } catch (err: any) {
+      toast.error('Error de red: ' + err.message);
+    } finally {
+      setSavingDetails(false);
+    }
+  };
   const [activeTab, setActiveTab] = useState<'results' | 'create' | 'sync'>('results');
   const [editingMatch, setEditingMatch] = useState<Match | null>(null);
   const [editForm, setEditForm] = useState<{
@@ -311,10 +365,16 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                     </button>
                   )}
                   <button
+                    onClick={() => startEditDetails(match)}
+                    className="text-xs px-3 py-1.5 rounded-lg text-blue-400 hover:bg-blue-500/10 transition-all border border-blue-500/20 flex items-center gap-1">
+                    <Calendar size={12} />
+                    Modificar
+                  </button>
+                  <button
                     onClick={() => startEdit(match)}
                     className="text-xs px-3 py-1.5 rounded-lg text-slate-300 hover:bg-slate-700 transition-all border border-slate-700 flex items-center gap-1">
                     <Edit3 size={12} />
-                    {match.status === 'finished' ? 'Editar' : 'Resultado'}
+                    {match.status === 'finished' ? 'Editar Marcador' : 'Resultado'}
                   </button>
                   <button
                     onClick={() => handleDeleteMatch(match.id)}
@@ -621,6 +681,99 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                 disabled={saving}
                 className="flex-1 btn-primary py-3 text-sm justify-center">
                 {saving ? <><Loader2 size={16} className="animate-spin" /> Guardando...</> : '✅ Guardar y Recalcular'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Edit Match Details Modal (Fecha, Aplazamiento, Equipos) ── */}
+      {editingDetails && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }}>
+          <div className="glass-card w-full max-w-md p-6 animate-fade-in space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Calendar size={18} className="text-blue-400" />
+                Modificar Partido / Fecha
+              </h2>
+              <button onClick={() => setEditingDetails(null)} className="text-slate-400 hover:text-white transition-colors">
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Teams */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Local</label>
+                <select
+                  value={detailsForm.home_team}
+                  onChange={e => setDetailsForm(f => ({ ...f, home_team: e.target.value }))}
+                  className="input-field text-xs">
+                  {SPANISH_TEAM_NAMES.map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Visitante</label>
+                <select
+                  value={detailsForm.away_team}
+                  onChange={e => setDetailsForm(f => ({ ...f, away_team: e.target.value }))}
+                  className="input-field text-xs">
+                  {SPANISH_TEAM_NAMES.filter(t => t !== detailsForm.home_team).map(t => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </div>
+            </div>
+
+            {/* Date and Matchday */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Jornada</label>
+                <input
+                  type="number"
+                  min={1}
+                  max={38}
+                  value={detailsForm.matchday}
+                  onChange={e => setDetailsForm(f => ({ ...f, matchday: parseInt(e.target.value) || 1 }))}
+                  className="input-field text-xs"
+                />
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Estado</label>
+                <select
+                  value={detailsForm.status}
+                  onChange={e => setDetailsForm(f => ({ ...f, status: e.target.value as MatchStatus }))}
+                  className="input-field text-xs">
+                  <option value="pending">Pendiente / Aplazado</option>
+                  <option value="live">En Vivo 🔴</option>
+                  <option value="finished">Finalizado</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Date time local */}
+            <div>
+              <label className="block text-xs text-slate-400 mb-1">Nueva Fecha y Hora (Hora de España) *</label>
+              <input
+                type="datetime-local"
+                value={detailsForm.match_date}
+                onChange={e => setDetailsForm(f => ({ ...f, match_date: e.target.value }))}
+                className="input-field text-xs"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setEditingDetails(null)}
+                className="btn-secondary py-2.5 flex-1 text-xs justify-center">
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveDetails}
+                disabled={savingDetails || !detailsForm.match_date}
+                className="btn-primary py-2.5 flex-1 text-xs justify-center">
+                {savingDetails ? <Loader2 size={14} className="animate-spin" /> : '💾 Guardar Cambios'}
               </button>
             </div>
           </div>
