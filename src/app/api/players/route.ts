@@ -1,28 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Team name to API-Football team ID mapping for La Liga 2024-25
-const TEAM_IDS: Record<string, number> = {
-  'Real Madrid': 541,
-  'FC Barcelona': 529,
-  'Atlético de Madrid': 530,
-  'Athletic Club': 531,
-  'Real Sociedad': 548,
-  'Villarreal': 533,
-  'Real Betis': 543,
-  'Valencia CF': 532,
-  'Celta de Vigo': 538,
-  'Osasuna': 727,
-  'Sevilla FC': 536,
-  'Rayo Vallecano': 728,
-  'Getafe CF': 546,
-  'UD Las Palmas': 798,
-  'Deportivo Alavés': 542,
-  'Girona FC': 547,
-  'RCD Espanyol': 539,
-  'RCD Mallorca': 723,
-  'CD Leganés': 724,
-  'Real Valladolid': 720,
-};
+import { getTeamId } from '@/lib/teams';
 
 // In-memory cache to avoid hitting rate limits (cache for 1 hour)
 const cache: Map<string, { data: any; expires: number }> = new Map();
@@ -38,8 +16,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(cached.data);
   }
 
-  const homeId = TEAM_IDS[homeTeam];
-  const awayId = TEAM_IDS[awayTeam];
+  const homeId = getTeamId(homeTeam);
+  const awayId = getTeamId(awayTeam);
 
   // If no API key or team IDs not found, return mock players
   if (!process.env.RAPIDAPI_KEY || process.env.RAPIDAPI_KEY === 'your-rapidapi-key') {

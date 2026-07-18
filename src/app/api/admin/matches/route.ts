@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { createClient as createAdminClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
+import { getTeamLogo } from '@/lib/teams';
 
 const supabaseAdmin = createAdminClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -29,11 +30,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Faltan campos obligatorios' }, { status: 400 });
   }
 
+  const homeLogo = body.home_team_logo || getTeamLogo(home_team);
+  const awayLogo = body.away_team_logo || getTeamLogo(away_team);
+
   const { data, error } = await supabaseAdmin
     .from('matches')
     .insert({
       home_team,
       away_team,
+      home_team_logo: homeLogo,
+      away_team_logo: awayLogo,
       matchday: matchday ?? 1,
       match_date: new Date(match_date).toISOString(),
       football_league: football_league ?? 'laliga',

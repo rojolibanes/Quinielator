@@ -17,13 +17,7 @@ interface AdminClientProps {
   matches: Match[];
 }
 
-const LA_LIGA_TEAMS = [
-  'Real Madrid', 'FC Barcelona', 'Atlético de Madrid', 'Athletic Club',
-  'Real Sociedad', 'Villarreal', 'Real Betis', 'Valencia CF',
-  'Celta de Vigo', 'Osasuna', 'Sevilla FC', 'Rayo Vallecano',
-  'Getafe CF', 'UD Las Palmas', 'Deportivo Alavés', 'Girona FC',
-  'RCD Espanyol', 'RCD Mallorca', 'CD Leganés', 'Real Valladolid',
-];
+import { SPANISH_TEAM_NAMES } from '@/lib/teams';
 
 export default function AdminClient({ matches: initialMatches }: AdminClientProps) {
   const supabase = createClient();
@@ -349,7 +343,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                 onChange={e => setNewMatch(f => ({ ...f, home_team: e.target.value }))}
                 className="input-field">
                 <option value="">Seleccionar...</option>
-                {LA_LIGA_TEAMS.map(t => <option key={t} value={t}>{t}</option>)}
+                {SPANISH_TEAM_NAMES.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
             <div>
@@ -359,7 +353,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                 onChange={e => setNewMatch(f => ({ ...f, away_team: e.target.value }))}
                 className="input-field">
                 <option value="">Seleccionar...</option>
-                {LA_LIGA_TEAMS.filter(t => t !== newMatch.home_team).map(t => <option key={t} value={t}>{t}</option>)}
+                {SPANISH_TEAM_NAMES.filter(t => t !== newMatch.home_team).map(t => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
           </div>

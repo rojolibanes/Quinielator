@@ -32,12 +32,29 @@ export async function PATCH(request: Request) {
   if (tagline !== undefined) updates.tagline = tagline ? String(tagline).trim().slice(0, 80) : null;
 
   try {
-    const { data, error } = await supabaseAdmin
+    let { data, error } = await supabaseAdmin
       .from('profiles')
       .update(updates)
       .eq('id', user.id)
       .select()
-      .single();
+      .maybeSingle();
+
+    if (error && (error.message.includes('column') || error.code === 'PGRST204')) {
+      // Si faltan columnas como tagline o favorite_team en la base de datos, actualizar solo nickname y avatar_url
+      const safeUpdates: Record<string, any> = {};
+      if (nickname !== undefined) safeUpdates.nickname = String(nickname).trim().replace(/\s/g, '');
+      if (avatar_url !== undefined) safeUpdates.avatar_url = avatar_url ? String(avatar_url).trim() : null;
+
+      const fallback = await supabaseAdmin
+        .from('profiles')
+        .update(safeUpdates)
+        .eq('id', user.id)
+        .select()
+        .maybeSingle();
+
+      data = fallback.data;
+      error = fallback.error;
+    }
 
     if (error) {
       if (error.code === '23505') {
