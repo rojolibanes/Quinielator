@@ -81,6 +81,34 @@ export async function syncFixtures(specificMatchday: number | null) {
 
     if (!homeTeam || !awayTeam || !date) continue;
 
+    let homeScore: number | null = null;
+    let awayScore: number | null = null;
+    let scorers: any[] | null = null;
+
+    if (status === 'finished' || item.goals?.home !== null) {
+      homeScore = item.goals?.home ?? 0;
+      awayScore = item.goals?.away ?? 0;
+
+      if (status === 'finished' && item.fixture?.id) {
+        try {
+          const eventsRes = await fetch(`${baseUrl}/fixtures/events?fixture=${item.fixture.id}`, { headers });
+          const eventsJson = eventsRes.ok ? await eventsRes.json() : { response: [] };
+          const events = eventsJson.response || [];
+
+          scorers = events
+            .filter((e: any) => e.type === 'Goal' && e.detail !== 'Missed Penalty')
+            .map((e: any) => ({
+              player_id: e.player.id,
+              name: e.player.name,
+              team: e.team.name === item.teams.home.name ? 'home' : 'away',
+              photo: e.player.photo || '',
+            }));
+        } catch (err) {
+          console.error('Error cargando goleadores:', err);
+        }
+      }
+    }
+
     const { data: existing } = await supabaseAdmin
       .from('matches')
       .select('id')
@@ -89,21 +117,29 @@ export async function syncFixtures(specificMatchday: number | null) {
       .eq('matchday', matchday)
       .maybeSingle();
 
+    const matchPayload: any = {
+      match_date: date,
+      home_team_logo: homeLogo,
+      away_team_logo: awayLogo,
+      status,
+    };
+
+    if (homeScore !== null) matchPayload.home_score = homeScore;
+    if (awayScore !== null) matchPayload.away_score = awayScore;
+    if (scorers !== null) matchPayload.scorers = scorers;
+
     if (existing) {
       await supabaseAdmin
         .from('matches')
-        .update({ match_date: date, home_team_logo: homeLogo, away_team_logo: awayLogo, status })
+        .update(matchPayload)
         .eq('id', existing.id);
     } else {
       await supabaseAdmin.from('matches').insert({
         home_team: homeTeam,
         away_team: awayTeam,
-        home_team_logo: homeLogo,
-        away_team_logo: awayLogo,
         matchday,
-        match_date: date,
         football_league: 'laliga',
-        status,
+        ...matchPayload,
       });
     }
     syncedCount++;
@@ -128,7 +164,7 @@ export async function syncResults() {
   const { data: matches } = await supabaseAdmin
     .from('matches')
     .select('*')
-    .in('status', ['pending', 'live']);
+    .or('status.in.(pending,live),home_score.is.null');
 
   if (!matches || matches.length === 0) {
     return { status: 'success', updated: 0, message: 'No hay partidos pendientes' };
