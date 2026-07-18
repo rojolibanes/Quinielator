@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-export default function manifest(): MetadataRoute.Manifest {
+export default function manifest(): MetadataRoute.Manifest | any {
   return {
     id: '/',
     name: 'Quinielator — Predicciones de Fútbol',
