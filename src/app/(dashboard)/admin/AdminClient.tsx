@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import {
-  ShieldCheck, PlusCircle, Edit3, CheckCircle, X, Loader2,
-  CalendarPlus, Trophy, Users, RefreshCw, Zap, Calendar
+  ShieldCheck, Edit3, CheckCircle, X, Loader2,
+  CalendarPlus, Trophy, Users, RefreshCw, Zap, Calendar, Trash2, AlertTriangle
 } from 'lucide-react';
 import type { Match, Scorer, MVPPlayer } from '@/types';
 import { createClient } from '@/lib/supabase/client';
@@ -38,6 +38,10 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
   }>({ home_score: 0, away_score: 0, scorers: [], mvp: null });
   const [saving, setSaving] = useState(false);
   const [recalculating, setRecalculating] = useState<string | null>(null);
+  const [deletingMatch, setDeletingMatch] = useState<string | null>(null);
+  const [confirmDeleteAll, setConfirmDeleteAll] = useState(false);
+  const [bulkDeleting, setBulkDeleting] = useState(false);
+  const [beforeDate, setBeforeDate] = useState('2026-08-01');
 
   // Sync state
   const [syncMatchday, setSyncMatchday] = useState<number>(1);
@@ -52,6 +56,56 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
     football_league: 'laliga',
   });
   const [creatingMatch, setCreatingMatch] = useState(false);
+
+  const handleDeleteMatch = async (matchId: string) => {
+    if (!window.confirm('¿Seguro que quieres eliminar este partido? Esta acción no se puede deshacer.')) return;
+    setDeletingMatch(matchId);
+    try {
+      const res = await fetch('/api/admin/matches/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ match_id: matchId }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        toast.error(json.error || 'Error al eliminar');
+      } else {
+        setMatches(prev => prev.filter(m => m.id !== matchId));
+        toast.success('🗑️ Partido eliminado');
+      }
+    } catch (err: any) {
+      toast.error('Error: ' + err.message);
+    } finally {
+      setDeletingMatch(null);
+    }
+  };
+
+  const handleBulkDelete = async (type: 'before_date' | 'all') => {
+    setBulkDeleting(true);
+    try {
+      const body = type === 'all'
+        ? { status_filter: 'all_matches' }
+        : { before_date: beforeDate };
+
+      const res = await fetch('/api/admin/matches/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        toast.error(json.error || 'Error al eliminar');
+      } else {
+        toast.success(`🗑️ ${json.message}`);
+        setMatches([]);
+        setConfirmDeleteAll(false);
+      }
+    } catch (err: any) {
+      toast.error('Error: ' + err.message);
+    } finally {
+      setBulkDeleting(false);
+    }
+  };
 
   const triggerSync = async (action: 'fixtures' | 'results' | 'all', matchday?: number) => {
     setSyncingAction(action);
@@ -268,6 +322,13 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                     <Edit3 size={12} />
                     {match.status === 'finished' ? 'Editar' : 'Resultado'}
                   </button>
+                  <button
+                    onClick={() => handleDeleteMatch(match.id)}
+                    disabled={deletingMatch === match.id}
+                    className="text-xs px-3 py-1.5 rounded-lg text-red-400 hover:bg-red-500/10 transition-all border border-red-500/20 flex items-center gap-1">
+                    {deletingMatch === match.id ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
+                    Borrar
+                  </button>
                 </div>
               </div>
             </div>
@@ -417,6 +478,76 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                 {syncingAction === 'all' ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
                 🔄 Ejecutar Sincronización Completa (Calendario + Resultados)
               </button>
+            </div>
+          </div>
+
+          {/* ── Danger Zone: Delete Matches ── */}
+          <div className="glass-card p-6 space-y-4 border border-red-900/40">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400">
+                <Trash2 size={20} />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold text-white">Gestión de Partidos</h2>
+                <p className="text-xs text-slate-400">Elimina partidos erróneos o de temporadas anteriores</p>
+              </div>
+            </div>
+
+            {/* Delete before date */}
+            <div className="glass-card p-4 space-y-3 border border-slate-800">
+              <div className="flex items-center gap-2">
+                <AlertTriangle size={14} className="text-amber-400" />
+                <span className="text-sm font-semibold text-white">Eliminar partidos anteriores a una fecha</span>
+              </div>
+              <p className="text-xs text-slate-400">Útil para borrar partidos de temporadas pasadas (ej: temporada 2024-25).</p>
+              <div className="flex items-center gap-3">
+                <input
+                  type="date"
+                  value={beforeDate}
+                  onChange={e => setBeforeDate(e.target.value)}
+                  className="input-field flex-1 py-1.5 text-xs"
+                />
+                <button
+                  onClick={() => handleBulkDelete('before_date')}
+                  disabled={bulkDeleting || !beforeDate}
+                  className="flex items-center gap-1 px-4 py-1.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition-all text-xs font-medium">
+                  {bulkDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
+                  Eliminar anteriores a {beforeDate}
+                </button>
+              </div>
+            </div>
+
+            {/* Delete all */}
+            <div className="glass-card p-4 space-y-3 border border-red-900/30">
+              <div className="flex items-center gap-2">
+                <AlertTriangle size={14} className="text-red-400" />
+                <span className="text-sm font-semibold text-white">Eliminar TODOS los partidos</span>
+              </div>
+              <p className="text-xs text-slate-400">⚠️ Borra absolutamente todos los partidos de la base de datos. Esta acción no se puede deshacer.</p>
+              {!confirmDeleteAll ? (
+                <button
+                  onClick={() => setConfirmDeleteAll(true)}
+                  className="flex items-center gap-1 px-4 py-1.5 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-all text-xs font-medium">
+                  <Trash2 size={12} />
+                  Eliminar todos los partidos
+                </button>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-red-400 font-medium">¿Estás seguro? Esta acción es irreversible.</span>
+                  <button
+                    onClick={() => handleBulkDelete('all')}
+                    disabled={bulkDeleting}
+                    className="flex items-center gap-1 px-4 py-1.5 rounded-lg bg-red-600 text-white hover:bg-red-500 transition-all text-xs font-bold">
+                    {bulkDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
+                    Sí, borrar todo
+                  </button>
+                  <button
+                    onClick={() => setConfirmDeleteAll(false)}
+                    className="text-xs text-slate-400 hover:text-white transition-colors">
+                    Cancelar
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
