@@ -89,43 +89,36 @@ export default function RegisterPage() {
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
             <label className="block text-sm text-slate-400 mb-2">Nickname *</label>
-            <div className="relative">
-              <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-              <input
-                type="text"
-                placeholder="Tu nombre en la plataforma"
-                value={nickname}
-                onChange={e => setNickname(e.target.value.replace(/\s/g, ''))}
-                required
-                minLength={3}
-                maxLength={20}
-                className="input-field pl-10"
-                id="register-nickname"
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Tu nombre en la plataforma"
+              value={nickname}
+              onChange={e => setNickname(e.target.value.replace(/\s/g, ''))}
+              required
+              minLength={3}
+              maxLength={20}
+              className="input-field"
+              id="register-nickname"
+            />
             <p className="text-xs text-slate-600 mt-1">Sin espacios, 3–20 caracteres. Visible en el ranking.</p>
           </div>
 
           <div>
             <label className="block text-sm text-slate-400 mb-2">Email *</label>
-            <div className="relative">
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-              <input
-                type="email"
-                placeholder="tu@email.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-                className="input-field pl-10"
-                id="register-email"
-              />
-            </div>
+            <input
+              type="email"
+              placeholder="tu@email.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              className="input-field"
+              id="register-email"
+            />
           </div>
 
           <div>
             <label className="block text-sm text-slate-400 mb-2">Contraseña *</label>
             <div className="relative">
-              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type={showPass ? 'text' : 'password'}
                 placeholder="Mínimo 8 caracteres"
@@ -133,7 +126,7 @@ export default function RegisterPage() {
                 onChange={e => setPassword(e.target.value)}
                 required
                 minLength={8}
-                className="input-field pl-10 pr-10"
+                className="input-field pr-10"
                 id="register-password"
               />
               <button type="button" onClick={() => setShowPass(!showPass)}
@@ -145,20 +138,17 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-sm text-slate-400 mb-2">Confirmar contraseña *</label>
-            <div className="relative">
-              <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-              <input
-                type={showPass ? 'text' : 'password'}
-                placeholder="Repite la contraseña"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                required
-                className={`input-field pl-10 ${
-                  confirmPassword && confirmPassword !== password ? 'border-red-500/60' : ''
-                }`}
-                id="register-confirm-password"
-              />
-            </div>
+            <input
+              type={showPass ? 'text' : 'password'}
+              placeholder="Repite la contraseña"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              required
+              className={`input-field ${
+                confirmPassword && confirmPassword !== password ? 'border-red-500/60' : ''
+              }`}
+              id="register-confirm-password"
+            />
           </div>
 
           <button type="submit" disabled={loading} id="register-submit"

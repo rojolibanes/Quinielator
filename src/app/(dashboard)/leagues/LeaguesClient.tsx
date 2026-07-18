@@ -217,6 +217,30 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
                   <p className="text-xs text-slate-500">puntos</p>
                 </div>
               </div>
+
+              {/* Reglas de la liga */}
+              <div className="mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                <span className="text-slate-500 font-medium">Reglas de la liga:</span>
+                <span className="text-slate-400">
+                  🎯 Marcador exacto: <strong className="text-emerald-400">+{league.points_config.exact_score}</strong>
+                </span>
+                <span className="text-slate-400">
+                  ✅ 1X2: <strong className="text-emerald-400">+{league.points_config.result_1x2}</strong>
+                </span>
+                {league.points_config.enable_scorers !== false && (
+                  <span className="text-slate-400">
+                    ⚽ Goleador: <strong className="text-emerald-400">+{league.points_config.scorer_per_goal}</strong>
+                  </span>
+                )}
+                <span className="text-slate-400">
+                  📊 Goles ind: <strong className="text-emerald-400">+{league.points_config.individual_goals}</strong>
+                </span>
+                {league.points_config.enable_mvp !== false && (
+                  <span className="text-slate-400">
+                    ⭐ MVP: <strong className="text-emerald-400">+{league.points_config.mvp}</strong>
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>

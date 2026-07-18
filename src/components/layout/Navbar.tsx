@@ -17,6 +17,7 @@ import type { Profile } from '@/types';
 
 interface NavbarProps {
   profile: Profile | null;
+  isAdmin?: boolean;
 }
 
 const navItems = [
@@ -25,7 +26,7 @@ const navItems = [
   { href: '/leagues', label: 'Mis Ligas', icon: Users },
 ];
 
-export default function Navbar({ profile }: NavbarProps) {
+export default function Navbar({ profile, isAdmin }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -79,16 +80,18 @@ export default function Navbar({ profile }: NavbarProps) {
             </Link>
           ))}
           {/* Admin link - only shown if user is admin */}
-          <Link
-            href="/admin"
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-              pathname.startsWith('/admin')
-                ? 'bg-emerald-500/10 text-emerald-400'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-            }`}>
-            <ShieldCheck size={16} />
-            Admin
-          </Link>
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                pathname.startsWith('/admin')
+                  ? 'bg-emerald-500/10 text-emerald-400'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}>
+              <ShieldCheck size={16} />
+              Admin
+            </Link>
+          )}
         </nav>
 
         {/* User section */}
@@ -178,17 +181,19 @@ export default function Navbar({ profile }: NavbarProps) {
                 {label}
               </Link>
             ))}
-            <Link
-              href="/admin"
-              onClick={() => setMenuOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                pathname.startsWith('/admin')
-                  ? 'bg-emerald-500/10 text-emerald-400'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-              }`}>
-              <ShieldCheck size={18} />
-              Admin
-            </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  pathname.startsWith('/admin')
+                    ? 'bg-emerald-500/10 text-emerald-400'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                }`}>
+                <ShieldCheck size={18} />
+                Admin
+              </Link>
+            )}
             <button
               onClick={() => { handleSignOut(); setMenuOpen(false); }}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-400/10 transition-all duration-200 text-left w-full">
@@ -215,12 +220,14 @@ export default function Navbar({ profile }: NavbarProps) {
             <span>{label}</span>
           </Link>
         ))}
-        <Link
-          href="/admin"
-          className={`nav-item ${pathname.startsWith('/admin') ? 'active' : ''}`}>
-          <ShieldCheck size={22} />
-          <span>Admin</span>
-        </Link>
+        {isAdmin && (
+          <Link
+            href="/admin"
+            className={`nav-item ${pathname.startsWith('/admin') ? 'active' : ''}`}>
+            <ShieldCheck size={22} />
+            <span>Admin</span>
+          </Link>
+        )}
       </nav>
     </>
   );

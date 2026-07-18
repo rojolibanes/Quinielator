@@ -131,34 +131,7 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
         </div>
       </div>
 
-      {/* Points config summary */}
-      <div className="glass-card p-4 flex flex-wrap gap-4 text-xs animate-fade-in">
-        <span className="text-slate-400">Reglas de la liga:</span>
-        <span className="flex gap-1 items-center">
-          <span className="text-emerald-400 font-bold">+{selectedLeague.points_config.exact_score}</span>
-          <span className="text-slate-400">marcador exacto</span>
-        </span>
-        <span className="flex gap-1 items-center">
-          <span className="text-emerald-400 font-bold">+{selectedLeague.points_config.result_1x2}</span>
-          <span className="text-slate-400">1X2</span>
-        </span>
-        {selectedLeague.points_config.enable_scorers !== false && (
-          <span className="flex gap-1 items-center">
-            <span className="text-emerald-400 font-bold">+{selectedLeague.points_config.scorer_per_goal}</span>
-            <span className="text-slate-400">por goleador</span>
-          </span>
-        )}
-        <span className="flex gap-1 items-center">
-          <span className="text-emerald-400 font-bold">+{selectedLeague.points_config.individual_goals}</span>
-          <span className="text-slate-400">goles individuales</span>
-        </span>
-        {selectedLeague.points_config.enable_mvp !== false && (
-          <span className="flex gap-1 items-center">
-            <span className="text-emerald-400 font-bold">+{selectedLeague.points_config.mvp}</span>
-            <span className="text-slate-400">MVP</span>
-          </span>
-        )}
-      </div>
+
 
       {/* Match list */}
       {loading ? (
