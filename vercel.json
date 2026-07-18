@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sync-football?action=all",
+      "schedule": "0 4 * * *"
+    }
+  ]
+}
