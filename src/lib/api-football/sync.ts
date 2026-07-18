@@ -4,7 +4,9 @@ const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const RAPIDAPI_HOST = process.env.RAPIDAPI_HOST || 'v3.football.api-sports.io';
 
 const LA_LIGA_ID = 140;
-const SEASON = 2024;
+// Temporada actual: 2025 = temporada 2025-2026
+// La API usa el año de inicio de la temporada (ej: 2025 para 2025/26)
+const SEASON = 2025;
 
 function getHeaders(): Record<string, string> {
   if (RAPIDAPI_HOST?.includes('rapidapi')) {
@@ -42,8 +44,10 @@ export async function syncFixtures(specificMatchday: number | null) {
   url.searchParams.append('league', String(LA_LIGA_ID));
   url.searchParams.append('season', String(SEASON));
   if (specificMatchday) {
+    // Jornada específica
     url.searchParams.append('round', `Regular Season - ${specificMatchday}`);
   } else {
+    // Intentar los próximos 10 partidos; si no hay (pretemporada), coger los últimos 10
     url.searchParams.append('next', '10');
   }
 
