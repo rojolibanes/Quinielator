@@ -4,9 +4,10 @@ const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const RAPIDAPI_HOST = process.env.RAPIDAPI_HOST || 'v3.football.api-sports.io';
 
 const LA_LIGA_ID = 140;
-// Temporada actual: 2026 = temporada 2026-2027
-// La API usa el año de inicio de la temporada (ej: 2026 para 2026/27)
-const SEASON = 2026;
+// NOTA SOBRE TEMPORADAS EN API-SPORTS:
+// El plan gratuito de API-Football da acceso a temporadas 2022 a 2024.
+// Para acceder a temporadas 2025/2026 en directo hace falta el plan de pago.
+const SEASON = 2024;
 
 function getHeaders(): Record<string, string> {
   if (RAPIDAPI_HOST?.includes('rapidapi')) {
