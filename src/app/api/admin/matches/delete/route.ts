@@ -12,6 +12,34 @@ async function checkAdmin() {
   return isAdmin ? user : null;
 }
 
+/**
+ * Recalcula el total de puntos de todos los usuarios en todas las ligas
+ * sumando únicamente las predicciones que aún existen en la base de datos.
+ */
+async function syncUserTotalPoints(supabaseAdmin: any) {
+  const { data: members } = await supabaseAdmin
+    .from('league_members')
+    .select('league_id, user_id');
+
+  if (!members || members.length === 0) return;
+
+  for (const m of members) {
+    const { data: preds } = await supabaseAdmin
+      .from('predictions')
+      .select('points_earned')
+      .eq('league_id', m.league_id)
+      .eq('user_id', m.user_id);
+
+    const total = (preds || []).reduce((acc: number, p: any) => acc + (p.points_earned || 0), 0);
+
+    await supabaseAdmin
+      .from('league_members')
+      .update({ total_points: total })
+      .eq('league_id', m.league_id)
+      .eq('user_id', m.user_id);
+  }
+}
+
 export async function DELETE(request: Request) {
   const user = await checkAdmin();
   if (!user) {
@@ -28,34 +56,78 @@ export async function DELETE(request: Request) {
 
   try {
     if (match_id) {
-      // Borrar un partido específico
+      // 1. Borrar predicciones asociadas a este partido
+      await supabaseAdmin
+        .from('predictions')
+        .delete()
+        .eq('match_id', match_id);
+
+      // 2. Borrar el partido
       const { error } = await supabaseAdmin
         .from('matches')
         .delete()
         .eq('id', match_id);
 
       if (error) throw error;
-      return NextResponse.json({ success: true, message: 'Partido eliminado' });
+
+      // 3. Recalcular la clasificación de todos los usuarios
+      await syncUserTotalPoints(supabaseAdmin);
+
+      return NextResponse.json({ success: true, message: 'Partido y puntos eliminados correctamente' });
     }
 
     if (before_date) {
-      // Borrar todos los partidos antes de una fecha
-      let query = supabaseAdmin.from('matches').delete().lt('match_date', before_date);
+      // Obtener partidos anteriores a la fecha
+      let query = supabaseAdmin.from('matches').select('id').lt('match_date', before_date);
       if (status_filter && status_filter !== 'all') {
-        query = supabaseAdmin.from('matches').delete()
+        query = supabaseAdmin.from('matches').select('id')
           .lt('match_date', before_date)
           .eq('status', status_filter);
       }
-      const { error, count } = await query;
-      if (error) throw error;
-      return NextResponse.json({ success: true, message: `Partidos eliminados correctamente`, count });
+      const { data: matchesToDelete } = await query;
+      const matchIds = (matchesToDelete || []).map((m: any) => m.id);
+
+      if (matchIds.length > 0) {
+        // 1. Borrar predicciones asociadas
+        await supabaseAdmin
+          .from('predictions')
+          .delete()
+          .in('match_id', matchIds);
+
+        // 2. Borrar los partidos
+        const { error } = await supabaseAdmin
+          .from('matches')
+          .delete()
+          .in('id', matchIds);
+
+        if (error) throw error;
+      }
+
+      // 3. Recalcular la clasificación de todos los usuarios
+      await syncUserTotalPoints(supabaseAdmin);
+
+      return NextResponse.json({
+        success: true,
+        message: `Se han eliminado ${matchIds.length} partidos y se han recalculado todos los puntos`,
+        count: matchIds.length,
+      });
     }
 
     if (status_filter === 'all_matches') {
-      // Borrar TODOS los partidos
+      // 1. Borrar TODAS las predicciones
+      await supabaseAdmin.from('predictions').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+
+      // 2. Borrar TODOS los partidos
       const { error } = await supabaseAdmin.from('matches').delete().neq('id', '00000000-0000-0000-0000-000000000000');
       if (error) throw error;
-      return NextResponse.json({ success: true, message: 'Todos los partidos eliminados' });
+
+      // 3. Resetear total_points de todos los usuarios a 0
+      await supabaseAdmin
+        .from('league_members')
+        .update({ total_points: 0 })
+        .neq('league_id', '00000000-0000-0000-0000-000000000000');
+
+      return NextResponse.json({ success: true, message: 'Todos los partidos y puntos han sido eliminados' });
     }
 
     return NextResponse.json({ error: 'Parámetros inválidos' }, { status: 400 });

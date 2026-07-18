@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { createClient as createAdmin } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { syncFixtures, syncResults } from '@/lib/api-football/sync';
 
@@ -10,6 +11,30 @@ async function checkAdmin() {
   if (!user) return null;
   const isAdmin = ADMIN_EMAILS.includes(user.email ?? '') || ADMIN_EMAILS.length === 0;
   return isAdmin ? user : null;
+}
+
+async function syncUserTotalPoints(supabaseAdmin: any) {
+  const { data: members } = await supabaseAdmin
+    .from('league_members')
+    .select('league_id, user_id');
+
+  if (!members || members.length === 0) return;
+
+  for (const m of members) {
+    const { data: preds } = await supabaseAdmin
+      .from('predictions')
+      .select('points_earned')
+      .eq('league_id', m.league_id)
+      .eq('user_id', m.user_id);
+
+    const total = (preds || []).reduce((acc: number, p: any) => acc + (p.points_earned || 0), 0);
+
+    await supabaseAdmin
+      .from('league_members')
+      .update({ total_points: total })
+      .eq('league_id', m.league_id)
+      .eq('user_id', m.user_id);
+  }
 }
 
 export async function POST(request: Request) {
@@ -31,6 +56,15 @@ export async function POST(request: Request) {
 
     if (action === 'results' || action === 'all') {
       summary.results = await syncResults();
+    }
+
+    if (action === 'recalculate_rankings' || action === 'all') {
+      const supabaseAdmin = createAdmin(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+      );
+      await syncUserTotalPoints(supabaseAdmin);
+      summary.rankings = { status: 'success', message: 'Clasificaciones recalculadas' };
     }
 
     return NextResponse.json({

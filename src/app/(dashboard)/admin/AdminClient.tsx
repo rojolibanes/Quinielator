@@ -107,7 +107,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
     }
   };
 
-  const triggerSync = async (action: 'fixtures' | 'results' | 'all', matchday?: number) => {
+  const triggerSync = async (action: 'fixtures' | 'results' | 'all' | 'recalculate_rankings', matchday?: number) => {
     setSyncingAction(action);
     try {
       const res = await fetch('/api/admin/sync', {
@@ -469,14 +469,22 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
               </div>
             </div>
 
-            {/* Complete Sync Button */}
-            <div className="pt-2">
+            {/* Complete Sync & Recalculate Buttons */}
+            <div className="pt-2 space-y-2">
               <button
                 onClick={() => triggerSync('all')}
                 disabled={syncingAction !== null}
                 className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/20">
                 {syncingAction === 'all' ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
                 🔄 Ejecutar Sincronización Completa (Calendario + Resultados)
+              </button>
+
+              <button
+                onClick={() => triggerSync('recalculate_rankings')}
+                disabled={syncingAction !== null}
+                className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-medium text-xs transition-all flex items-center justify-center gap-2">
+                {syncingAction === 'recalculate_rankings' ? <Loader2 size={14} className="animate-spin" /> : <Users size={14} />}
+                📊 Recalcular Puntos Totales y Clasificación General
               </button>
             </div>
           </div>
