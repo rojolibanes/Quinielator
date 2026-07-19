@@ -1,7 +1,6 @@
 'use client';
 
-import { ChevronDown, Globe, Lock } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { Globe, Lock, Sparkles } from 'lucide-react';
 import type { League } from '@/types';
 
 interface LeagueSelectorProps {
@@ -11,68 +10,49 @@ interface LeagueSelectorProps {
 }
 
 export default function LeagueSelector({ leagues, selected, onSelect }: LeagueSelectorProps) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
+  if (!leagues || leagues.length === 0) return null;
 
   return (
-    <div ref={ref} className="relative">
-      <label className="block text-xs text-slate-500 mb-1.5 font-medium">Liga</label>
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
-        style={{
-          background: 'rgba(15, 23, 42, 0.8)',
-          border: '1px solid rgba(51, 65, 85, 0.6)',
-          color: 'white',
-        }}>
-        <div className="flex items-center gap-2">
-          {selected?.is_private ? <Lock size={14} className="text-slate-400" /> : <Globe size={14} className="text-emerald-400" />}
-          <span>{selected?.name ?? 'Seleccionar liga'}</span>
-          {selected?.is_official && (
-            <span className="text-xs px-1.5 py-0.5 rounded text-emerald-400"
-              style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-              Oficial
-            </span>
-          )}
-        </div>
-        <ChevronDown size={16} className={`text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <label className="text-xs text-slate-400 font-semibold tracking-wider uppercase">
+          Liga activa
+        </label>
+        <span className="text-xs text-slate-500">
+          {leagues.length} {leagues.length === 1 ? 'liga' : 'ligas'}
+        </span>
+      </div>
 
-      {open && (
-        <div
-          className="absolute top-full left-0 right-0 mt-2 rounded-xl overflow-hidden z-50 animate-fade-in"
-          style={{
-            background: 'rgba(15, 23, 42, 0.98)',
-            border: '1px solid rgba(51, 65, 85, 0.6)',
-            backdropFilter: 'blur(16px)',
-          }}>
-          {leagues.map(league => (
+      {/* Chip Tabs for instant 1-tap switching */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none">
+        {leagues.map(league => {
+          const isSelected = selected?.id === league.id;
+          return (
             <button
               key={league.id}
-              onClick={() => { onSelect(league); setOpen(false); }}
-              className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-slate-800/60 ${
-                selected?.id === league.id ? 'text-emerald-400' : 'text-slate-300'
+              onClick={() => onSelect(league)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 border ${
+                isSelected
+                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/60 shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500/30'
+                  : 'bg-slate-900/80 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-white'
               }`}>
-              {league.is_private ? <Lock size={14} className="text-slate-500" /> : <Globe size={14} className="text-emerald-400" />}
-              <div className="flex-1 text-left">
-                <p className="font-medium">{league.name}</p>
-                {league.is_private && (
-                  <p className="text-xs text-slate-500">Liga privada</p>
-                )}
-              </div>
-              {selected?.id === league.id && <span className="text-emerald-400">✓</span>}
+              {league.is_official ? (
+                <Sparkles size={15} className={isSelected ? 'text-emerald-400' : 'text-slate-400'} />
+              ) : league.is_private ? (
+                <Lock size={14} className={isSelected ? 'text-emerald-400' : 'text-slate-500'} />
+              ) : (
+                <Globe size={14} className={isSelected ? 'text-emerald-400' : 'text-slate-500'} />
+              )}
+              <span>{league.name}</span>
+              {league.is_official && (
+                <span className="text-[10px] uppercase font-black tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Oficial
+                </span>
+              )}
             </button>
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
     </div>
   );
 }
