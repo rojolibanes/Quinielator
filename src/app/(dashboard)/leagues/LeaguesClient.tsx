@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Users, Copy, Check, Lock, Globe, ChevronRight, Sparkles } from 'lucide-react';
+import { Plus, Users, Copy, Check, Lock, Globe, ChevronRight, Sparkles, Trash2, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { CreateLeagueFormData, PointsConfig, FootballLeague } from '@/types';
@@ -10,10 +10,12 @@ import toast from 'react-hot-toast';
 
 interface LeaguesClientProps {
   userId: string;
+  isAdmin?: boolean;
   userLeagues: Array<{
     league: {
       id: string;
       name: string;
+      creator_id?: string | null;
       is_private: boolean;
       is_official: boolean;
       code_to_join: string | null;
@@ -25,13 +27,6 @@ interface LeaguesClientProps {
   }>;
 }
 
-const FOOTBALL_LEAGUES = [
-  { value: 'laliga', label: 'LaLiga', flag: '🇪🇸' },
-  { value: 'champions', label: 'Champions League', flag: '⭐' },
-  { value: 'europa_league', label: 'Europa League', flag: '🟠' },
-  { value: 'copa_rey', label: 'Copa del Rey', flag: '🏆' },
-];
-
 const SCORING_OPTIONS = [
   { key: 'exact_score', label: 'Marcador exacto', emoji: '🎯', min: 5, max: 50, step: 5 },
   { key: 'result_1x2', label: 'Resultado 1X2', emoji: '✅', min: 1, max: 30, step: 1 },
@@ -40,13 +35,15 @@ const SCORING_OPTIONS = [
   { key: 'mvp', label: 'MVP del partido', emoji: '⭐', min: 1, max: 15, step: 1 },
 ] as const;
 
-export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProps) {
+export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUserLeagues }: LeaguesClientProps) {
   const router = useRouter();
   const supabase = createClient();
   const [activeTab, setActiveTab] = useState<'my' | 'create' | 'join'>('my');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [joinCode, setJoinCode] = useState('');
   const [joiningLeague, setJoiningLeague] = useState(false);
+  const [userLeagues, setUserLeagues] = useState(initialUserLeagues);
+  const [deletingLeagueId, setDeletingLeagueId] = useState<string | null>(null);
 
   // Create league form
   const [form, setForm] = useState<CreateLeagueFormData>({
@@ -64,6 +61,30 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
     toast.success('Código copiado al portapapeles');
   };
 
+  const handleDeleteLeague = async (leagueId: string, leagueName: string) => {
+    if (!window.confirm(`¿Seguro que quieres eliminar la liga "${leagueName}"? Esta acción no se puede deshacer y borrará a todos los participantes y sus puntos.`)) return;
+
+    setDeletingLeagueId(leagueId);
+    try {
+      const res = await fetch(`/api/leagues?id=${leagueId}`, {
+        method: 'DELETE',
+      });
+      const json = await res.json();
+
+      if (!res.ok) {
+        toast.error(json.error || 'Error al eliminar la liga');
+      } else {
+        toast.success(`🗑️ Liga "${leagueName}" eliminada`);
+        setUserLeagues(prev => prev.filter(l => l.league.id !== leagueId));
+        router.refresh();
+      }
+    } catch {
+      toast.error('Error de red al eliminar la liga');
+    } finally {
+      setDeletingLeagueId(null);
+    }
+  };
+
   const handleCreate = async () => {
     if (!form.name.trim()) {
       toast.error('Introduce un nombre para la liga');
@@ -78,7 +99,7 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
         body: JSON.stringify({
           name: form.name.trim(),
           is_private: form.is_private,
-          football_league: form.football_league,
+          football_league: 'laliga',
           points_config: form.points_config,
         }),
       });
@@ -136,7 +157,7 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
       {/* Header */}
       <div className="animate-fade-in">
         <h1 className="text-2xl font-bold text-white">Mis Ligas</h1>
-        <p className="text-slate-400 text-sm mt-1">Gestiona tus ligas y compite con amigos</p>
+        <p className="text-slate-400 text-sm mt-1">Gestiona tus ligas de LaLiga y compite con amigos</p>
       </div>
 
       {/* Tabs */}
@@ -171,78 +192,95 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
               <p className="text-slate-500 text-sm">Crea una o únete con un código.</p>
             </div>
           )}
-          {userLeagues.map(({ league, total_points, member_count }) => (
-            <div key={league.id} className="glass-card p-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: league.is_official ? 'linear-gradient(135deg, #10B981, #059669)' : 'rgba(30, 41, 59, 0.8)', border: '1px solid rgba(51, 65, 85, 0.5)' }}>
-                    {league.is_official ? (
-                      <Sparkles size={18} className="text-white" />
-                    ) : (
-                      league.is_private ? <Lock size={16} className="text-slate-400" /> : <Globe size={16} className="text-slate-400" />
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-white">{league.name}</h3>
-                      {league.is_official && (
-                        <span className="text-xs px-1.5 py-0.5 rounded text-emerald-400"
-                          style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-                          Oficial
-                        </span>
+          {userLeagues.map(({ league, total_points, member_count }) => {
+            const canDelete = !league.is_official && (league.creator_id === userId || isAdmin);
+
+            return (
+              <div key={league.id} className="glass-card p-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: league.is_official ? 'linear-gradient(135deg, #10B981, #059669)' : 'rgba(30, 41, 59, 0.8)', border: '1px solid rgba(51, 65, 85, 0.5)' }}>
+                      {league.is_official ? (
+                        <Sparkles size={18} className="text-white" />
+                      ) : (
+                        league.is_private ? <Lock size={16} className="text-slate-400" /> : <Globe size={16} className="text-slate-400" />
                       )}
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      {member_count} {member_count === 1 ? 'participante' : 'participantes'} · {FOOTBALL_LEAGUES.find(l => l.value === league.football_league)?.label}
-                    </p>
-                    {league.is_private && league.code_to_join && (
-                      <div className="flex items-center gap-2 mt-2">
-                        <span className="text-xs text-slate-500">Código:</span>
-                        <code className="text-xs font-mono font-bold text-emerald-400 px-2 py-0.5 rounded"
-                          style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.15)' }}>
-                          {league.code_to_join}
-                        </code>
-                        <button
-                          onClick={() => copyCode(league.code_to_join!)}
-                          className="text-slate-500 hover:text-emerald-400 transition-colors">
-                          {copiedCode === league.code_to_join ? <Check size={14} /> : <Copy size={14} />}
-                        </button>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-white">{league.name}</h3>
+                        {league.is_official && (
+                          <span className="text-xs px-1.5 py-0.5 rounded text-emerald-400"
+                            style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+                            Oficial
+                          </span>
+                        )}
                       </div>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        {member_count} {member_count === 1 ? 'participante' : 'participantes'} · LaLiga 🇪🇸
+                      </p>
+                      {league.is_private && league.code_to_join && (
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-xs text-slate-500">Código:</span>
+                          <code className="text-xs font-mono font-bold text-emerald-400 px-2 py-0.5 rounded"
+                            style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.15)' }}>
+                            {league.code_to_join}
+                          </code>
+                          <button
+                            onClick={() => copyCode(league.code_to_join!)}
+                            className="text-slate-500 hover:text-emerald-400 transition-colors">
+                            {copiedCode === league.code_to_join ? <Check size={14} /> : <Copy size={14} />}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="text-right">
+                      <p className="text-xl font-black text-emerald-400">{total_points}</p>
+                      <p className="text-xs text-slate-500">puntos</p>
+                    </div>
+
+                    {canDelete && (
+                      <button
+                        onClick={() => handleDeleteLeague(league.id, league.name)}
+                        disabled={deletingLeagueId === league.id}
+                        className="text-xs px-2.5 py-1 rounded-lg text-red-400 hover:bg-red-500/10 border border-red-500/20 transition-all flex items-center gap-1"
+                        title="Eliminar liga">
+                        {deletingLeagueId === league.id ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
+                        <span>Borrar</span>
+                      </button>
                     )}
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-xl font-black text-emerald-400">{total_points}</p>
-                  <p className="text-xs text-slate-500">puntos</p>
+
+                {/* Reglas de la liga */}
+                <div className="mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                  <span className="text-slate-500 font-medium">Reglas de la liga:</span>
+                  <span className="text-slate-400">
+                    🎯 Marcador exacto: <strong className="text-emerald-400">+{league.points_config.exact_score}</strong>
+                  </span>
+                  <span className="text-slate-400">
+                    ✅ 1X2: <strong className="text-emerald-400">+{league.points_config.result_1x2}</strong>
+                  </span>
+                  {league.points_config.enable_scorers !== false && (
+                    <span className="text-slate-400">
+                      ⚽ Goleador: <strong className="text-emerald-400">+{league.points_config.scorer_per_goal}</strong>
+                    </span>
+                  )}
+                  <span className="text-slate-400">
+                    📊 Goles ind: <strong className="text-emerald-400">+{league.points_config.individual_goals}</strong>
+                  </span>
+                  {league.points_config.enable_mvp !== false && (
+                    <span className="text-slate-400">
+                      ⭐ MVP: <strong className="text-emerald-400">+{league.points_config.mvp}</strong>
+                    </span>
+                  )}
                 </div>
               </div>
-
-              {/* Reglas de la liga */}
-              <div className="mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap gap-x-4 gap-y-1 text-xs">
-                <span className="text-slate-500 font-medium">Reglas de la liga:</span>
-                <span className="text-slate-400">
-                  🎯 Marcador exacto: <strong className="text-emerald-400">+{league.points_config.exact_score}</strong>
-                </span>
-                <span className="text-slate-400">
-                  ✅ 1X2: <strong className="text-emerald-400">+{league.points_config.result_1x2}</strong>
-                </span>
-                {league.points_config.enable_scorers !== false && (
-                  <span className="text-slate-400">
-                    ⚽ Goleador: <strong className="text-emerald-400">+{league.points_config.scorer_per_goal}</strong>
-                  </span>
-                )}
-                <span className="text-slate-400">
-                  📊 Goles ind: <strong className="text-emerald-400">+{league.points_config.individual_goals}</strong>
-                </span>
-                {league.points_config.enable_mvp !== false && (
-                  <span className="text-slate-400">
-                    ⭐ MVP: <strong className="text-emerald-400">+{league.points_config.mvp}</strong>
-                  </span>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -263,26 +301,6 @@ export default function LeaguesClient({ userId, userLeagues }: LeaguesClientProp
               maxLength={50}
               id="league-name"
             />
-          </div>
-
-          {/* Football league */}
-          <div>
-            <label className="block text-sm text-slate-400 mb-2">Competición de fútbol</label>
-            <div className="grid grid-cols-2 gap-2">
-              {FOOTBALL_LEAGUES.map(fl => (
-                <button
-                  key={fl.value}
-                  onClick={() => setForm(f => ({ ...f, football_league: fl.value as FootballLeague }))}
-                  className={`flex items-center gap-2 p-3 rounded-xl text-sm font-medium transition-all border ${
-                    form.football_league === fl.value
-                      ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400'
-                      : 'border-slate-700/50 text-slate-400 hover:border-slate-600'
-                  }`}>
-                  <span>{fl.flag}</span>
-                  {fl.label}
-                </button>
-              ))}
-            </div>
           </div>
 
           {/* Private toggle */}

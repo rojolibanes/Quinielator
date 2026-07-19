@@ -3,10 +3,14 @@ import { redirect } from 'next/navigation';
 import LeaguesClient from './LeaguesClient';
 import type { PointsConfig } from '@/types';
 
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
+
 export default async function LeaguesPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login');
+
+  const isAdmin = ADMIN_EMAILS.length === 0 || ADMIN_EMAILS.includes(user.email ?? '');
 
   // Fetch user's leagues with member count and user points
   const { data: memberships } = await supabase
@@ -14,7 +18,7 @@ export default async function LeaguesPage() {
     .select(`
       total_points,
       leagues (
-        id, name, is_private, is_official, code_to_join, football_league, points_config
+        id, name, creator_id, is_private, is_official, code_to_join, football_league, points_config
       )
     `)
     .eq('user_id', user.id);
@@ -37,6 +41,7 @@ export default async function LeaguesPage() {
       league: {
         id: m.leagues.id,
         name: m.leagues.name,
+        creator_id: m.leagues.creator_id,
         is_private: m.leagues.is_private,
         is_official: m.leagues.is_official,
         code_to_join: m.leagues.code_to_join,
@@ -47,5 +52,5 @@ export default async function LeaguesPage() {
       member_count: countMap[m.leagues.id] || 1,
     }));
 
-  return <LeaguesClient userId={user.id} userLeagues={userLeagues} />;
+  return <LeaguesClient userId={user.id} isAdmin={isAdmin} userLeagues={userLeagues} />;
 }
