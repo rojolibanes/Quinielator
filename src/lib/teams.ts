@@ -3,7 +3,7 @@ export interface TeamInfo {
   logo: string;
 }
 
-// Strictly the 20 teams of LaLiga Primera División
+// Strictly the 20 teams of LaLiga EA Sports (1ª División) for the 2026/27 season
 export const SPANISH_TEAMS: Record<string, TeamInfo> = {
   'Real Madrid': { id: 541, logo: 'https://media.api-sports.io/football/teams/541.png' },
   'FC Barcelona': { id: 529, logo: 'https://media.api-sports.io/football/teams/529.png' },
@@ -18,13 +18,13 @@ export const SPANISH_TEAMS: Record<string, TeamInfo> = {
   'Sevilla FC': { id: 536, logo: 'https://media.api-sports.io/football/teams/536.png' },
   'Rayo Vallecano': { id: 728, logo: 'https://media.api-sports.io/football/teams/728.png' },
   'Getafe CF': { id: 546, logo: 'https://media.api-sports.io/football/teams/546.png' },
-  'UD Las Palmas': { id: 798, logo: 'https://media.api-sports.io/football/teams/798.png' },
   'Deportivo Alavés': { id: 542, logo: 'https://media.api-sports.io/football/teams/542.png' },
-  'Girona FC': { id: 547, logo: 'https://media.api-sports.io/football/teams/547.png' },
   'RCD Espanyol': { id: 539, logo: 'https://media.api-sports.io/football/teams/539.png' },
-  'RCD Mallorca': { id: 723, logo: 'https://media.api-sports.io/football/teams/723.png' },
-  'CD Leganés': { id: 537, logo: 'https://media.api-sports.io/football/teams/537.png' },
-  'Real Valladolid': { id: 720, logo: 'https://media.api-sports.io/football/teams/720.png' },
+  'Racing Santander': { id: 4665, logo: 'https://media.api-sports.io/football/teams/4665.png' },
+  'Deportivo de La Coruña': { id: 544, logo: 'https://media.api-sports.io/football/teams/544.png' },
+  'Málaga CF': { id: 573, logo: 'https://media.api-sports.io/football/teams/573.png' },
+  'Elche CF': { id: 797, logo: 'https://media.api-sports.io/football/teams/797.png' },
+  'Levante UD': { id: 545, logo: 'https://media.api-sports.io/football/teams/545.png' },
 };
 
 export const SPANISH_TEAM_NAMES = Object.keys(SPANISH_TEAMS).sort();
