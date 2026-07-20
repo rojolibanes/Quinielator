@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, Check, Loader2, Target, Trophy, CheckCircle2 } from 'lucide-react';
+import { User, Loader2, Target, Trophy, CheckCircle2 } from 'lucide-react';
 import type { Profile } from '@/types';
 import toast from 'react-hot-toast';
 
@@ -16,15 +16,20 @@ interface ProfileClientProps {
   };
 }
 
+// 100% Football-themed avatar presets
 const PRESET_AVATARS = [
-  { id: 'soccer', label: 'Futbolista ⚽', url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=soccer' },
-  { id: 'trophy', label: 'Campeón 🏆', url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=trophy' },
-  { id: 'crown', label: 'Leyenda 👑', url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=crown' },
-  { id: 'fire', label: 'En Racha 🔥', url: 'https://api.dicebear.com/7.x/fun-emoji/svg?seed=fire' },
-  { id: 'tactical', label: 'Táctico 🧠', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=tactical' },
-  { id: 'striker', label: 'Goleador 🎯', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=striker' },
-  { id: 'lion', label: 'León 🦁', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=lion' },
-  { id: 'coach', label: 'Entrenador 🕶️', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=coach' },
+  { id: 'delantero', label: 'Delantero ⚽', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Striker10&clothingColor=emerald' },
+  { id: 'portero', label: 'Portero 🧤', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Keeper1&top=shortHairShortCurly&clothingColor=amber' },
+  { id: 'capitan', label: 'Capitán 👑', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Capitan&clothingColor=blue' },
+  { id: 'mister', label: 'Míster 🧢', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MisterCoach&top=hat&clothingColor=black' },
+  { id: 'arbitro', label: 'El Árbitro 🟨', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=RefYellow&clothingColor=yellow' },
+  { id: 'ultra', label: 'Ultra / Hincha 🔥', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=UltraFanatic&facialHair=beardMedium' },
+  { id: 'tactico', label: 'Táctico 🧠', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=TacticalBrain&accessories=prescription02' },
+  { id: 'leyenda', label: 'Leyenda 🏆', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=GoldLegend&top=winterHat01' },
+  { id: 'var', label: 'Sala VAR 🖥️', url: 'https://api.dicebear.com/7.x/bottts/svg?seed=VAR_Room&texture=circuit' },
+  { id: 'crack', label: 'El 10 Crack 🌟', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ElDiez10&hairColor=black' },
+  { id: 'muro', label: 'El Muro 🛡️', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=DefensaMuro&facialHair=beardMajestic' },
+  { id: 'canterano', label: 'Canterano ⚡', url: 'https://api.dicebear.com/7.x/avataaars/svg?seed=YoungRookie&hairColor=blonde' },
 ];
 
 const SUGGESTED_TAGLINES = [
@@ -95,7 +100,7 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 relative z-10">
-          {/* Avatar view (Fixed image top clipping with object-contain p-1) */}
+          {/* Avatar view */}
           <div className="relative group">
             <div className="w-20 h-20 rounded-2xl ring-4 ring-emerald-500/30 flex items-center justify-center overflow-hidden font-bold text-2xl text-white shadow-xl bg-slate-800"
               style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}>
@@ -172,25 +177,30 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
           <p className="text-xs text-slate-500 mt-1">Este es el nombre visible en la clasificación de tus ligas.</p>
         </div>
 
-        {/* Preset Avatars Selection */}
+        {/* Football Preset Avatars Selection */}
         <div>
-          <label className="block text-sm text-slate-400 mb-2">Seleccionar Avatar Predeterminado</label>
-          <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 mb-3">
-            {PRESET_AVATARS.map(avatar => (
-              <button
-                key={avatar.id}
-                type="button"
-                onClick={() => setAvatarUrl(avatar.url)}
-                className={`p-1.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
-                  avatarUrl === avatar.url
-                    ? 'border-emerald-500 bg-emerald-500/20 ring-2 ring-emerald-500/50'
-                    : 'border-slate-800 bg-slate-900/60 hover:border-slate-700'
-                }`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={avatar.url} alt={avatar.label} className="w-10 h-10 rounded-lg object-contain p-0.5" />
-                <span className="text-[10px] text-slate-400 truncate w-full text-center">{avatar.label.split(' ')[0]}</span>
-              </button>
-            ))}
+          <label className="block text-sm text-slate-400 mb-2 font-medium">Avatares Futboleros Predeterminados ⚽</label>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 mb-3">
+            {PRESET_AVATARS.map(avatar => {
+              const isSelected = avatarUrl === avatar.url;
+              return (
+                <button
+                  key={avatar.id}
+                  type="button"
+                  onClick={() => setAvatarUrl(avatar.url)}
+                  className={`p-2 rounded-xl border flex flex-col items-center gap-1.5 transition-all duration-200 ${
+                    isSelected
+                      ? 'border-emerald-500 bg-emerald-500/20 ring-2 ring-emerald-500/50 shadow-lg shadow-emerald-950/40'
+                      : 'border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:bg-slate-800/80'
+                  }`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={avatar.url} alt={avatar.label} className="w-12 h-12 rounded-lg object-contain p-0.5" />
+                  <span className={`text-xs truncate w-full text-center font-medium ${isSelected ? 'text-emerald-300 font-bold' : 'text-slate-300'}`}>
+                    {avatar.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Custom Avatar URL */}
