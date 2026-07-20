@@ -171,25 +171,27 @@ export default function MatchCard({
         </div>
 
         {/* Teams + Score row */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Home team */}
-          <div className="flex-1 flex items-center justify-end gap-2">
+          <div className="flex-1 flex items-center justify-end gap-1.5 sm:gap-2 min-w-0">
+            <span className="font-semibold text-xs sm:text-sm text-white text-right leading-tight truncate">{match.home_team}</span>
             {match.home_team_logo && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={match.home_team_logo} alt="" className="w-8 h-8 object-contain" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={match.home_team_logo} alt={match.home_team} className="max-w-full max-h-full object-contain" />
+              </div>
             )}
-            <span className="font-semibold text-sm text-white text-right leading-tight">{match.home_team}</span>
           </div>
 
           {/* Score inputs / result */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             {match.status === 'finished' ? (
               /* Real result */
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl"
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl"
                 style={{ background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(51, 65, 85, 0.4)' }}>
-                <span className="text-2xl font-black text-white">{match.home_score}</span>
+                <span className="text-xl sm:text-2xl font-black text-white">{match.home_score}</span>
                 <span className="text-slate-500 font-light">—</span>
-                <span className="text-2xl font-black text-white">{match.away_score}</span>
+                <span className="text-xl sm:text-2xl font-black text-white">{match.away_score}</span>
               </div>
             ) : (
               /* Prediction inputs */
@@ -205,7 +207,7 @@ export default function MatchCard({
                   placeholder="–"
                   id={`home-${match.id}`}
                 />
-                <span className="text-slate-500 text-lg font-light">:</span>
+                <span className="text-slate-500 text-base sm:text-lg font-light">:</span>
                 <input
                   type="number"
                   min="0"
@@ -222,12 +224,14 @@ export default function MatchCard({
           </div>
 
           {/* Away team */}
-          <div className="flex-1 flex items-center gap-2">
+          <div className="flex-1 flex items-center justify-start gap-1.5 sm:gap-2 min-w-0">
             {match.away_team_logo && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={match.away_team_logo} alt="" className="w-8 h-8 object-contain" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 flex items-center justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={match.away_team_logo} alt={match.away_team} className="max-w-full max-h-full object-contain" />
+              </div>
             )}
-            <span className="font-semibold text-sm text-white leading-tight">{match.away_team}</span>
+            <span className="font-semibold text-xs sm:text-sm text-white leading-tight truncate">{match.away_team}</span>
           </div>
         </div>
 
