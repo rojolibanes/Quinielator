@@ -32,7 +32,15 @@ export default function ResetPasswordPage() {
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
-      toast.error('Error al actualizar la contraseña: ' + error.message);
+      let msg = error.message;
+      if (msg.toLowerCase().includes('different from the old')) {
+        msg = 'La nueva contraseña debe ser diferente a la contraseña anterior.';
+      } else if (msg.toLowerCase().includes('should be at least') || msg.toLowerCase().includes('at least 6 characters')) {
+        msg = 'La contraseña debe tener al menos 6 caracteres.';
+      } else if (msg.toLowerCase().includes('rate limit')) {
+        msg = 'Has excedido el límite de intentos. Por favor, espera unos minutos.';
+      }
+      toast.error('Error: ' + msg);
       setLoading(false);
     } else {
       toast.success('🎉 Contraseña actualizada con éxito');
