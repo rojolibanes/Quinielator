@@ -145,8 +145,8 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
     <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
       {/* Header */}
       <div className="animate-fade-in">
-        <p className="text-slate-400 text-sm mb-1">Buenas predicciones, <span className="text-emerald-400 font-semibold">{profile.nickname}</span> 👋</p>
-        <h1 className="text-2xl font-bold text-white">Dashboard de Predicciones</h1>
+        <p className="text-slate-400 text-sm mb-1">Bienvenido, <span className="text-emerald-400 font-semibold">{profile.nickname}</span> 👋</p>
+        <h1 className="text-2xl font-bold text-white">Tus Predicciones</h1>
       </div>
 
       {/* League & Matchday Selectors */}
