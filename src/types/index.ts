@@ -15,6 +15,10 @@ export interface PointsConfig {
   mvp: number;              // Default: 3
   enable_scorers: boolean;  // Default: true
   enable_mvp: boolean;      // Default: true
+  matchday_type?: 'all' | 'single' | 'range'; // Default: 'all'
+  start_matchday?: number;  // Default: 1
+  end_matchday?: number;    // Default: 38
+  filter_team?: string | null; // Default: null (all teams)
 }
 
 export const DEFAULT_POINTS_CONFIG: PointsConfig = {
@@ -25,6 +29,10 @@ export const DEFAULT_POINTS_CONFIG: PointsConfig = {
   mvp: 3,
   enable_scorers: true,
   enable_mvp: true,
+  matchday_type: 'all',
+  start_matchday: 1,
+  end_matchday: 38,
+  filter_team: null,
 };
 
 // ────────────────────────────────────────────────────────────

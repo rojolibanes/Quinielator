@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Users, Copy, Check, Lock, Globe, ChevronRight, Sparkles, Trash2, Loader2 } from 'lucide-react';
+import { Plus, Users, Copy, Check, Lock, Globe, ChevronRight, Sparkles, Trash2, Loader2, Calendar, Trophy, Filter } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { CreateLeagueFormData, PointsConfig, FootballLeague } from '@/types';
 import { DEFAULT_POINTS_CONFIG } from '@/types';
+import { SPANISH_TEAM_NAMES, getTeamLogo } from '@/lib/teams';
 import toast from 'react-hot-toast';
 
 interface LeaguesClientProps {
@@ -194,6 +195,10 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
           )}
           {userLeagues.map(({ league, total_points, member_count }) => {
             const canDelete = !league.is_official && (league.creator_id === userId || isAdmin);
+            const cfg = league.points_config || {};
+            const filterTeam = cfg.filter_team;
+            const teamLogo = filterTeam ? getTeamLogo(filterTeam) : null;
+            const matchdayType = cfg.matchday_type || 'all';
 
             return (
               <div key={league.id} className="glass-card p-4">
@@ -203,17 +208,37 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
                       style={{ background: league.is_official ? 'linear-gradient(135deg, #10B981, #059669)' : 'rgba(30, 41, 59, 0.8)', border: '1px solid rgba(51, 65, 85, 0.5)' }}>
                       {league.is_official ? (
                         <Sparkles size={18} className="text-white" />
+                      ) : filterTeam && teamLogo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={teamLogo} alt="" className="w-6 h-6 object-contain" />
+                      ) : league.is_private ? (
+                        <Lock size={16} className="text-slate-400" />
                       ) : (
-                        league.is_private ? <Lock size={16} className="text-slate-400" /> : <Globe size={16} className="text-slate-400" />
+                        <Globe size={16} className="text-slate-400" />
                       )}
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-semibold text-white">{league.name}</h3>
                         {league.is_official && (
                           <span className="text-xs px-1.5 py-0.5 rounded text-emerald-400"
                             style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
                             Oficial
+                          </span>
+                        )}
+                        {filterTeam && (
+                          <span className="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 flex items-center gap-1 font-medium">
+                            ⚽ Solo {filterTeam}
+                          </span>
+                        )}
+                        {matchdayType === 'single' && (
+                          <span className="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20 font-medium">
+                            📅 Jornada {cfg.start_matchday || 1}
+                          </span>
+                        )}
+                        {matchdayType === 'range' && (
+                          <span className="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-medium">
+                            📅 Jornadas {cfg.start_matchday || 1} a {cfg.end_matchday || 38}
                           </span>
                         )}
                       </div>
@@ -294,7 +319,7 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
             <label className="block text-sm text-slate-400 mb-2">Nombre de la liga *</label>
             <input
               type="text"
-              placeholder="Ej: La Peña del Barrio"
+              placeholder="Ej: Liga del Barça entre amigos"
               value={form.name}
               onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
               className="input-field"
@@ -315,6 +340,132 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
               className={`relative w-12 h-6 rounded-full transition-all duration-300 ${form.is_private ? 'bg-emerald-500' : 'bg-slate-700'}`}>
               <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-300 ${form.is_private ? 'left-7' : 'left-1'}`} />
             </button>
+          </div>
+
+          {/* ── Duración y Jornadas de la Liga ── */}
+          <div className="p-4 rounded-xl space-y-3"
+            style={{ background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(51, 65, 85, 0.4)' }}>
+            <label className="block text-sm font-semibold text-white flex items-center gap-2">
+              <Calendar size={16} className="text-purple-400" />
+              Duración y Jornadas
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { id: 'all', label: 'Toda la temporada' },
+                { id: 'single', label: '1 sola jornada' },
+                { id: 'range', label: 'Rango de jornadas' },
+              ].map(opt => (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => setForm(f => ({
+                    ...f,
+                    points_config: { ...f.points_config, matchday_type: opt.id as any }
+                  }))}
+                  className={`py-2 px-2.5 rounded-xl text-xs font-medium border transition-all ${
+                    (form.points_config.matchday_type || 'all') === opt.id
+                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/50 font-bold'
+                      : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:text-white'
+                  }`}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Single matchday selector */}
+            {form.points_config.matchday_type === 'single' && (
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 animate-fade-in">
+                <label className="block text-xs text-slate-400 font-medium">Selecciona la Jornada en la que competirán:</label>
+                <select
+                  value={form.points_config.start_matchday || 1}
+                  onChange={e => {
+                    const val = parseInt(e.target.value) || 1;
+                    setForm(f => ({
+                      ...f,
+                      points_config: { ...f.points_config, start_matchday: val, end_matchday: val }
+                    }));
+                  }}
+                  className="input-field text-xs">
+                  {Array.from({ length: 38 }, (_, i) => i + 1).map(j => (
+                    <option key={j} value={j}>Jornada {j}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Range matchday selector */}
+            {form.points_config.matchday_type === 'range' && (
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 grid grid-cols-2 gap-3 animate-fade-in">
+                <div>
+                  <label className="block text-xs text-slate-400 mb-1 font-medium">Jornada Inicial:</label>
+                  <select
+                    value={form.points_config.start_matchday || 1}
+                    onChange={e => {
+                      const val = parseInt(e.target.value) || 1;
+                      setForm(f => ({
+                        ...f,
+                        points_config: {
+                          ...f.points_config,
+                          start_matchday: val,
+                          end_matchday: Math.max(val, f.points_config.end_matchday || 38)
+                        }
+                      }));
+                    }}
+                    className="input-field text-xs">
+                    {Array.from({ length: 38 }, (_, i) => i + 1).map(j => (
+                      <option key={j} value={j}>Jornada {j}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-slate-400 mb-1 font-medium">Jornada Final:</label>
+                  <select
+                    value={form.points_config.end_matchday || 38}
+                    onChange={e => {
+                      const val = parseInt(e.target.value) || 38;
+                      setForm(f => ({
+                        ...f,
+                        points_config: {
+                          ...f.points_config,
+                          end_matchday: Math.max(f.points_config.start_matchday || 1, val)
+                        }
+                      }));
+                    }}
+                    className="input-field text-xs">
+                    {Array.from({ length: 38 }, (_, i) => i + 1).map(j => (
+                      <option key={j} value={j}>Jornada {j}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── Filtro por Equipo Específico ── */}
+          <div className="p-4 rounded-xl space-y-3"
+            style={{ background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(51, 65, 85, 0.4)' }}>
+            <label className="block text-sm font-semibold text-white flex items-center gap-2">
+              <Filter size={16} className="text-blue-400" />
+              Filtro por Equipo (Liga Monotemática)
+            </label>
+            <p className="text-xs text-slate-400">Si seleccionas un equipo, la liga solo incluirá los partidos donde juegue ese equipo.</p>
+            <select
+              value={form.points_config.filter_team || ''}
+              onChange={e => {
+                const val = e.target.value;
+                setForm(f => ({
+                  ...f,
+                  points_config: { ...f.points_config, filter_team: val ? val : null }
+                }));
+              }}
+              className="input-field text-xs">
+              <option value="">Todos los equipos de LaLiga (Sin filtro)</option>
+              {SPANISH_TEAM_NAMES.map(team => (
+                <option key={team} value={team}>
+                  Solo partidos del {team}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Toggles for optional features */}
