@@ -28,8 +28,8 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen gradient-hero">
       <Navbar profile={profile as Profile | null} isAdmin={isAdmin} />
-      {/* Content with padding for desktop top nav + mobile bottom nav */}
-      <main className="md:pt-16 pb-20 md:pb-6 min-h-screen">
+      {/* Content with proper top padding for mobile navbar (pt-16) and desktop (md:pt-20) */}
+      <main className="pt-16 md:pt-20 pb-24 md:pb-8 min-h-screen">
         {children}
       </main>
     </div>
