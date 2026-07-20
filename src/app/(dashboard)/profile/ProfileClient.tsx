@@ -205,11 +205,11 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
             <label className="block text-xs text-slate-500 mb-1">O introduce una URL de imagen propia:</label>
             <div className="flex gap-2">
               <input
-                type="url"
+                type="text"
                 value={avatarUrl}
                 onChange={e => setAvatarUrl(e.target.value)}
                 className="input-field flex-1 py-1.5 text-xs"
-                placeholder="https://ejemplo.com/mi-foto.jpg"
+                placeholder="https://ejemplo.com/mi-foto.jpg o /avatars/avatar_1.png"
               />
               {avatarUrl && (
                 <button
