@@ -455,10 +455,11 @@ body {
 /* ─────────────────────────────────────────────────
    RESPONSIVE UTILITIES
 ───────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .score-input {
-    width: 52px;
-    height: 52px;
-    font-size: 1.25rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.125rem;
+    border-radius: 10px;
   }
 }

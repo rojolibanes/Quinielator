@@ -93,7 +93,7 @@ export default function LeaderboardClient({
 
       {/* Podium — Top 3 */}
       {!loading && topThree.length >= 2 && (
-        <div className="flex items-end justify-center gap-3 pt-10 mt-4 animate-fade-in relative z-10">
+        <div className="flex items-end justify-center gap-3 pt-4 animate-fade-in relative z-10">
           {/* 2nd place */}
           {topThree[1] && (
             <div className="flex flex-col items-center gap-2 flex-1">
