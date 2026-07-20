@@ -59,12 +59,7 @@ export default function MatchCard({
     }
   }, [maxScorers, selectedScorers.length]);
 
-  // Auto expand when score is set
-  useEffect(() => {
-    if (homeScore !== '' && awayScore !== '') {
-      setExpanded(true);
-    }
-  }, [homeScore, awayScore]);
+
 
   const showScorers = league.points_config.enable_scorers !== false;
   const showMvp = league.points_config.enable_mvp !== false;
@@ -269,16 +264,42 @@ export default function MatchCard({
         <div className="border-t border-slate-700/30">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="w-full flex items-center justify-between px-4 py-2 text-xs text-slate-400 hover:text-emerald-400 transition-colors">
-            <span>
-              {showScorers && showMvp ? 'Goleadores y MVP' : showScorers ? 'Goleadores' : 'MVP'}
-              <span className="ml-2 text-emerald-400">
-                {showScorers && `(${selectedScorers.length}/${maxScorers} goleadores)`}
-                {showScorers && showMvp && ' · '}
-                {showMvp && (selectedMvp ? '1 MVP' : 'sin MVP')}
+            className="w-full flex items-center justify-between px-4 py-2.5 text-xs hover:bg-slate-800/30 transition-all border-b border-slate-700/20">
+            {expanded ? (
+              <span className="text-slate-400 font-medium">Ocultar panel de selección</span>
+            ) : (
+              <span className="text-xs text-slate-400 text-left leading-relaxed">
+                {showMvp && (
+                  <span className="mr-3">
+                    <span className="text-slate-500 font-medium">MVP:</span>{' '}
+                    <span className="text-amber-400/90 font-semibold">
+                      {selectedMvp ? (selectedMvp.name.split(' ').pop() || selectedMvp.name) : 'ninguno'}
+                    </span>
+                  </span>
+                )}
+                {showScorers && (
+                  <span>
+                    <span className="text-slate-500 font-medium">Goleadores:</span>{' '}
+                    <span className="text-emerald-400/90 font-semibold">
+                      {(() => {
+                        if (selectedScorers.length === 0) return 'ninguno';
+                        const counts = new Map<string, number>();
+                        selectedScorers.forEach(s => {
+                          const shortName = s.name.split(' ').pop() || s.name;
+                          counts.set(shortName, (counts.get(shortName) || 0) + 1);
+                        });
+                        const parts: string[] = [];
+                        counts.forEach((count, name) => {
+                          parts.push(count > 1 ? `${name} (${count})` : name);
+                        });
+                        return parts.join(', ');
+                      })()}
+                    </span>
+                  </span>
+                )}
               </span>
-            </span>
-            {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            )}
+            {expanded ? <ChevronUp size={14} className="text-slate-400" /> : <ChevronDown size={14} className="text-slate-400" />}
           </button>
 
           {expanded && (
@@ -306,18 +327,18 @@ export default function MatchCard({
         </div>
       )}
 
-      {/* Save button */}
-      {!isLocked && (
-        <div className="px-4 pb-4">
+      {/* Save button (Only shown when there are pending unsaved changes) */}
+      {!isLocked && hasChanges && (
+        <div className="px-4 pb-4 animate-fade-in">
           <button
             onClick={handleSave}
-            disabled={saving || !hasChanges || homeScore === '' || awayScore === ''}
+            disabled={saving || homeScore === '' || awayScore === ''}
             className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              hasChanges && homeScore !== '' && awayScore !== ''
+              homeScore !== '' && awayScore !== ''
                 ? 'btn-primary'
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}>
-            {saving ? 'Guardando...' : hasChanges ? 'Guardar predicción' : 'Predicción guardada ✓'}
+            {saving ? 'Guardando...' : 'Guardar predicción'}
           </button>
         </div>
       )}
