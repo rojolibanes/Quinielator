@@ -196,7 +196,11 @@ export default function MatchCard({
                   min="0"
                   max="20"
                   value={homeScore}
-                  onChange={e => setHomeScore(e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value)))}
+                  onChange={e => {
+                    const val = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value));
+                    setHomeScore(val);
+                    if (val !== '') setExpanded(true);
+                  }}
                   disabled={isLocked}
                   className="score-input"
                   placeholder="–"
@@ -208,7 +212,11 @@ export default function MatchCard({
                   min="0"
                   max="20"
                   value={awayScore}
-                  onChange={e => setAwayScore(e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value)))}
+                  onChange={e => {
+                    const val = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value));
+                    setAwayScore(val);
+                    if (val !== '') setExpanded(true);
+                  }}
                   disabled={isLocked}
                   className="score-input"
                   placeholder="–"
