@@ -462,7 +462,7 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
               <option value="">Todos los equipos de LaLiga (Sin filtro)</option>
               {SPANISH_TEAM_NAMES.map(team => (
                 <option key={team} value={team}>
-                  Solo partidos del {team}
+                  Solo {team}
                 </option>
               ))}
             </select>
