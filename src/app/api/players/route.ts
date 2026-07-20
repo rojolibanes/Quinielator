@@ -89,6 +89,7 @@ function generateMockPlayers(homeTeam: string, awayTeam: string) {
     'FC Barcelona': ['Lewandowski', 'Yamal', 'Raphinha', 'Pedri', 'Gavi', 'Dani Olmo', 'De Jong', 'Koundé', 'Cubarsí', 'Balde', 'Iñigo Martínez', 'ter Stegen', 'Flick'],
     'Atlético de Madrid': ['Morata', 'Griezmann', 'Correa', 'De Paul', 'Koke', 'Llorente', 'Witsel', 'Hermoso', 'Giménez', 'Molina', 'Nahuel', 'Oblak'],
     'Athletic Club': ['Williams I.', 'Williams N.', 'Guruzeta', 'Berenguer', 'Prados', 'Vesga', 'Jauregizar', 'De Marcos', 'Dani Vivian', 'Yeray', 'Paredes', 'Simón'],
+    'Málaga CF': ['Dioni', 'Larrubia', 'Kevin Medina', 'Alfonso Herrero', 'Manu Molina', 'Dani Lorenzo', 'Nelson Monte', 'Galilea', 'Víctor García', 'Gabilondo', 'Sangalli', 'Puga', 'Juanpe', 'Baturina'],
   };
 
   const getPlayers = (teamName: string, side: 'home' | 'away') => {

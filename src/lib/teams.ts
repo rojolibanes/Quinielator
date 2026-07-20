@@ -22,7 +22,7 @@ export const SPANISH_TEAMS: Record<string, TeamInfo> = {
   'RCD Espanyol': { id: 539, logo: 'https://media.api-sports.io/football/teams/539.png' },
   'Racing Santander': { id: 4665, logo: 'https://media.api-sports.io/football/teams/4665.png' },
   'Deportivo de La Coruña': { id: 544, logo: 'https://media.api-sports.io/football/teams/544.png' },
-  'Málaga CF': { id: 573, logo: 'https://media.api-sports.io/football/teams/573.png' },
+  'Málaga CF': { id: 535, logo: 'https://media.api-sports.io/football/teams/535.png' },
   'Elche CF': { id: 797, logo: 'https://media.api-sports.io/football/teams/797.png' },
   'Levante UD': { id: 545, logo: 'https://media.api-sports.io/football/teams/545.png' },
 };
