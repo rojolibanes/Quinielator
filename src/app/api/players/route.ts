@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-
 import { getTeamId } from '@/lib/teams';
 
 // In-memory cache to avoid hitting rate limits (cache for 1 hour)
 const cache: Map<string, { data: any; expires: number }> = new Map();
+
+function translatePosition(pos: string): string {
+  if (!pos) return '';
+  const p = pos.toLowerCase();
+  if (p.includes('goalkeeper') || p === 'por' || p === 'g') return 'POR';
+  if (p.includes('defender') || p === 'def' || p === 'd') return 'DEF';
+  if (p.includes('midfielder') || p === 'med' || p === 'm') return 'MED';
+  if (p.includes('attacker') || p.includes('forward') || p === 'del' || p === 'a') return 'DEL';
+  return pos;
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -49,7 +58,7 @@ export async function GET(request: NextRequest) {
       id: p.id,
       name: p.name,
       photo: p.photo,
-      position: p.position,
+      position: translatePosition(p.position),
       team: 'home',
     }));
 
@@ -57,7 +66,7 @@ export async function GET(request: NextRequest) {
       id: p.id,
       name: p.name,
       photo: p.photo,
-      position: p.position,
+      position: translatePosition(p.position),
       team: 'away',
     }));
 
@@ -91,7 +100,7 @@ function generateMockPlayers(homeTeam: string, awayTeam: string) {
       id: side === 'home' ? i + 1 : i + 100,
       name,
       photo: '',
-      position: i === 0 ? 'Goalkeeper' : i < 4 ? 'Defender' : i < 7 ? 'Midfielder' : 'Attacker',
+      position: translatePosition(i === 0 ? 'Goalkeeper' : i < 4 ? 'Defender' : i < 7 ? 'Midfielder' : 'Attacker'),
       team: side,
     }));
   };
