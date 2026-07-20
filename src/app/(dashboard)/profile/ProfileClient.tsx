@@ -2,16 +2,17 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, Check, Loader2, Flame, Target, Trophy } from 'lucide-react';
+import { User, Check, Loader2, Target, Trophy, CheckCircle2 } from 'lucide-react';
 import type { Profile } from '@/types';
 import toast from 'react-hot-toast';
 
 interface ProfileClientProps {
   profile: Profile;
   stats: {
-    totalPredictions: number;
     totalPoints: number;
-    exactScores: number;
+    exactPct: number;
+    result1X2Pct: number;
+    totalFinished: number;
   };
 }
 
@@ -94,18 +95,18 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 relative z-10">
-          {/* Avatar view */}
+          {/* Avatar view (Fixed image top clipping with object-contain p-1) */}
           <div className="relative group">
             <div className="w-20 h-20 rounded-2xl ring-4 ring-emerald-500/30 flex items-center justify-center overflow-hidden font-bold text-2xl text-white shadow-xl bg-slate-800"
               style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}>
               {avatarUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={avatarUrl} alt={nickname} className="w-full h-full object-cover" />
+                <img src={avatarUrl} alt={nickname} className="w-full h-full object-contain p-1" />
               ) : (
                 nickname.charAt(0).toUpperCase()
               )}
             </div>
-            <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-xs">
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-xs shadow-md">
               {rank.icon}
             </div>
           </div>
@@ -129,20 +130,20 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
         <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-slate-800">
           <div className="text-center">
             <p className="text-2xl font-black text-emerald-400">{stats.totalPoints}</p>
-            <p className="text-xs text-slate-500 flex items-center justify-center gap-1">
-              <Trophy size={12} className="text-amber-400" /> Puntos Totales
+            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+              <Trophy size={13} className="text-amber-400" /> Puntos Totales
             </p>
           </div>
           <div className="text-center border-x border-slate-800">
-            <p className="text-2xl font-black text-amber-400">{stats.exactScores}</p>
-            <p className="text-xs text-slate-500 flex items-center justify-center gap-1">
-              <Target size={12} className="text-emerald-400" /> Plenos Exactos
+            <p className="text-2xl font-black text-amber-400">{stats.exactPct}%</p>
+            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+              <Target size={13} className="text-emerald-400" /> % Plenos Exactos
             </p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-black text-blue-400">{stats.totalPredictions}</p>
-            <p className="text-xs text-slate-500 flex items-center justify-center gap-1">
-              <Flame size={12} className="text-blue-400" /> Predicciones
+            <p className="text-2xl font-black text-blue-400">{stats.result1X2Pct}%</p>
+            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+              <CheckCircle2 size={13} className="text-blue-400" /> % Acierto 1X2
             </p>
           </div>
         </div>
@@ -186,7 +187,7 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
                     : 'border-slate-800 bg-slate-900/60 hover:border-slate-700'
                 }`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={avatar.url} alt={avatar.label} className="w-10 h-10 rounded-lg object-cover" />
+                <img src={avatar.url} alt={avatar.label} className="w-10 h-10 rounded-lg object-contain p-0.5" />
                 <span className="text-[10px] text-slate-400 truncate w-full text-center">{avatar.label.split(' ')[0]}</span>
               </button>
             ))}
