@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { User, Loader2, Target, Trophy, CheckCircle2 } from 'lucide-react';
 import type { Profile } from '@/types';
 import toast from 'react-hot-toast';
@@ -255,6 +256,13 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
           {saving ? <><Loader2 size={16} className="animate-spin" /> Guardando...</> : '💾 Guardar Cambios'}
         </button>
       </form>
+
+      {/* Link to Privacy Policy */}
+      <div className="text-center pt-2">
+        <Link href="/privacy" className="text-xs text-slate-500 hover:text-slate-400 transition-colors underline">
+          Política de Privacidad
+        </Link>
+      </div>
     </div>
   );
 }

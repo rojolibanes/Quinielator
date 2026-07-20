@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Iniciar Sesión — Quinielator',
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4"
+    <div className="min-h-screen flex items-center justify-center px-4 py-8"
       style={{
         background: 'radial-gradient(ellipse at 30% 40%, rgba(16, 185, 129, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(16, 185, 129, 0.04) 0%, transparent 40%), #0a0f1a',
       }}>
@@ -21,7 +22,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <rect x="330" y="100" width="60" height="100" stroke="#10B981" strokeWidth="2"/>
         </svg>
       </div>
-      {children}
+
+      <div className="relative z-10 w-full max-w-md flex flex-col items-center">
+        {children}
+        
+        {/* Link to Privacy Policy */}
+        <Link href="/privacy" className="mt-8 text-xs text-slate-500 hover:text-slate-400 transition-colors underline">
+          Política de Privacidad
+        </Link>
+      </div>
     </div>
   );
 }
