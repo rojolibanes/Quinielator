@@ -22,6 +22,21 @@ import { SPANISH_TEAM_NAMES } from '@/lib/teams';
 export default function AdminClient({ matches: initialMatches }: AdminClientProps) {
   const supabase = createClient();
   const [matches, setMatches] = useState<Match[]>(initialMatches);
+  const [filterMatchday, setFilterMatchday] = useState<number | 'all'>('all');
+  const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'finished'>('all');
+
+  const filteredMatches = matches.filter(match => {
+    if (filterMatchday !== 'all' && match.matchday !== filterMatchday) {
+      return false;
+    }
+    if (filterStatus === 'pending' && match.status === 'finished') {
+      return false;
+    }
+    if (filterStatus === 'finished' && match.status !== 'finished') {
+      return false;
+    }
+    return true;
+  });
   const [editingDetails, setEditingDetails] = useState<Match | null>(null);
   const [detailsForm, setDetailsForm] = useState({
     home_team: '',
@@ -325,14 +340,52 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
 
       {/* ── Tab: Results ── */}
       {activeTab === 'results' && (
-        <div className="space-y-3 stagger-children">
-          {matches.length === 0 && (
+        <div className="space-y-4 stagger-children">
+          {/* Filtros Bar */}
+          <div className="glass-card p-4 flex flex-col md:flex-row gap-4 items-center justify-between"
+            style={{ background: 'rgba(15, 23, 42, 0.65)', border: '1px solid rgba(51, 65, 85, 0.4)' }}>
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto md:flex-1">
+              {/* Filtro por Jornada */}
+              <div className="flex-1 sm:max-w-[200px]">
+                <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Filtrar por Jornada</label>
+                <select
+                  value={filterMatchday}
+                  onChange={e => setFilterMatchday(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+                  className="input-field text-xs py-1.5 px-3">
+                  <option value="all">Todas las jornadas</option>
+                  {Array.from({ length: 38 }, (_, i) => i + 1).map(j => (
+                    <option key={j} value={j}>Jornada {j}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Filtro por Estado */}
+              <div className="flex-1 sm:max-w-[200px]">
+                <label className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">Estado del Partido</label>
+                <select
+                  value={filterStatus}
+                  onChange={e => setFilterStatus(e.target.value as any)}
+                  className="input-field text-xs py-1.5 px-3">
+                  <option value="all">Todos los estados</option>
+                  <option value="pending">Pendientes / En vivo</option>
+                  <option value="finished">Finalizados</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Contador de Partidos */}
+            <div className="text-right text-xs text-slate-400 font-medium w-full md:w-auto">
+              Mostrando <span className="text-emerald-400 font-bold">{filteredMatches.length}</span> de {matches.length} partidos
+            </div>
+          </div>
+
+          {filteredMatches.length === 0 && (
             <div className="glass-card p-12 text-center">
               <Trophy size={40} className="text-slate-600 mx-auto mb-3" />
-              <p className="text-slate-400">No hay partidos creados aún.</p>
+              <p className="text-slate-400">No se encontraron partidos para los filtros seleccionados.</p>
             </div>
           )}
-          {matches.map(match => (
+          {filteredMatches.map(match => (
             <div key={match.id} className="glass-card p-4">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1">
