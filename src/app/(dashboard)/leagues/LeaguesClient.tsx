@@ -45,6 +45,11 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
   const [joiningLeague, setJoiningLeague] = useState(false);
   const [userLeagues, setUserLeagues] = useState(initialUserLeagues);
   const [deletingLeagueId, setDeletingLeagueId] = useState<string | null>(null);
+  const [leavingLeagueId, setLeavingLeagueId] = useState<string | null>(null);
+  
+  // Ownership transfer state
+  const [transferModal, setTransferModal] = useState<{leagueId: string, leagueName: string, members: any[]} | null>(null);
+  const [selectedNewCreator, setSelectedNewCreator] = useState<string>('');
 
   // Create league form
   const [form, setForm] = useState<CreateLeagueFormData>({
@@ -83,6 +88,81 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
       toast.error('Error de red al eliminar la liga');
     } finally {
       setDeletingLeagueId(null);
+    }
+  };
+
+  const executeLeave = async (leagueId: string, leagueName: string, newCreatorId?: string) => {
+    setLeavingLeagueId(leagueId);
+    try {
+      const url = newCreatorId 
+        ? `/api/leagues/leave?id=${leagueId}&new_creator_id=${newCreatorId}` 
+        : `/api/leagues/leave?id=${leagueId}`;
+      const res = await fetch(url, { method: 'DELETE' });
+      const json = await res.json();
+
+      if (!res.ok) {
+        toast.error(json.error || 'Error al abandonar la liga');
+      } else {
+        if (json.action === 'deleted') {
+          toast.success(`🗑️ Liga "${leagueName}" eliminada porque eras el único miembro`);
+        } else {
+          toast.success(`🚪 Has abandonado la liga "${leagueName}"`);
+        }
+        setUserLeagues(prev => prev.filter(l => l.league.id !== leagueId));
+        router.refresh();
+        setTransferModal(null);
+      }
+    } catch {
+      toast.error('Error de red al abandonar la liga');
+    } finally {
+      setLeavingLeagueId(null);
+    }
+  };
+
+  const handleLeaveLeagueClick = async (league: any, memberCount: number) => {
+    if (league.is_official) {
+      toast.error('No puedes abandonar una liga oficial');
+      return;
+    }
+
+    if (league.creator_id === userId) {
+      // User is the creator
+      if (memberCount === 1) {
+        // Only member, confirm and delete
+        if (window.confirm(`Eres el único participante en "${league.name}". Si abandonas, la liga será eliminada. ¿Continuar?`)) {
+          executeLeave(league.id, league.name);
+        }
+      } else {
+        // More members exist, need to transfer ownership
+        setLeavingLeagueId(league.id); // Show spinner while loading members
+        try {
+          const res = await fetch(`/api/leagues/members?id=${league.id}`);
+          const data = await res.json();
+          if (res.ok) {
+            // Filter out current user
+            const otherMembers = data.members.filter((m: any) => m.user_id !== userId);
+            setTransferModal({
+              leagueId: league.id,
+              leagueName: league.name,
+              members: otherMembers
+            });
+            if (otherMembers.length > 0) {
+              setSelectedNewCreator(otherMembers[0].user_id);
+            }
+          } else {
+            toast.error('Error al cargar participantes para transferir la liga');
+          }
+        } catch (e) {
+          toast.error('Error de red');
+        } finally {
+          setLeavingLeagueId(null);
+        }
+      }
+    } else {
+      // User is not the creator, just confirm and leave
+      if (window.confirm(`¿Seguro que quieres abandonar la liga "${league.name}"? Perderás todos tus puntos acumulados en esta liga.`)) {
+        executeLeave(league.id, league.name);
+      }
     }
   };
 
@@ -195,6 +275,7 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
           )}
           {userLeagues.map(({ league, total_points, member_count }) => {
             const canDelete = !league.is_official && (league.creator_id === userId || isAdmin);
+            const canLeave = !league.is_official;
             const cfg = league.points_config || {};
             const filterTeam = cfg.filter_team;
             const teamLogo = filterTeam ? getTeamLogo(filterTeam) : null;
@@ -267,16 +348,27 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
                       <p className="text-xs text-slate-500">puntos</p>
                     </div>
 
-                    {canDelete && (
-                      <button
-                        onClick={() => handleDeleteLeague(league.id, league.name)}
-                        disabled={deletingLeagueId === league.id}
-                        className="text-xs px-2.5 py-1 rounded-lg text-red-400 hover:bg-red-500/10 border border-red-500/20 transition-all flex items-center gap-1"
-                        title="Eliminar liga">
-                        {deletingLeagueId === league.id ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
-                        <span>Borrar</span>
-                      </button>
-                    )}
+                    {/* Actions (Leave / Delete) */}
+                    <div className="flex flex-col gap-2">
+                      {canLeave && (
+                        <button
+                          onClick={() => handleLeaveLeagueClick(league, member_count)}
+                          disabled={leavingLeagueId === league.id}
+                          className="p-2 text-orange-400 bg-orange-500/10 hover:bg-orange-500/20 rounded-lg transition-colors border border-orange-500/20 text-xs flex items-center justify-center min-w-[36px]"
+                          title={league.creator_id === userId ? "Abandonar y ceder liga" : "Abandonar liga"}>
+                          {leavingLeagueId === league.id ? <Loader2 size={16} className="animate-spin" /> : '🚪'}
+                        </button>
+                      )}
+                      {canDelete && (
+                        <button
+                          onClick={() => handleDeleteLeague(league.id, league.name)}
+                          disabled={deletingLeagueId === league.id}
+                          className="p-2 text-red-400 bg-red-500/10 hover:bg-red-500/20 rounded-lg transition-colors border border-red-500/20 flex items-center justify-center min-w-[36px]"
+                          title="Eliminar liga (solo creadores)">
+                          {deletingLeagueId === league.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -612,6 +704,44 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
             }`}>
             {joiningLeague ? 'Uniéndose...' : '🤝 Unirme a la Liga'}
           </button>
+        </div>
+      )}
+
+      {/* Transfer Ownership Modal */}
+      {transferModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-2">Ceder Liga</h3>
+            <p className="text-sm text-slate-400 mb-6">
+              Eres el creador de <strong>{transferModal.leagueName}</strong>. Para abandonarla, debes nombrar a un nuevo administrador de entre los participantes.
+            </p>
+
+            <label className="block text-sm font-medium text-slate-300 mb-2">Nuevo Administrador</label>
+            <select
+              value={selectedNewCreator}
+              onChange={(e) => setSelectedNewCreator(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm mb-6 focus:ring-2 focus:ring-emerald-500 outline-none">
+              {transferModal.members.map((m) => (
+                <option key={m.user_id} value={m.user_id}>
+                  {m.profiles.nickname || m.profiles.email}
+                </option>
+              ))}
+            </select>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setTransferModal(null)}
+                className="flex-1 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm transition-colors border border-slate-700">
+                Cancelar
+              </button>
+              <button
+                onClick={() => executeLeave(transferModal.leagueId, transferModal.leagueName, selectedNewCreator)}
+                disabled={!selectedNewCreator || leavingLeagueId === transferModal.leagueId}
+                className="flex-1 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-colors flex justify-center items-center">
+                {leavingLeagueId === transferModal.leagueId ? <Loader2 size={16} className="animate-spin" /> : 'Confirmar y Salir'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

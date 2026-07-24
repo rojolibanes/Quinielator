@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import {
   ShieldCheck, Edit3, CheckCircle, X, Loader2,
-  CalendarPlus, Trophy, Users, RefreshCw, Zap, Calendar, Trash2, AlertTriangle
+  CalendarPlus, Trophy, Users, RefreshCw, Zap, Calendar, Trash2, AlertTriangle, UserX
 } from 'lucide-react';
 import type { Match, Scorer, MVPPlayer, MatchStatus } from '@/types';
 import { createClient } from '@/lib/supabase/client';
@@ -91,7 +91,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
       setSavingDetails(false);
     }
   };
-  const [activeTab, setActiveTab] = useState<'results' | 'create' | 'sync'>('results');
+  const [activeTab, setActiveTab] = useState<'results' | 'create' | 'sync' | 'users'>('results');
   const [editingMatch, setEditingMatch] = useState<Match | null>(null);
   const [editForm, setEditForm] = useState<{
     home_score: number;
@@ -109,6 +109,42 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
   // Sync state
   const [syncMatchday, setSyncMatchday] = useState<number>(1);
   const [syncingAction, setSyncingAction] = useState<string | null>(null);
+
+  // Users state
+  const [adminUsers, setAdminUsers] = useState<any[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  const [deletingUserId, setDeletingUserId] = useState<string | null>(null);
+
+  const loadUsers = async () => {
+    setLoadingUsers(true);
+    try {
+      const res = await fetch('/api/admin/users');
+      const data = await res.json();
+      if (res.ok) setAdminUsers(data.users || []);
+    } catch (e) {
+      toast.error('Error al cargar usuarios');
+    } finally {
+      setLoadingUsers(false);
+    }
+  };
+
+  const handleDeleteUser = async (id: string, nickname: string) => {
+    if (!window.confirm(`¿ESTÁS COMPLETAMENTE SEGURO de querer eliminar al usuario "${nickname}"? Esta acción borrará permanentemente su cuenta, perfil y predicciones. NO SE PUEDE DESHACER.`)) return;
+    setDeletingUserId(id);
+    try {
+      const res = await fetch(`/api/admin/users/delete?id=${id}`, { method: 'DELETE' });
+      const json = await res.json();
+      if (!res.ok) toast.error(json.error || 'Error al eliminar usuario');
+      else {
+        toast.success(`🗑️ Usuario ${nickname} eliminado correctamente`);
+        setAdminUsers(prev => prev.filter(u => u.id !== id));
+      }
+    } catch (e) {
+      toast.error('Error de red al eliminar usuario');
+    } finally {
+      setDeletingUserId(null);
+    }
+  };
 
   // New match form
   const [newMatch, setNewMatch] = useState({
@@ -324,7 +360,8 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
         {[
           { id: 'results', label: 'Resultados', icon: Edit3 },
           { id: 'create', label: 'Crear Partido', icon: CalendarPlus },
-          { id: 'sync', label: 'Sincronización API', icon: RefreshCw },
+          { id: 'sync', label: 'Sincronización', icon: RefreshCw },
+          { id: 'users', label: 'Usuarios', icon: Users },
         ].map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -829,6 +866,56 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
                 {savingDetails ? <Loader2 size={14} className="animate-spin" /> : '💾 Guardar Cambios'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {/* ── Tab: Users ── */}
+      {activeTab === 'users' && (
+        <div className="space-y-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <Users className="text-emerald-400" /> Gestión de Usuarios
+            </h2>
+            <button onClick={loadUsers} disabled={loadingUsers} className="btn-secondary text-xs px-3 py-1.5 flex items-center gap-2">
+              {loadingUsers ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
+              Recargar
+            </button>
+          </div>
+
+          {!loadingUsers && adminUsers.length === 0 && (
+            <div className="text-center py-10 text-slate-500">
+              Usa el botón de recargar para cargar los usuarios.
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {adminUsers.map(user => (
+              <div key={user.id} className="glass-card p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {user.avatar_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={user.avatar_url} alt="" className="w-10 h-10 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
+                      <Users size={16} className="text-slate-500" />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-semibold text-white">{user.nickname || 'Sin Nickname'}</h3>
+                    <p className="text-xs text-slate-400">{user.email}</p>
+                    <p className="text-[10px] text-slate-500 mt-0.5">ID: {user.id.slice(0, 8)}...</p>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => handleDeleteUser(user.id, user.nickname || user.email)}
+                  disabled={deletingUserId === user.id}
+                  className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                  title="Eliminar usuario">
+                  {deletingUserId === user.id ? <Loader2 size={18} className="animate-spin" /> : <UserX size={18} />}
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       )}

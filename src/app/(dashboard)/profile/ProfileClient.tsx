@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { User, Loader2, Target, Trophy, CheckCircle2 } from 'lucide-react';
+import { User, Loader2, Target, Trophy, CheckCircle2, AlertTriangle } from 'lucide-react';
 import type { Profile } from '@/types';
 import toast from 'react-hot-toast';
 
@@ -45,6 +45,7 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
   const [avatarUrl, setAvatarUrl] = useState(profile.avatar_url ?? '');
   const [tagline, setTagline] = useState(profile.tagline ?? '');
   const [saving, setSaving] = useState(false);
+  const [deletingAccount, setDeletingAccount] = useState(false);
 
   // Calculate Rank level
   const getRank = (pts: number) => {
@@ -55,6 +56,32 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
   };
 
   const rank = getRank(stats.totalPoints);
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm('¿ESTÁS SEGURO? Esta acción es irreversible. Se eliminará tu cuenta, tu perfil y todas tus predicciones para siempre.')) return;
+    
+    // Double confirmation for safety
+    if (!window.confirm('ÚLTIMA CONFIRMACIÓN. ¿Borrar tu cuenta de QuinielaTOR definitivamente?')) return;
+
+    setDeletingAccount(true);
+    try {
+      const res = await fetch('/api/profile/delete', { method: 'DELETE' });
+      const json = await res.json();
+      
+      if (!res.ok) {
+        toast.error(json.error || 'Error al eliminar la cuenta');
+      } else {
+        toast.success('Cuenta eliminada correctamente. Adiós.');
+        // User will be signed out by the server, but let's force a client side redirect to login
+        router.push('/login');
+        router.refresh();
+      }
+    } catch (e) {
+      toast.error('Error de red al eliminar la cuenta');
+    } finally {
+      setDeletingAccount(false);
+    }
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -256,9 +283,26 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
           {saving ? <><Loader2 size={16} className="animate-spin" /> Guardando...</> : '💾 Guardar Cambios'}
         </button>
       </form>
+      {/* Danger Zone */}
+      <div className="mt-8 pt-6 border-t border-red-900/30">
+        <h3 className="text-red-400 font-semibold flex items-center gap-2 mb-2 text-sm">
+          <AlertTriangle size={16} /> Zona Peligrosa
+        </h3>
+        <div className="glass-card p-4 border border-red-900/50 bg-red-950/10">
+          <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+            Eliminar tu cuenta borrará permanentemente tu perfil, todas tus predicciones y te eliminará de todas las ligas. Esta acción <strong>no se puede deshacer</strong>.
+          </p>
+          <button
+            onClick={handleDeleteAccount}
+            disabled={deletingAccount}
+            className="w-full py-2.5 rounded-lg font-medium text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-all flex items-center justify-center gap-2">
+            {deletingAccount ? <><Loader2 size={14} className="animate-spin" /> Eliminando...</> : 'Eliminar mi cuenta definitivamente'}
+          </button>
+        </div>
+      </div>
 
       {/* Link to Privacy Policy */}
-      <div className="text-center pt-2">
+      <div className="text-center pt-6 pb-2">
         <Link href="/privacy" className="text-xs text-slate-500 hover:text-slate-400 transition-colors underline">
           Política de Privacidad
         </Link>
