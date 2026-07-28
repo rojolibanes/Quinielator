@@ -19,12 +19,12 @@ export const SPANISH_TEAMS: Record<string, TeamInfo> = {
   'Rayo Vallecano': { id: 728, logo: 'https://media.api-sports.io/football/teams/728.png' },
   'Getafe CF': { id: 546, logo: 'https://media.api-sports.io/football/teams/546.png' },
   'Deportivo Alavés': { id: 542, logo: 'https://media.api-sports.io/football/teams/542.png' },
-  'RCD Espanyol': { id: 539, logo: 'https://media.api-sports.io/football/teams/539.png' },
+  'RCD Espanyol': { id: 540, logo: 'https://media.api-sports.io/football/teams/540.png' },
   'Racing Santander': { id: 4665, logo: 'https://media.api-sports.io/football/teams/4665.png' },
   'Deportivo de La Coruña': { id: 544, logo: 'https://media.api-sports.io/football/teams/544.png' },
   'Málaga CF': { id: 535, logo: 'https://media.api-sports.io/football/teams/535.png' },
   'Elche CF': { id: 797, logo: 'https://media.api-sports.io/football/teams/797.png' },
-  'Levante UD': { id: 545, logo: 'https://media.api-sports.io/football/teams/545.png' },
+  'Levante UD': { id: 539, logo: 'https://media.api-sports.io/football/teams/539.png' },
 };
 
 export const SPANISH_TEAM_NAMES = Object.keys(SPANISH_TEAMS).sort();
