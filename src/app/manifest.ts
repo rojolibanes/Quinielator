@@ -12,10 +12,18 @@ export default function manifest(): MetadataRoute.Manifest | any {
     theme_color: '#10B981',
     orientation: 'portrait',
     categories: ['sports', 'entertainment', 'games'],
-    related_applications: [],
+    related_applications: [
+      {
+        platform: 'play',
+        url: 'https://play.google.com/store/apps/details?id=es.quinielator.app',
+        id: 'es.quinielator.app',
+      },
+    ],
     prefer_related_applications: false,
     lang: 'es',
+    dir: 'ltr',
     scope: '/',
+    scope_extensions: [{ origin: '*.quinielator.es' }],
     display_override: ['standalone', 'minimal-ui'],
     iarc_rating_id: 'e84b072d-71b3-4d3e-86ae-31a8ce4e53b7',
     icons: [
