@@ -33,3 +33,10 @@ Credenciales.docx
 
 # vercel
 .vercel
+
+# PWA files
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/fallback-*.js
+public/sweetalert2.all.min.js

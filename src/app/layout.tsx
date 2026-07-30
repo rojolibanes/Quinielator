@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
-import RegisterSW from '@/components/pwa/RegisterSW';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,7 +49,6 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <body className={`${inter.variable} font-sans bg-dark-800 text-white antialiased`}>
-        <RegisterSW />
         {children}
         <Toaster
           position="top-right"
