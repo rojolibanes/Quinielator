@@ -24,7 +24,7 @@ export default function manifest(): MetadataRoute.Manifest | any {
     dir: 'ltr',
     scope: '/',
     scope_extensions: [{ origin: '*.quinielator.es' }],
-    display_override: ['standalone', 'minimal-ui'],
+    display_override: ['window-controls-overlay', 'standalone', 'minimal-ui'],
     iarc_rating_id: 'e84b072d-71b3-4d3e-86ae-31a8ce4e53b7',
     icons: [
       {
