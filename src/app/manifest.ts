@@ -14,6 +14,10 @@ export default function manifest(): MetadataRoute.Manifest | any {
     categories: ['sports', 'entertainment', 'games'],
     related_applications: [],
     prefer_related_applications: false,
+    lang: 'es',
+    scope: '/',
+    display_override: ['standalone', 'minimal-ui'],
+    iarc_rating_id: 'e84b072d-71b3-4d3e-86ae-31a8ce4e53b7',
     icons: [
       {
         src: '/icons/icon-192.png',
