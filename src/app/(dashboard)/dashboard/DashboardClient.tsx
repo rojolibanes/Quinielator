@@ -78,12 +78,12 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
     if (matchData) {
       let finalMatches = matchData as Match[];
       const cfg = selectedLeague.points_config || {};
+      const filterTeams = cfg.filter_teams || (cfg.filter_team ? [cfg.filter_team] : []);
 
-      // Filter by team if specified for this league
-      if (cfg.filter_team) {
-        const teamName = cfg.filter_team;
+      // Filter by teams if specified for this league
+      if (filterTeams.length > 0) {
         finalMatches = finalMatches.filter(
-          m => m.home_team === teamName || m.away_team === teamName
+          m => filterTeams.includes(m.home_team) || filterTeams.includes(m.away_team)
         );
       }
 
@@ -137,6 +137,7 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
   }
 
   const cfg = selectedLeague.points_config || {};
+  const filterTeams = cfg.filter_teams || (cfg.filter_team ? [cfg.filter_team] : []);
   const matchdayType = cfg.matchday_type || 'all';
   const minMatchday = matchdayType === 'single' || matchdayType === 'range' ? (cfg.start_matchday || 1) : 1;
   const maxMatchday = matchdayType === 'single' ? (cfg.start_matchday || 1) : matchdayType === 'range' ? (cfg.end_matchday || 38) : 38;
@@ -169,28 +170,26 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
       </div>
 
       {/* League Filters Banner if active */}
-      {(cfg.filter_team || matchdayType !== 'all') && (
+      {(filterTeams.length > 0 || matchdayType !== 'all') && (
         <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs animate-fade-in">
-          <div className="flex items-center gap-2 text-slate-300">
+          <div className="flex items-center gap-2 text-slate-300 flex-wrap">
             <Filter size={14} className="text-emerald-400 flex-shrink-0" />
-            <span>
-              Configuración de esta liga:
-              {cfg.filter_team && (
-                <span className="text-blue-300 font-semibold ml-1">
-                  ⚽ Solo partidos del {cfg.filter_team}
-                </span>
-              )}
-              {matchdayType === 'single' && (
-                <span className="text-purple-300 font-semibold ml-1">
-                  📅 Limitada a Jornada {cfg.start_matchday}
-                </span>
-              )}
-              {matchdayType === 'range' && (
-                <span className="text-amber-300 font-semibold ml-1">
-                  📅 Jornadas {cfg.start_matchday} a {cfg.end_matchday}
-                </span>
-              )}
-            </span>
+            <span>Configuración de esta liga:</span>
+            {filterTeams.length > 0 && (
+              <span className="text-blue-300 font-semibold ml-1 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                ⚽ Solo {filterTeams.length === 1 ? filterTeams[0] : `${filterTeams.length} equipos`}
+              </span>
+            )}
+            {matchdayType === 'single' && (
+              <span className="text-purple-300 font-semibold ml-1 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+                📅 Limitada a Jornada {cfg.start_matchday}
+              </span>
+            )}
+            {matchdayType === 'range' && (
+              <span className="text-amber-300 font-semibold ml-1 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                📅 Jornadas {cfg.start_matchday} a {cfg.end_matchday}
+              </span>
+            )}
           </div>
         </div>
       )}
@@ -207,8 +206,8 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
           <Sparkles size={40} className="text-slate-600 mx-auto mb-3" />
           <p className="text-slate-400 font-medium">No hay partidos para esta jornada o filtro.</p>
           <p className="text-slate-500 text-sm mt-1">
-            {cfg.filter_team
-              ? `El ${cfg.filter_team} no juega en la Jornada ${matchday}.`
+            {filterTeams.length > 0
+              ? `Los equipos seleccionados no juegan en la Jornada ${matchday}.`
               : 'Selecciona otra jornada o revisa el calendario.'}
           </p>
         </div>

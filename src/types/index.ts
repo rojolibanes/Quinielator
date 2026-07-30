@@ -18,7 +18,8 @@ export interface PointsConfig {
   matchday_type?: 'all' | 'single' | 'range'; // Default: 'all'
   start_matchday?: number;  // Default: 1
   end_matchday?: number;    // Default: 38
-  filter_team?: string | null; // Default: null (all teams)
+  filter_team?: string | null; // Deprecated: use filter_teams
+  filter_teams?: string[]; // Array of selected teams
 }
 
 export const DEFAULT_POINTS_CONFIG: PointsConfig = {

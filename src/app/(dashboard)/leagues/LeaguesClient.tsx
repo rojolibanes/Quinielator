@@ -166,6 +166,20 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
     }
   };
 
+  const toggleTeamFilter = (team: string) => {
+    setForm(f => {
+      const current = f.points_config.filter_teams || [];
+      const newTeams = current.includes(team)
+        ? current.filter(t => t !== team)
+        : [...current, team];
+      
+      return {
+        ...f,
+        points_config: { ...f.points_config, filter_teams: newTeams }
+      };
+    });
+  };
+
   const handleCreate = async () => {
     if (!form.name.trim()) {
       toast.error('Introduce un nombre para la liga');
@@ -277,8 +291,9 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
             const canDelete = !league.is_official && (league.creator_id === userId || isAdmin);
             const canLeave = !league.is_official;
             const cfg = league.points_config || {};
-            const filterTeam = cfg.filter_team;
-            const teamLogo = filterTeam ? getTeamLogo(filterTeam) : null;
+            const filterTeams = cfg.filter_teams || (cfg.filter_team ? [cfg.filter_team] : []);
+            const hasTeamFilter = filterTeams.length > 0;
+            const singleTeamLogo = hasTeamFilter && filterTeams.length === 1 ? getTeamLogo(filterTeams[0]) : null;
             const matchdayType = cfg.matchday_type || 'all';
 
             return (
@@ -289,9 +304,21 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
                       style={{ background: league.is_official ? 'linear-gradient(135deg, #10B981, #059669)' : 'rgba(30, 41, 59, 0.8)', border: '1px solid rgba(51, 65, 85, 0.5)' }}>
                       {league.is_official ? (
                         <Sparkles size={18} className="text-white" />
-                      ) : filterTeam && teamLogo ? (
+                      ) : singleTeamLogo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={teamLogo} alt="" className="w-6 h-6 object-contain" />
+                        <img src={singleTeamLogo} alt="" className="w-6 h-6 object-contain" />
+                      ) : hasTeamFilter ? (
+                        <div className="flex -space-x-2">
+                          {filterTeams.slice(0, 2).map(t => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img key={t} src={getTeamLogo(t)} alt="" className="w-5 h-5 object-contain bg-slate-800 rounded-full border border-slate-700" />
+                          ))}
+                          {filterTeams.length > 2 && (
+                            <div className="w-5 h-5 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-[8px] text-white font-bold">
+                              +{filterTeams.length - 2}
+                            </div>
+                          )}
+                        </div>
                       ) : league.is_private ? (
                         <Lock size={16} className="text-slate-400" />
                       ) : (
@@ -307,9 +334,9 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
                             Oficial
                           </span>
                         )}
-                        {filterTeam && (
+                        {hasTeamFilter && (
                           <span className="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 flex items-center gap-1 font-medium">
-                            ⚽ Solo {filterTeam}
+                            ⚽ Solo {filterTeams.length === 1 ? filterTeams[0] : `${filterTeams.length} equipos`}
                           </span>
                         )}
                         {matchdayType === 'single' && (
@@ -533,31 +560,42 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
             )}
           </div>
 
-          {/* ── Filtro por Equipo Específico ── */}
+          {/* ── Filtro por Equipos ── */}
           <div className="p-4 rounded-xl space-y-3"
             style={{ background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(51, 65, 85, 0.4)' }}>
-            <label className="block text-sm font-semibold text-white flex items-center gap-2">
-              <Filter size={16} className="text-blue-400" />
-              Filtro por Equipo (Liga Monotemática)
-            </label>
-            <p className="text-xs text-slate-400">Si seleccionas un equipo, la liga solo incluirá los partidos donde juegue ese equipo.</p>
-            <select
-              value={form.points_config.filter_team || ''}
-              onChange={e => {
-                const val = e.target.value;
-                setForm(f => ({
-                  ...f,
-                  points_config: { ...f.points_config, filter_team: val ? val : null }
-                }));
-              }}
-              className="input-field text-xs">
-              <option value="">Todos los equipos de LaLiga (Sin filtro)</option>
-              {SPANISH_TEAM_NAMES.map(team => (
-                <option key={team} value={team}>
-                  Solo {team}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-start justify-between">
+              <div>
+                <label className="block text-sm font-semibold text-white flex items-center gap-2">
+                  <Filter size={16} className="text-blue-400" />
+                  Equipos Exclusivos
+                </label>
+                <p className="text-xs text-slate-400 mt-1">Si seleccionas equipos, la liga solo incluirá los partidos donde jueguen estos equipos. Si no seleccionas ninguno, se incluirán todos los partidos de LaLiga.</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 mt-3">
+              {SPANISH_TEAM_NAMES.map(team => {
+                const isSelected = (form.points_config.filter_teams || []).includes(team);
+                const logo = getTeamLogo(team);
+                return (
+                  <button
+                    key={team}
+                    type="button"
+                    onClick={() => toggleTeamFilter(team)}
+                    className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all border ${
+                      isSelected 
+                        ? 'bg-blue-500/20 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]' 
+                        : 'bg-slate-800/50 border-slate-700/50 hover:bg-slate-700/50 opacity-60 hover:opacity-100'
+                    }`}
+                    title={team}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={logo} alt={team} className="w-8 h-8 object-contain mb-1" />
+                    <span className="text-[9px] text-center text-slate-300 leading-tight line-clamp-1 w-full">{team.replace('FC ', '').replace(' CF', '').replace(' UD', '').replace('RCD ', '')}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Toggles for optional features */}
