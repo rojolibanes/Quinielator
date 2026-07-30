@@ -11,6 +11,9 @@ export default function manifest(): MetadataRoute.Manifest | any {
     background_color: '#0f172a',
     theme_color: '#10B981',
     orientation: 'portrait',
+    categories: ['sports', 'entertainment', 'games'],
+    related_applications: [],
+    prefer_related_applications: false,
     icons: [
       {
         src: '/icons/icon-192.png',
