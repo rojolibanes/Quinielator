@@ -22,6 +22,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Faltan datos obligatorios para la predicción.' }, { status: 400 });
   }
 
+  if (Number(predicted_home_score) > 9 || Number(predicted_away_score) > 9) {
+    return NextResponse.json({ error: 'El límite máximo de goles por equipo es 9.' }, { status: 400 });
+  }
+
   // Check match deadline using admin client
   const { data: match, error: matchError } = await supabaseAdmin
     .from('matches')

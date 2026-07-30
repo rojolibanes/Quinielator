@@ -194,10 +194,10 @@ export default function MatchCard({
                 <input
                   type="number"
                   min="0"
-                  max="20"
+                  max="9"
                   value={homeScore}
                   onChange={e => {
-                    const val = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value));
+                    const val = e.target.value === '' ? '' : Math.min(9, Math.max(0, parseInt(e.target.value)));
                     setHomeScore(val);
                     if (val !== '') setExpanded(true);
                   }}
@@ -210,10 +210,10 @@ export default function MatchCard({
                 <input
                   type="number"
                   min="0"
-                  max="20"
+                  max="9"
                   value={awayScore}
                   onChange={e => {
-                    const val = e.target.value === '' ? '' : Math.max(0, parseInt(e.target.value));
+                    const val = e.target.value === '' ? '' : Math.min(9, Math.max(0, parseInt(e.target.value)));
                     setAwayScore(val);
                     if (val !== '') setExpanded(true);
                   }}
