@@ -15,8 +15,8 @@ export default function manifest(): MetadataRoute.Manifest | any {
     related_applications: [
       {
         platform: 'play',
-        url: 'https://play.google.com/store/apps/details?id=es.quinielator.app',
-        id: 'es.quinielator.app',
+        url: 'https://play.google.com/store/apps/details?id=es.quinielator.qui',
+        id: 'es.quinielator.qui',
       },
     ],
     prefer_related_applications: false,
