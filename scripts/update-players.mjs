@@ -54,6 +54,9 @@ async function scrapePlayers() {
         // Skip loaned players (cedidos)
         if ($el.closest('.cedidos').length > 0) return;
         
+        // Skip youth/B-team players (filial)
+        if ($el.hasClass('filial')) return;
+        
         let playerName = $el.find('a.jugador').text().trim();
         // Remove squad numbers like "1. "
         playerName = playerName.replace(/^\d+\.\s*/, '');
