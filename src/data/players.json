@@ -1,0 +1,5157 @@
+{
+  "updatedAt": "2026-08-13T07:55:31.494Z",
+  "players": [
+    {
+      "id": 1,
+      "name": "Jonny Castro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/189.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 2,
+      "name": "Aitor Mañas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130447/uploads/images/jugadores/ficha/12925.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 3,
+      "name": "Toni Martinez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/5032.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 4,
+      "name": "Antonio Sivera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/1059.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 5,
+      "name": "Pablo Ibáñez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/10258.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 6,
+      "name": "Antonio Blanco",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/8737.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 7,
+      "name": "Youssef Enríquez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/14935.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 8,
+      "name": "Nahuel Tenaglia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/9909.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 9,
+      "name": "Carles Aleñá",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/2759.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 10,
+      "name": "Ángel Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/15127.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 11,
+      "name": "Ville Koski",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041448/uploads/images/jugadores/ficha/17284.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 12,
+      "name": "Denis Suárez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/1778.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 13,
+      "name": "Abde Rebbach",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/10476.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 14,
+      "name": "Lucas Boyé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608081632/uploads/images/jugadores/ficha/5124.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 15,
+      "name": "Nicolás Valentini",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_28_local_campo.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 16,
+      "name": "Mikel Rodriguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041641/uploads/images/jugadores/ficha/16186.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 17,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 18,
+      "name": "Xanet Oláiz",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_28_local_campo.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 19,
+      "name": "Miguel Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/8080.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 20,
+      "name": "Ander Guevara",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/3802.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 21,
+      "name": "Hugo Novoa",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/7902.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 22,
+      "name": "Mariano Díaz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/3226.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 23,
+      "name": "Carlos Benavidez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112329/uploads/images/jugadores/ficha/10448.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 24,
+      "name": "Jesús Owono",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/9644.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 25,
+      "name": "Selu Diallo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/11719.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 26,
+      "name": "Moussa Diarra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/12355.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 27,
+      "name": "Nikola Maras",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/4715.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 28,
+      "name": "Adrián Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/9897.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 29,
+      "name": "Facundo Garcés",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/14045.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 30,
+      "name": "Antonio Blanco",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/8737.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 31,
+      "name": "Toni Martinez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/5032.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 32,
+      "name": "Jonny Castro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/189.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 33,
+      "name": "Abde Rebbach",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/10476.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 34,
+      "name": "Carles Aleñá",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/2759.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 35,
+      "name": "Lucas Boyé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608081632/uploads/images/jugadores/ficha/5124.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 36,
+      "name": "Ángel Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/15127.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 37,
+      "name": "Ville Koski",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041448/uploads/images/jugadores/ficha/17284.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 38,
+      "name": "Pablo Ibáñez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/10258.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 39,
+      "name": "Antonio Sivera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/1059.png",
+      "position": "POR",
+      "team": "Alavés"
+    },
+    {
+      "id": 40,
+      "name": "Nahuel Tenaglia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300333/uploads/images/jugadores/ficha/9909.png",
+      "position": "MED",
+      "team": "Alavés"
+    },
+    {
+      "id": 41,
+      "name": "Yeray Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604211141/uploads/images/jugadores/ficha/1972.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 42,
+      "name": "Jesús Areso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100140/uploads/images/jugadores/ficha/7638.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 43,
+      "name": "Unai Simón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/3693.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 44,
+      "name": "Aitor Paredes",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604081109/uploads/images/jugadores/ficha/7916.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 45,
+      "name": "Gorka Guruzeta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100140/uploads/images/jugadores/ficha/5859.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 46,
+      "name": "Iñaki Williams",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050319/uploads/images/jugadores/ficha/1934.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 47,
+      "name": "Íñigo Ruiz de Galarreta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607211128/uploads/images/jugadores/ficha/44.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 48,
+      "name": "Nico Williams",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/8693.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 49,
+      "name": "Yuri Berchiche",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607231137/uploads/images/jugadores/ficha/735.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 50,
+      "name": "Oihan Sancet",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7006.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 51,
+      "name": "Mikel Jauregizar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602261305/uploads/images/jugadores/ficha/12605.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 52,
+      "name": "Robert Navarro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7293.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 53,
+      "name": "Peio Canales",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/14017.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 54,
+      "name": "Hugo Rincón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080251/uploads/images/jugadores/ficha/11677.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 55,
+      "name": "Beñat Prados",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604301159/uploads/images/jugadores/ficha/7917.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 56,
+      "name": "Álex Berenguer",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3204.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 57,
+      "name": "Adama Boiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100141/uploads/images/jugadores/ficha/11688.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 58,
+      "name": "Dani Vivian",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161347/uploads/images/jugadores/ficha/5245.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 59,
+      "name": "Aymeric Laporte",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/697.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 60,
+      "name": "Alejandro Rego",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604131910/uploads/images/jugadores/ficha/15409.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 61,
+      "name": "Beñat Gerenabarrena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080600/uploads/images/jugadores/ficha/10213.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 62,
+      "name": "Selton Sánchez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607081118/uploads/images/jugadores/ficha/16810.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 63,
+      "name": "Nico Serrano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7920.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 64,
+      "name": "Andoni Gorosabel",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111150/uploads/images/jugadores/ficha/3799.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 65,
+      "name": "Álvaro Djaló",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080001/uploads/images/jugadores/ficha/11983.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 66,
+      "name": "Alex Padilla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100258/uploads/images/jugadores/ficha/10214.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 67,
+      "name": "Unai Vencedor",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080251/uploads/images/jugadores/ficha/7737.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 68,
+      "name": "Maroan Sannadi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607231137/uploads/images/jugadores/ficha/13830.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 69,
+      "name": "Unai Egiluz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605151118/uploads/images/jugadores/ficha/11676.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 70,
+      "name": "Yuri Berchiche",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607231137/uploads/images/jugadores/ficha/735.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 71,
+      "name": "Unai Simón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/3693.png",
+      "position": "POR",
+      "team": "Athletic"
+    },
+    {
+      "id": 72,
+      "name": "Íñigo Ruiz de Galarreta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607211128/uploads/images/jugadores/ficha/44.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 73,
+      "name": "Jesús Areso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100140/uploads/images/jugadores/ficha/7638.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 74,
+      "name": "Iñaki Williams",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050319/uploads/images/jugadores/ficha/1934.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 75,
+      "name": "Yeray Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604211141/uploads/images/jugadores/ficha/1972.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 76,
+      "name": "Nico Williams",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/8693.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 77,
+      "name": "Aymeric Laporte",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111116/uploads/images/jugadores/ficha/697.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 78,
+      "name": "Mikel Jauregizar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602261305/uploads/images/jugadores/ficha/12605.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 79,
+      "name": "Oihan Sancet",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7006.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 80,
+      "name": "Gorka Guruzeta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602100140/uploads/images/jugadores/ficha/5859.png",
+      "position": "MED",
+      "team": "Athletic"
+    },
+    {
+      "id": 81,
+      "name": "Pablo Barrios",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041059/uploads/images/jugadores/ficha/10005.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 82,
+      "name": "Morten Hjulmand",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060438/uploads/images/jugadores/ficha/10393.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 83,
+      "name": "Giuliano Simeone",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/9276.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 84,
+      "name": "Ademola Lookman",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/4434.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 85,
+      "name": "Julián Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/10287.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 86,
+      "name": "Álex Grimaldo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/2771.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 87,
+      "name": "Jan Oblak",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201927/uploads/images/jugadores/ficha/1826.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 88,
+      "name": "Álex Baena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/7645.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 89,
+      "name": "David Hancko",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/5995.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 90,
+      "name": "Marc Pubill",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/9823.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 91,
+      "name": "Marcos Llorente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/1931.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 92,
+      "name": "Rodrigo Mendoza",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/10237.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 93,
+      "name": "Arnau Ortiz",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_2_local_campo.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 94,
+      "name": "Robin Le Normand",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/6002.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 95,
+      "name": "Koke Resurrección",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/63.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 96,
+      "name": "Alexander Sorloth",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/5134.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 97,
+      "name": "Johnny Cardoso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607211012/uploads/images/jugadores/ficha/12647.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 98,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 99,
+      "name": "Jorge Domínguez",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_2_local_campo.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 100,
+      "name": "Javier Boñar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/12484.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 101,
+      "name": "Obed Vargas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201929/uploads/images/jugadores/ficha/15572.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 102,
+      "name": "José María Giménez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201929/uploads/images/jugadores/ficha/775.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 103,
+      "name": "Kang-In Lee",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071145/uploads/images/jugadores/ficha/6337.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 104,
+      "name": "Carlos Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9755.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 105,
+      "name": "Juan Musso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/5942.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 106,
+      "name": "Matteo Ruggeri",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071145/uploads/images/jugadores/ficha/8256.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 107,
+      "name": "Thomas Lemar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071145/uploads/images/jugadores/ficha/3427.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 108,
+      "name": "Giuliano Simeone",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/9276.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 109,
+      "name": "Jan Oblak",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201927/uploads/images/jugadores/ficha/1826.png",
+      "position": "POR",
+      "team": "Atlético"
+    },
+    {
+      "id": 110,
+      "name": "Pablo Barrios",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041059/uploads/images/jugadores/ficha/10005.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 111,
+      "name": "David Hancko",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170354/uploads/images/jugadores/ficha/5995.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 112,
+      "name": "Morten Hjulmand",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060438/uploads/images/jugadores/ficha/10393.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 113,
+      "name": "Álex Grimaldo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/2771.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 114,
+      "name": "Álex Baena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/7645.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 115,
+      "name": "Ademola Lookman",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/4434.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 116,
+      "name": "Julián Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/10287.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 117,
+      "name": "Marcos Llorente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/1931.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 118,
+      "name": "Marc Pubill",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121143/uploads/images/jugadores/ficha/9823.png",
+      "position": "MED",
+      "team": "Atlético"
+    },
+    {
+      "id": 119,
+      "name": "Marc Bernal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/13864.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 120,
+      "name": "Joan Garcia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101214/uploads/images/jugadores/ficha/7279.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 121,
+      "name": "Lamine Yamal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121500/uploads/images/jugadores/ficha/11520.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 122,
+      "name": "Fermín López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608021424/uploads/images/jugadores/ficha/11709.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 123,
+      "name": "Pau Cubarsí",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/11706.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 124,
+      "name": "Karim Adeyemi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060419/uploads/images/jugadores/ficha/8395.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 125,
+      "name": "Gerard Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/12641.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 126,
+      "name": "Alejandro Balde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061400/uploads/images/jugadores/ficha/9316.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 127,
+      "name": "Pedri González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/7257.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 128,
+      "name": "Eric Garcia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101214/uploads/images/jugadores/ficha/7542.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 129,
+      "name": "Raphinha",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101214/uploads/images/jugadores/ficha/4288.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 130,
+      "name": "Jules Koundé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111159/uploads/images/jugadores/ficha/6674.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 131,
+      "name": "Pablo Gavi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101215/uploads/images/jugadores/ficha/9273.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 132,
+      "name": "Anthony Gordon",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/7595.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 133,
+      "name": "Dani Olmo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/2288.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 134,
+      "name": "Xavi Espart",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/16765.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 135,
+      "name": "Andreas Christensen",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/2417.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 136,
+      "name": "Ferrán Torres",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/5050.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 137,
+      "name": "Hamza Abdelkarim",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/17663.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 138,
+      "name": "Wojciech Szczesny",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/2534.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 139,
+      "name": "Marc Casadó",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111301/uploads/images/jugadores/ficha/10217.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 140,
+      "name": "Héctor Fort",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111301/uploads/images/jugadores/ficha/11577.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 141,
+      "name": "Frenkie de Jong",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/6210.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 142,
+      "name": "Roony Bardghji",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111202/uploads/images/jugadores/ficha/10658.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 143,
+      "name": "Dani Olmo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/2288.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 144,
+      "name": "Ferrán Torres",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/5050.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 145,
+      "name": "Joan Garcia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101214/uploads/images/jugadores/ficha/7279.png",
+      "position": "POR",
+      "team": "Barcelona"
+    },
+    {
+      "id": 146,
+      "name": "Jules Koundé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111159/uploads/images/jugadores/ficha/6674.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 147,
+      "name": "Marc Bernal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/13864.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 148,
+      "name": "Lamine Yamal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121500/uploads/images/jugadores/ficha/11520.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 149,
+      "name": "Raphinha",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101214/uploads/images/jugadores/ficha/4288.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 150,
+      "name": "Alejandro Balde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061400/uploads/images/jugadores/ficha/9316.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 151,
+      "name": "Pedri González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/7257.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 152,
+      "name": "Pau Cubarsí",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121457/uploads/images/jugadores/ficha/11706.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 153,
+      "name": "Gerard Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300329/uploads/images/jugadores/ficha/12641.png",
+      "position": "MED",
+      "team": "Barcelona"
+    },
+    {
+      "id": 154,
+      "name": "Cucho Hernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031001/uploads/images/jugadores/ficha/5546.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 155,
+      "name": "Pablo Fornals",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607231309/uploads/images/jugadores/ficha/2632.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 156,
+      "name": "Héctor Bellerín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/2153.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 157,
+      "name": "Diego Javier Llorente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/707.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 158,
+      "name": "Natan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/11813.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 159,
+      "name": "Álvaro Valles",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/3686.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 160,
+      "name": "Marc Roca",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/3215.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 161,
+      "name": "Isco Alarcón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607301116/uploads/images/jugadores/ficha/336.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 162,
+      "name": "Antony",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/8405.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 163,
+      "name": "Fran García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101421/uploads/images/jugadores/ficha/6392.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 164,
+      "name": "Rodrigo Riquelme",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6450.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 165,
+      "name": "Facundo Bernal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050410/uploads/images/jugadores/ficha/15736.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 166,
+      "name": "Nelson Deossa",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/15696.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 167,
+      "name": "Pablo García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/13822.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 168,
+      "name": "Marc Bartra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/322.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 169,
+      "name": "Abde Ezzalzouli",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121231/uploads/images/jugadores/ficha/9750.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 170,
+      "name": "Álvaro Fidalgo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607301124/uploads/images/jugadores/ficha/6393.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 171,
+      "name": "Ángel Ortiz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/10233.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 172,
+      "name": "Giovani Lo Celso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111007/uploads/images/jugadores/ficha/3717.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 173,
+      "name": "Junior Firpo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/4620.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 174,
+      "name": "Valentín Gómez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/16203.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 175,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 176,
+      "name": "José Antonio Morante",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_4_local_campo.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 177,
+      "name": "Manu González",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_4_local_portero.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 178,
+      "name": "Iker Losada",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111007/uploads/images/jugadores/ficha/7201.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 179,
+      "name": "Gonzalo Petit",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111007/uploads/images/jugadores/ficha/16197.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 180,
+      "name": "Aitor Ruibal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111007/uploads/images/jugadores/ficha/5051.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 181,
+      "name": "Diego Conde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111007/uploads/images/jugadores/ficha/7554.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 182,
+      "name": "Héctor Bellerín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/2153.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 183,
+      "name": "Cucho Hernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031001/uploads/images/jugadores/ficha/5546.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 184,
+      "name": "Álvaro Valles",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/3686.png",
+      "position": "POR",
+      "team": "Betis"
+    },
+    {
+      "id": 185,
+      "name": "Isco Alarcón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607301116/uploads/images/jugadores/ficha/336.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 186,
+      "name": "Abde Ezzalzouli",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121231/uploads/images/jugadores/ficha/9750.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 187,
+      "name": "Natan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/11813.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 188,
+      "name": "Fran García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101421/uploads/images/jugadores/ficha/6392.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 189,
+      "name": "Diego Javier Llorente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/707.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 190,
+      "name": "Pablo Fornals",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607231309/uploads/images/jugadores/ficha/2632.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 191,
+      "name": "Marc Roca",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091403/uploads/images/jugadores/ficha/3215.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 192,
+      "name": "Antony",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/8405.png",
+      "position": "MED",
+      "team": "Betis"
+    },
+    {
+      "id": 193,
+      "name": "Carl Starfelt",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607221503/uploads/images/jugadores/ficha/9612.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 194,
+      "name": "Sergio Carreira",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/7199.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 195,
+      "name": "Ionut Radu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/5978.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 196,
+      "name": "Marcos Alonso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080001/uploads/images/jugadores/ficha/4397.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 197,
+      "name": "Aleix Febas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080410/uploads/images/jugadores/ficha/6885.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 198,
+      "name": "Javi Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131229/uploads/images/jugadores/ficha/12534.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 199,
+      "name": "Javi Rueda",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605141324/uploads/images/jugadores/ficha/13035.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 200,
+      "name": "Miguel Román",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101436/uploads/images/jugadores/ficha/13808.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 201,
+      "name": "Williot Swedberg",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/10207.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 202,
+      "name": "Hugo González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110203/uploads/images/jugadores/ficha/9744.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 203,
+      "name": "Ferran Jutglà",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/7842.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 204,
+      "name": "Hugo Álvarez ",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9740.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 205,
+      "name": "Ilaix Moriba",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111334/uploads/images/jugadores/ficha/8082.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 206,
+      "name": "Iago Aspas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/175.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 207,
+      "name": "Javi Galán",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111917/uploads/images/jugadores/ficha/6487.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 208,
+      "name": "Yoel Lago",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/13036.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 209,
+      "name": "Álvaro Núñez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/11767.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 210,
+      "name": "Abdoulaye Faye",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_5_local_campo.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 211,
+      "name": "Matías Vecino",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061456/uploads/images/jugadores/ficha/5313.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 212,
+      "name": "Manu Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061456/uploads/images/jugadores/ficha/16003.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 213,
+      "name": "Jones El-Abdellaoui",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111334/uploads/images/jugadores/ficha/14980.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 214,
+      "name": "Altay Bayindir",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608081919/uploads/images/jugadores/ficha/9012.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 215,
+      "name": "Borja Iglesias",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608120252/uploads/images/jugadores/ficha/1945.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 216,
+      "name": "Pablo Durán",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608062019/uploads/images/jugadores/ficha/10822.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 217,
+      "name": "Carles Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061456/uploads/images/jugadores/ficha/6606.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 218,
+      "name": "Iván Villar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/3255.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 219,
+      "name": "Ionut Radu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/5978.png",
+      "position": "POR",
+      "team": "Celta"
+    },
+    {
+      "id": 220,
+      "name": "Miguel Román",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101436/uploads/images/jugadores/ficha/13808.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 221,
+      "name": "Ferran Jutglà",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605140335/uploads/images/jugadores/ficha/7842.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 222,
+      "name": "Javi Galán",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111917/uploads/images/jugadores/ficha/6487.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 223,
+      "name": "Sergio Carreira",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/7199.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 224,
+      "name": "Borja Iglesias",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608120252/uploads/images/jugadores/ficha/1945.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 225,
+      "name": "Javi Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131229/uploads/images/jugadores/ficha/12534.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 226,
+      "name": "Carl Starfelt",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607221503/uploads/images/jugadores/ficha/9612.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 227,
+      "name": "Marcos Alonso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080001/uploads/images/jugadores/ficha/4397.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 228,
+      "name": "Williot Swedberg",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/10207.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 229,
+      "name": "Aleix Febas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080410/uploads/images/jugadores/ficha/6885.png",
+      "position": "MED",
+      "team": "Celta"
+    },
+    {
+      "id": 230,
+      "name": "Diego Villares",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/13972.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 231,
+      "name": "Pierre-Emerick Aubameyang",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060428/uploads/images/jugadores/ficha/3414.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 232,
+      "name": "Ximo Navarro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041641/uploads/images/jugadores/ficha/392.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 233,
+      "name": "Bright Ede",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 234,
+      "name": "Mario Soriano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060441/uploads/images/jugadores/ficha/8712.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 235,
+      "name": "Leo Román",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607291636/uploads/images/jugadores/ficha/9405.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 236,
+      "name": "Lucas Noubi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041641/uploads/images/jugadores/ficha/16099.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 237,
+      "name": "Bil Nsongo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/16863.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 238,
+      "name": "Luismi Cruz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091904/uploads/images/jugadores/ficha/9772.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 239,
+      "name": "Angeliño",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 240,
+      "name": "Lorenzo Amatucci",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/11198.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 241,
+      "name": "Giacomo Quagliata",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041642/uploads/images/jugadores/ficha/10473.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 242,
+      "name": "Miguel Loureiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/10478.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 243,
+      "name": "Noé Carrillo",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 244,
+      "name": "David Mella",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130448/uploads/images/jugadores/ficha/13975.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 245,
+      "name": "Zakaria Eddahchouri",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/15164.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 246,
+      "name": "Jonathan Asp Jensen",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 247,
+      "name": "Adrià Altimira",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/10357.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 248,
+      "name": "Yeremay Hernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/13974.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 249,
+      "name": "Teun Gijselhart",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 250,
+      "name": "Dani Barcia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608090601/uploads/images/jugadores/ficha/13970.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 251,
+      "name": "Arnau Comas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/9854.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 252,
+      "name": "Álvaro Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091837/uploads/images/jugadores/ficha/3612.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 253,
+      "name": "Kevin Sánchez",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 254,
+      "name": "José Ángel Jurado",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/1980.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 255,
+      "name": "Riki Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/7309.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 256,
+      "name": "Charlie Patino",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/9847.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 257,
+      "name": "Eric Puerto",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/13968.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 258,
+      "name": "Germán Parreño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191856/uploads/images/jugadores/ficha/698.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 259,
+      "name": "Adrià Altimira",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/10357.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 260,
+      "name": "Angeliño",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_6_local_campo.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 261,
+      "name": "Yeremay Hernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/13974.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 262,
+      "name": "Leo Román",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607291636/uploads/images/jugadores/ficha/9405.png",
+      "position": "POR",
+      "team": "Deportivo"
+    },
+    {
+      "id": 263,
+      "name": "Lucas Noubi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041641/uploads/images/jugadores/ficha/16099.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 264,
+      "name": "Luismi Cruz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091904/uploads/images/jugadores/ficha/9772.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 265,
+      "name": "Miguel Loureiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111420/uploads/images/jugadores/ficha/10478.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 266,
+      "name": "Lorenzo Amatucci",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/11198.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 267,
+      "name": "Pierre-Emerick Aubameyang",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060428/uploads/images/jugadores/ficha/3414.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 268,
+      "name": "Mario Soriano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060441/uploads/images/jugadores/ficha/8712.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 269,
+      "name": "Ximo Navarro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041641/uploads/images/jugadores/ficha/392.png",
+      "position": "MED",
+      "team": "Deportivo"
+    },
+    {
+      "id": 270,
+      "name": "Víctor Chust",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604071509/uploads/images/jugadores/ficha/8273.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 271,
+      "name": "Lucas Cepeda",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/17248.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 272,
+      "name": "Buba Sangaré",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271308/uploads/images/jugadores/ficha/12878.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 273,
+      "name": "David Affengruber",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271308/uploads/images/jugadores/ficha/8816.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 274,
+      "name": "Germán Valera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7658.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 275,
+      "name": "Gonzalo Villar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603131742/uploads/images/jugadores/ficha/5227.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 276,
+      "name": "Pedro Bigas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/404.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 277,
+      "name": "Marc Aguado",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080702/uploads/images/jugadores/ficha/10358.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 278,
+      "name": " Ali Houary",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080702/uploads/images/jugadores/ficha/14118.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 279,
+      "name": "Matías Dituro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/9161.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 280,
+      "name": "Fernando Niño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608042146/uploads/images/jugadores/ficha/7081.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 281,
+      "name": "Federico Redondo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605061142/uploads/images/jugadores/ficha/15505.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 282,
+      "name": "Martim Neto",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/13883.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 283,
+      "name": "Grady Diangana",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/5194.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 284,
+      "name": "Tete Morente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6882.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 285,
+      "name": "Adam Boayar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/12922.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 286,
+      "name": "Facundo Buonanotte",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/11214.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 287,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 288,
+      "name": "Umaru Konaré",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_21_local_campo.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 289,
+      "name": "John Chetauya",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/8680.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 290,
+      "name": "Abiel Osorio",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_21_local_campo.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 291,
+      "name": "Javi Morcillo",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_21_local_campo.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 292,
+      "name": "Alejandro Iturbe",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602030453/uploads/images/jugadores/ficha/9759.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 293,
+      "name": "Rafa Núñez",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_21_local_campo.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 294,
+      "name": "Yago Santiago",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/11562.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 295,
+      "name": "Bambo Diaby",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608032357/uploads/images/jugadores/ficha/5022.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 296,
+      "name": "Matia Barzic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080702/uploads/images/jugadores/ficha/14115.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 297,
+      "name": "Gonzalo Villar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603131742/uploads/images/jugadores/ficha/5227.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 298,
+      "name": "Marc Aguado",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080702/uploads/images/jugadores/ficha/10358.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 299,
+      "name": "Germán Valera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7658.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 300,
+      "name": "Grady Diangana",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/5194.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 301,
+      "name": "Matías Dituro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/9161.png",
+      "position": "POR",
+      "team": "Elche"
+    },
+    {
+      "id": 302,
+      "name": "Víctor Chust",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604071509/uploads/images/jugadores/ficha/8273.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 303,
+      "name": "David Affengruber",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271308/uploads/images/jugadores/ficha/8816.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 304,
+      "name": "Fernando Niño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608042146/uploads/images/jugadores/ficha/7081.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 305,
+      "name": "Buba Sangaré",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271308/uploads/images/jugadores/ficha/12878.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 306,
+      "name": "Pedro Bigas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/404.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 307,
+      "name": "Facundo Buonanotte",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112340/uploads/images/jugadores/ficha/11214.png",
+      "position": "MED",
+      "team": "Elche"
+    },
+    {
+      "id": 308,
+      "name": "Álex Calatrava",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041642/uploads/images/jugadores/ficha/11863.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 309,
+      "name": "Omar El Hilali",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/10220.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 310,
+      "name": "Roger Hinojo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/15316.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 311,
+      "name": "Leandro Cabrera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607140852/uploads/images/jugadores/ficha/582.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 312,
+      "name": "Unai Núñez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112358/uploads/images/jugadores/ficha/3785.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 313,
+      "name": "Urko González de Zarate",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604170902/uploads/images/jugadores/ficha/8228.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 314,
+      "name": "Edu Expósito",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607171538/uploads/images/jugadores/ficha/3738.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 315,
+      "name": "Tyrhys Dolan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/16202.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 316,
+      "name": "Marko Dmitrovic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061525/uploads/images/jugadores/ficha/3759.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 317,
+      "name": "Javier Hernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/14024.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 318,
+      "name": "Roberto Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/9987.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 319,
+      "name": "Pere Milla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/1927.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 320,
+      "name": "Jofre Carreras",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9850.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 321,
+      "name": "Pol Lozano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/3879.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 322,
+      "name": "Quilindschy Hartman",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041642/uploads/images/jugadores/ficha/11467.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 323,
+      "name": "Clemens Riedel",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/16308.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 324,
+      "name": "Marcos Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051448/uploads/images/jugadores/ficha/10893.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 325,
+      "name": "Gabriel Moscardo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080003/uploads/images/jugadores/ficha/15957.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 326,
+      "name": "Rafel Bauzà",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607071703/uploads/images/jugadores/ficha/12918.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 327,
+      "name": "Miguel Ángel Rubio",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112358/uploads/images/jugadores/ficha/5220.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 328,
+      "name": "Ángel Fortuño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/10219.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 329,
+      "name": "Rubén Sánchez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604170902/uploads/images/jugadores/ficha/9695.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 330,
+      "name": "Kike García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041439/uploads/images/jugadores/ficha/2751.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 331,
+      "name": "Javi Puado",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3807.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 332,
+      "name": "Kike García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041439/uploads/images/jugadores/ficha/2751.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 333,
+      "name": "Quilindschy Hartman",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041642/uploads/images/jugadores/ficha/11467.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 334,
+      "name": "Javi Puado",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3807.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 335,
+      "name": "Marko Dmitrovic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061525/uploads/images/jugadores/ficha/3759.png",
+      "position": "POR",
+      "team": "Espanyol"
+    },
+    {
+      "id": 336,
+      "name": "Leandro Cabrera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607140852/uploads/images/jugadores/ficha/582.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 337,
+      "name": "Omar El Hilali",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602020148/uploads/images/jugadores/ficha/10220.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 338,
+      "name": "Urko González de Zarate",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604170902/uploads/images/jugadores/ficha/8228.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 339,
+      "name": "Tyrhys Dolan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/16202.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 340,
+      "name": "Álex Calatrava",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041642/uploads/images/jugadores/ficha/11863.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 341,
+      "name": "Edu Expósito",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607171538/uploads/images/jugadores/ficha/3738.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 342,
+      "name": "Unai Núñez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112358/uploads/images/jugadores/ficha/3785.png",
+      "position": "MED",
+      "team": "Espanyol"
+    },
+    {
+      "id": 343,
+      "name": "Martín Satriano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/8496.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 344,
+      "name": "Mario Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/11202.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 345,
+      "name": "David Soria",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/1919.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 346,
+      "name": "Ramón Terrats",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8944.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 347,
+      "name": "Orel Mangala",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/10463.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 348,
+      "name": "Davinchi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/16004.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 349,
+      "name": "Zaid Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/14210.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 350,
+      "name": "Dakonam Djené",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/3881.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 351,
+      "name": "Kiko Femenia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/3178.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 352,
+      "name": "Andrés García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091903/uploads/images/jugadores/ficha/11916.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 353,
+      "name": "Abdel Abqar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/5083.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 354,
+      "name": "Sebastián Boselli",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/17161.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 355,
+      "name": "Borja Mayoral",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041434/uploads/images/jugadores/ficha/1989.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 356,
+      "name": "Saba Sazonov",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060547/uploads/images/jugadores/ficha/11905.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 357,
+      "name": "Juan Berrocal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/5671.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 358,
+      "name": "Jean Ives Valou",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131453/uploads/images/jugadores/ficha/14816.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 359,
+      "name": "Álex Sancris",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/11766.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 360,
+      "name": "Ismael Bekhoucha",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131453/uploads/images/jugadores/ficha/13875.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 361,
+      "name": "Javi Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/1981.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 362,
+      "name": "Jiri Letácek",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/13877.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 363,
+      "name": "Yvan Neyou",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041434/uploads/images/jugadores/ficha/10564.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 364,
+      "name": "Christantus Uche",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080003/uploads/images/jugadores/ficha/13780.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 365,
+      "name": "Juanmi Jiménez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050319/uploads/images/jugadores/ficha/340.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 366,
+      "name": "Mario Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/11202.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 367,
+      "name": "Davinchi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/16004.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 368,
+      "name": "Martín Satriano",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/8496.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 369,
+      "name": "Dakonam Djené",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/3881.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 370,
+      "name": "Abdel Abqar",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/5083.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 371,
+      "name": "Andrés García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091903/uploads/images/jugadores/ficha/11916.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 372,
+      "name": "David Soria",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/1919.png",
+      "position": "POR",
+      "team": "Getafe"
+    },
+    {
+      "id": 373,
+      "name": "Ramón Terrats",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8944.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 374,
+      "name": "Zaid Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607062104/uploads/images/jugadores/ficha/14210.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 375,
+      "name": "Christantus Uche",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080003/uploads/images/jugadores/ficha/13780.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 376,
+      "name": "Orel Mangala",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/10463.png",
+      "position": "MED",
+      "team": "Getafe"
+    },
+    {
+      "id": 377,
+      "name": "Paco Cortés",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/13145.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 378,
+      "name": "Carlos Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8646.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 379,
+      "name": "Iván Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/7629.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 380,
+      "name": "Mathew Ryan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051721/uploads/images/jugadores/ficha/1743.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 381,
+      "name": "Hugo Sotelo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/8988.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 382,
+      "name": "Nacho Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/16020.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 383,
+      "name": "Enzo Bardelli",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091920/uploads/images/jugadores/ficha/18006.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 384,
+      "name": "Aissa Mandi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/1566.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 385,
+      "name": "Jon Ander Olasagasti",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/8961.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 386,
+      "name": "Manu Sánchez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/6605.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 387,
+      "name": "Adrián de la Fuente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/6346.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 388,
+      "name": "Karl Etta Eyong",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/10326.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 389,
+      "name": "Jeremy Toljan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/4976.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 390,
+      "name": "Víctor García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/7644.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 391,
+      "name": "Oriol Rey",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/8088.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 392,
+      "name": "Kareem Tunde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/16022.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 393,
+      "name": "Thiago Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121153/uploads/images/jugadores/ficha/17116.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 394,
+      "name": "Kervin Arriaga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041122/uploads/images/jugadores/ficha/14989.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 395,
+      "name": "Yanis Musuayi",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_10_local_campo.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 396,
+      "name": "Dani Requena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/12598.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 397,
+      "name": "Tai Abed",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/15086.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 398,
+      "name": "Jorge Cabello",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607292229/uploads/images/jugadores/ficha/12879.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 399,
+      "name": "Pablo Campos",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/11807.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 400,
+      "name": "Alejandro Primo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060448/uploads/images/jugadores/ficha/10191.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 401,
+      "name": "Dani Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/14065.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 402,
+      "name": "Roger Brugué",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/9157.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 403,
+      "name": "Carlos Álvarez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8646.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 404,
+      "name": "Karl Etta Eyong",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/10326.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 405,
+      "name": "Kareem Tunde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/16022.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 406,
+      "name": "Jeremy Toljan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/4976.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 407,
+      "name": "Aissa Mandi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/1566.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 408,
+      "name": "Manu Sánchez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/6605.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 409,
+      "name": "Jon Ander Olasagasti",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/8961.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 410,
+      "name": "Hugo Sotelo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/8988.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 411,
+      "name": "Iván Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/7629.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 412,
+      "name": "Mathew Ryan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051721/uploads/images/jugadores/ficha/1743.png",
+      "position": "POR",
+      "team": "Levante"
+    },
+    {
+      "id": 413,
+      "name": "Adrián de la Fuente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607161602/uploads/images/jugadores/ficha/6346.png",
+      "position": "MED",
+      "team": "Levante"
+    },
+    {
+      "id": 414,
+      "name": "Chupete",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/14096.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 415,
+      "name": "José Salinas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060445/uploads/images/jugadores/ficha/8250.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 416,
+      "name": "Rafa Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/15336.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 417,
+      "name": "Einar Galilea",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/3174.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 418,
+      "name": "Carlos Puga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/13982.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 419,
+      "name": "Izan Merino",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/13983.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 420,
+      "name": "Dani Lorenzo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/16286.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 421,
+      "name": "Ramón Enríquez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110202/uploads/images/jugadores/ficha/7703.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 422,
+      "name": "David Larrubia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8780.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 423,
+      "name": "Joaquín Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6050.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 424,
+      "name": "Alfonso Herrero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608052212/uploads/images/jugadores/ficha/6973.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 425,
+      "name": "Rafa Garrido",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/15344.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 426,
+      "name": "Angel Recio",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110204/uploads/images/jugadores/ficha/15417.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 427,
+      "name": "Álex Pastor",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191857/uploads/images/jugadores/ficha/10353.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 428,
+      "name": "Juan Cruz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101408/uploads/images/jugadores/ficha/10823.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 429,
+      "name": "Adrián Niño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/12475.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 430,
+      "name": "Dani Sánchez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191857/uploads/images/jugadores/ficha/13980.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 431,
+      "name": "Julen Lobete",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141559/uploads/images/jugadores/ficha/7686.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 432,
+      "name": "Eneko Jauregi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191857/uploads/images/jugadores/ficha/6814.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 433,
+      "name": "Haitam Abaida",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/9321.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 434,
+      "name": "Juanpe Jiménez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608090602/uploads/images/jugadores/ficha/7238.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 435,
+      "name": "Carlos López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191857/uploads/images/jugadores/ficha/13978.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 436,
+      "name": "Pablo Arriaza",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_11_local_campo.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 437,
+      "name": "Aarón Ochoa",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101409/uploads/images/jugadores/ficha/13984.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 438,
+      "name": "Diego Murillo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060448/uploads/images/jugadores/ficha/13979.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 439,
+      "name": "Carlos Dotor",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101408/uploads/images/jugadores/ficha/10860.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 440,
+      "name": "Fernando Calero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101408/uploads/images/jugadores/ficha/5553.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 441,
+      "name": "Alfonso Herrero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608052212/uploads/images/jugadores/ficha/6973.png",
+      "position": "POR",
+      "team": "Málaga"
+    },
+    {
+      "id": 442,
+      "name": "David Larrubia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8780.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 443,
+      "name": "Izan Merino",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/13983.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 444,
+      "name": "Joaquín Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6050.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 445,
+      "name": "Carlos Dotor",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101408/uploads/images/jugadores/ficha/10860.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 446,
+      "name": "Chupete",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/14096.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 447,
+      "name": "Einar Galilea",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/3174.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 448,
+      "name": "Carlos Puga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041643/uploads/images/jugadores/ficha/13982.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 449,
+      "name": "Fernando Calero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101408/uploads/images/jugadores/ficha/5553.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 450,
+      "name": "José Salinas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060445/uploads/images/jugadores/ficha/8250.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 451,
+      "name": "Dani Lorenzo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/16286.png",
+      "position": "MED",
+      "team": "Málaga"
+    },
+    {
+      "id": 452,
+      "name": "Alejandro Catena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202601270343/uploads/images/jugadores/ficha/6493.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 453,
+      "name": "Raul Moro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7870.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 454,
+      "name": "Iñigo Arguibide",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608122023/uploads/images/jugadores/ficha/12823.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 455,
+      "name": "Ante Budimir",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607282119/uploads/images/jugadores/ficha/6635.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 456,
+      "name": "Rubén García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/660.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 457,
+      "name": "Aimar Oroz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607282119/uploads/images/jugadores/ficha/7203.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 458,
+      "name": "Jon Moncayola",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602171442/uploads/images/jugadores/ficha/7204.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 459,
+      "name": "Iker Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202601270343/uploads/images/jugadores/ficha/11362.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 460,
+      "name": "Boyomo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608122025/uploads/images/jugadores/ficha/8695.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 461,
+      "name": "Abel Bretones",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/11230.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 462,
+      "name": "Sergio Herrera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603261710/uploads/images/jugadores/ficha/6611.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 463,
+      "name": "Lucas Torró",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141339/uploads/images/jugadores/ficha/1928.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 464,
+      "name": "Jorge Herrando",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202601270343/uploads/images/jugadores/ficha/7082.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 465,
+      "name": "Jonathan Dubasin",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060446/uploads/images/jugadores/ficha/10208.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 466,
+      "name": "Valentin Rosier",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607251601/uploads/images/jugadores/ficha/9531.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 467,
+      "name": "Moi Gómez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121440/uploads/images/jugadores/ficha/841.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 468,
+      "name": "Kike Barja",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3206.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 469,
+      "name": "Raúl García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603131323/uploads/images/jugadores/ficha/7027.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 470,
+      "name": "Aitor Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605120539/uploads/images/jugadores/ficha/829.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 471,
+      "name": "Diego Rico",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602030459/uploads/images/jugadores/ficha/3235.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 472,
+      "name": "Asier Osambela",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/12453.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 473,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 474,
+      "name": "Rockson Yeboah",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_13_local_campo.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 475,
+      "name": "Iker Benito",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111454/uploads/images/jugadores/ficha/9872.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 476,
+      "name": "Iker Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202601270343/uploads/images/jugadores/ficha/11362.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 477,
+      "name": "Boyomo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608122025/uploads/images/jugadores/ficha/8695.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 478,
+      "name": "Jon Moncayola",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602171442/uploads/images/jugadores/ficha/7204.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 479,
+      "name": "Ante Budimir",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607282119/uploads/images/jugadores/ficha/6635.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 480,
+      "name": "Raul Moro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7870.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 481,
+      "name": "Sergio Herrera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603261710/uploads/images/jugadores/ficha/6611.png",
+      "position": "POR",
+      "team": "Osasuna"
+    },
+    {
+      "id": 482,
+      "name": "Valentin Rosier",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607251601/uploads/images/jugadores/ficha/9531.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 483,
+      "name": "Alejandro Catena",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202601270343/uploads/images/jugadores/ficha/6493.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 484,
+      "name": "Rubén García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/660.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 485,
+      "name": "Aimar Oroz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607282119/uploads/images/jugadores/ficha/7203.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 486,
+      "name": "Abel Bretones",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/11230.png",
+      "position": "MED",
+      "team": "Osasuna"
+    },
+    {
+      "id": 487,
+      "name": "Sergio Canales",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608102212/uploads/images/jugadores/ficha/132.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 488,
+      "name": "Simon Eriksson",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/15033.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 489,
+      "name": "Asier Villalibre",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110205/uploads/images/jugadores/ficha/3671.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 490,
+      "name": "Andrés Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6890.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 491,
+      "name": "Maguette Gueye",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/14155.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 492,
+      "name": "Iñigo Vicente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6442.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 493,
+      "name": "Gustavo Puerta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/12079.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 494,
+      "name": "Jorge Salinas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/14105.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 495,
+      "name": "Pedro Felipe",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_42_local_campo.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 496,
+      "name": "Facundo González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110205/uploads/images/jugadores/ficha/10209.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 497,
+      "name": "Álvaro Mantilla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060508/uploads/images/jugadores/ficha/10336.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 498,
+      "name": "Manu Hernando",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/3836.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 499,
+      "name": "Julen Agirrezabala",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060418/uploads/images/jugadores/ficha/9213.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 500,
+      "name": "Íñigo Sainz-Maza",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607191857/uploads/images/jugadores/ficha/10338.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 501,
+      "name": "Pablo Ramón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608091904/uploads/images/jugadores/ficha/8972.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 502,
+      "name": "Juan Carlos Arana",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041640/uploads/images/jugadores/ficha/9930.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 503,
+      "name": "Yassir Zabiri",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_42_local_campo.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 504,
+      "name": "Sergio Martínez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031048/uploads/images/jugadores/ficha/16262.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 505,
+      "name": "Giorgi Guliashvili",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_42_local_campo.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 506,
+      "name": "Laro Gómez",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_42_local_portero.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 507,
+      "name": "Maguette Gueye",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/14155.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 508,
+      "name": "Sergio Canales",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608102212/uploads/images/jugadores/ficha/132.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 509,
+      "name": "Andrés Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6890.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 510,
+      "name": "Manu Hernando",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041644/uploads/images/jugadores/ficha/3836.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 511,
+      "name": "Asier Villalibre",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110205/uploads/images/jugadores/ficha/3671.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 512,
+      "name": "Álvaro Mantilla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060508/uploads/images/jugadores/ficha/10336.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 513,
+      "name": "Julen Agirrezabala",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060418/uploads/images/jugadores/ficha/9213.png",
+      "position": "POR",
+      "team": "Racing"
+    },
+    {
+      "id": 514,
+      "name": "Gustavo Puerta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/12079.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 515,
+      "name": "Jorge Salinas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041648/uploads/images/jugadores/ficha/14105.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 516,
+      "name": "Iñigo Vicente",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6442.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 517,
+      "name": "Facundo González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110205/uploads/images/jugadores/ficha/10209.png",
+      "position": "MED",
+      "team": "Racing"
+    },
+    {
+      "id": 518,
+      "name": "Isi Palazón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6957.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 519,
+      "name": "Álvaro García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/867.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 520,
+      "name": "Andrei Ratiu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/6560.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 521,
+      "name": "Iván Balliu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/7251.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 522,
+      "name": "Florian Lejeune",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201436/uploads/images/jugadores/ficha/863.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 523,
+      "name": "Pelayo Fernández",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/13801.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 524,
+      "name": "Unai López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/1881.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 525,
+      "name": "Óscar Valentín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/6889.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 526,
+      "name": "Jorge de Frutos",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6633.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 527,
+      "name": "Augusto Batalla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604211535/uploads/images/jugadores/ficha/12651.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 528,
+      "name": "Alemão",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/11758.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 529,
+      "name": "Pedro Díaz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/3623.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 530,
+      "name": "Sergio Camello",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/6562.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 531,
+      "name": "Pathé Ciss",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608052014/uploads/images/jugadores/ficha/7307.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 532,
+      "name": "Jozhua Vertrouwd",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604202124/uploads/images/jugadores/ficha/14004.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 533,
+      "name": "Fran Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/10210.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 534,
+      "name": "Randy Nteka",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6853.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 535,
+      "name": "Marash Kumbulla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607130506/uploads/images/jugadores/ficha/7100.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 536,
+      "name": "Dani Cárdenas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/7570.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 537,
+      "name": "Raúl De Tomás",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608052014/uploads/images/jugadores/ficha/1123.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 538,
+      "name": "Luiz Felipe",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091429/uploads/images/jugadores/ficha/5705.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 539,
+      "name": "Unai López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/1881.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 540,
+      "name": "Andrei Ratiu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/6560.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 541,
+      "name": "Iván Balliu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/7251.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 542,
+      "name": "Pathé Ciss",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608052014/uploads/images/jugadores/ficha/7307.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 543,
+      "name": "Marash Kumbulla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607130506/uploads/images/jugadores/ficha/7100.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 544,
+      "name": "Sergio Camello",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604121805/uploads/images/jugadores/ficha/6562.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 545,
+      "name": "Isi Palazón",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6957.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 546,
+      "name": "Jorge de Frutos",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6633.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 547,
+      "name": "Álvaro García",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/867.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 548,
+      "name": "Augusto Batalla",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604211535/uploads/images/jugadores/ficha/12651.png",
+      "position": "POR",
+      "team": "Rayo"
+    },
+    {
+      "id": 549,
+      "name": "Florian Lejeune",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607201436/uploads/images/jugadores/ficha/863.png",
+      "position": "MED",
+      "team": "Rayo"
+    },
+    {
+      "id": 550,
+      "name": "Kylian Mbappé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101206/uploads/images/jugadores/ficha/3429.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 551,
+      "name": "Arda Güler",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/11439.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 552,
+      "name": "Dean Huijsen",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071318/uploads/images/jugadores/ficha/11830.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 553,
+      "name": "Ibrahima Konaté",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/4884.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 554,
+      "name": "Denzel Dumfries",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/6055.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 555,
+      "name": "Bernardo Silva",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050410/uploads/images/jugadores/ficha/3431.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 556,
+      "name": "Federico Valverde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3758.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 557,
+      "name": "Jude Bellingham",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/8386.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 558,
+      "name": "Vinicius Junior",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/5565.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 559,
+      "name": "Thibaut Courtois",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101210/uploads/images/jugadores/ficha/59.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 560,
+      "name": "Marc Cucurella",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101206/uploads/images/jugadores/ficha/5013.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 561,
+      "name": "Antonio Rüdiger",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/2536.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 562,
+      "name": "Trent Alexander-Arnold",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/4480.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 563,
+      "name": "Yan Diomande",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608120440/uploads/images/jugadores/ficha/15342.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 564,
+      "name": "Aurélien Tchouaméni",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111301/uploads/images/jugadores/ficha/9669.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 565,
+      "name": "Eduardo Camavinga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/8479.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 566,
+      "name": "Brahim Díaz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/5035.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 567,
+      "name": "Carlos Espí",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608102201/uploads/images/jugadores/ficha/12870.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 568,
+      "name": "Álvaro F. Carreras",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/10176.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 569,
+      "name": "Andriy Lunin",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/5526.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 570,
+      "name": "Endrick",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/13564.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 571,
+      "name": "Ferland Mendy",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/6158.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 572,
+      "name": "Raúl Asencio",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607301234/uploads/images/jugadores/ficha/12639.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 573,
+      "name": "Éder Militão",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/6062.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 574,
+      "name": "Thiago Pitarch",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/16237.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 575,
+      "name": "Rodrygo Goes",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6631.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 576,
+      "name": "Jude Bellingham",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607300320/uploads/images/jugadores/ficha/8386.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 577,
+      "name": "Vinicius Junior",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/5565.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 578,
+      "name": "Federico Valverde",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/3758.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 579,
+      "name": "Yan Diomande",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608120440/uploads/images/jugadores/ficha/15342.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 580,
+      "name": "Marc Cucurella",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101206/uploads/images/jugadores/ficha/5013.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 581,
+      "name": "Denzel Dumfries",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/6055.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 582,
+      "name": "Aurélien Tchouaméni",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111301/uploads/images/jugadores/ficha/9669.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 583,
+      "name": "Kylian Mbappé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101206/uploads/images/jugadores/ficha/3429.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 584,
+      "name": "Dean Huijsen",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071318/uploads/images/jugadores/ficha/11830.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 585,
+      "name": "Ibrahima Konaté",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130446/uploads/images/jugadores/ficha/4884.png",
+      "position": "MED",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 586,
+      "name": "Thibaut Courtois",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608101210/uploads/images/jugadores/ficha/59.png",
+      "position": "POR",
+      "team": "Real Madrid"
+    },
+    {
+      "id": 587,
+      "name": "Sergio Gómez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/6180.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 588,
+      "name": "Jon Aramburu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101513/uploads/images/jugadores/ficha/12538.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 589,
+      "name": "Igor Zubeldia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605081233/uploads/images/jugadores/ficha/2802.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 590,
+      "name": "Jon Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061647/uploads/images/jugadores/ficha/11792.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 591,
+      "name": "Beñat Turrientes",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061647/uploads/images/jugadores/ficha/8651.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 592,
+      "name": "Carlos Soler",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604081236/uploads/images/jugadores/ficha/2799.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 593,
+      "name": "Yangel Herrera",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101513/uploads/images/jugadores/ficha/6446.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 594,
+      "name": "Ander Barrenetxea",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/6363.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 595,
+      "name": "Takefusa Kubo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7091.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 596,
+      "name": "Mikel Oyarzabal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111918/uploads/images/jugadores/ficha/2675.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 597,
+      "name": "Álex Remiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080544/uploads/images/jugadores/ficha/1975.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 598,
+      "name": "Gonçalo Guedes",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051346/uploads/images/jugadores/ficha/2242.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 599,
+      "name": "Luka Sucic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607291241/uploads/images/jugadores/ficha/8392.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 600,
+      "name": "Orri Steinn Óskarsson",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101513/uploads/images/jugadores/ficha/10660.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 601,
+      "name": "Pablo Marín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111918/uploads/images/jugadores/ficha/10830.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 602,
+      "name": "Jon Gorrotxategi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121225/uploads/images/jugadores/ficha/11683.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 603,
+      "name": "Arsen Zakharyan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604231935/uploads/images/jugadores/ficha/9011.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 604,
+      "name": "Luken Beitia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130311/uploads/images/jugadores/ficha/15273.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 605,
+      "name": "Aihen Muñoz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607261703/uploads/images/jugadores/ficha/6394.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 606,
+      "name": "Job Ochieng",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_16_local_campo.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 607,
+      "name": "Kazunari Kita",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130311/uploads/images/jugadores/ficha/16217.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 608,
+      "name": "Jon Pacheco",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131430/uploads/images/jugadores/ficha/7725.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 609,
+      "name": "Unai Marrero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604300210/uploads/images/jugadores/ficha/8679.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 610,
+      "name": "Jon Balda",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_16_local_campo.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 611,
+      "name": "Mikel Goti",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111918/uploads/images/jugadores/ficha/11684.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 612,
+      "name": "Javi López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080544/uploads/images/jugadores/ficha/7781.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 613,
+      "name": "Iñaki Rupérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608130311/uploads/images/jugadores/ficha/12694.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 614,
+      "name": "Jon Karrikaburu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111918/uploads/images/jugadores/ficha/9423.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 615,
+      "name": "Álvaro Odriozola",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607291241/uploads/images/jugadores/ficha/2807.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 616,
+      "name": "Jon Martín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061647/uploads/images/jugadores/ficha/11792.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 617,
+      "name": "Carlos Soler",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604081236/uploads/images/jugadores/ficha/2799.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 618,
+      "name": "Igor Zubeldia",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202605081233/uploads/images/jugadores/ficha/2802.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 619,
+      "name": "Sergio Gómez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/6180.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 620,
+      "name": "Mikel Oyarzabal",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111918/uploads/images/jugadores/ficha/2675.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 621,
+      "name": "Jon Aramburu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607101513/uploads/images/jugadores/ficha/12538.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 622,
+      "name": "Álex Remiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607080544/uploads/images/jugadores/ficha/1975.png",
+      "position": "POR",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 623,
+      "name": "Takefusa Kubo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/7091.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 624,
+      "name": "Jon Gorrotxategi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121225/uploads/images/jugadores/ficha/11683.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 625,
+      "name": "Luka Sucic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607291241/uploads/images/jugadores/ficha/8392.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 626,
+      "name": "Gonçalo Guedes",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051346/uploads/images/jugadores/ficha/2242.png",
+      "position": "MED",
+      "team": "Real Sociedad"
+    },
+    {
+      "id": 627,
+      "name": "Gabriel Suazo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/12358.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 628,
+      "name": "Arouna Sangante",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 629,
+      "name": "Lucien Agoume",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061113/uploads/images/jugadores/ficha/7249.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 630,
+      "name": "Joaquín Oso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607131043/uploads/images/jugadores/ficha/12596.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 631,
+      "name": "Odysseas Vlachodimos",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061838/uploads/images/jugadores/ficha/6235.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 632,
+      "name": "Kike Salas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061113/uploads/images/jugadores/ficha/9931.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 633,
+      "name": "Jon Guridi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111109/uploads/images/jugadores/ficha/3736.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 634,
+      "name": "Juan Iglesias",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/8686.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 635,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 636,
+      "name": "Nico Guillén",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 637,
+      "name": "Isaac Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607090945/uploads/images/jugadores/ficha/11680.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 638,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 639,
+      "name": "Miguel Sierra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110442/uploads/images/jugadores/ficha/16236.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 640,
+      "name": "Peque",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/10341.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 641,
+      "name": "Andrés Castrín",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607220955/uploads/images/jugadores/ficha/13888.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 642,
+      "name": "Rubén Vargas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121200/uploads/images/jugadores/ficha/9125.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 643,
+      "name": "José Ángel Carmona",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607181530/uploads/images/jugadores/ficha/9317.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 644,
+      "name": "Julio Díaz",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060500/uploads/images/jugadores/ficha/17129.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 645,
+      "name": "Manu Bueno",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061113/uploads/images/jugadores/ficha/11180.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 646,
+      "name": "Robbie Ure",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 647,
+      "name": "Marcão",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031057/uploads/images/jugadores/ficha/4208.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 648,
+      "name": "Fran González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111109/uploads/images/jugadores/ficha/11554.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 649,
+      "name": "Chidera Ejuke",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111034/uploads/images/jugadores/ficha/12042.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 650,
+      "name": "Alfonso González",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/8703.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 651,
+      "name": "Adrià Pedrosa",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031057/uploads/images/jugadores/ficha/5587.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 652,
+      "name": "Federico Gattoni",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031057/uploads/images/jugadores/ficha/11381.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 653,
+      "name": "Fábio Cardoso",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608031057/uploads/images/jugadores/ficha/9500.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 654,
+      "name": "Lucien Agoume",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061113/uploads/images/jugadores/ficha/7249.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 655,
+      "name": "Jon Guridi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111109/uploads/images/jugadores/ficha/3736.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 656,
+      "name": "Rubén Vargas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121200/uploads/images/jugadores/ficha/9125.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 657,
+      "name": "Odysseas Vlachodimos",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061838/uploads/images/jugadores/ficha/6235.png",
+      "position": "POR",
+      "team": "Sevilla"
+    },
+    {
+      "id": 658,
+      "name": "Kike Salas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607061113/uploads/images/jugadores/ficha/9931.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 659,
+      "name": "Juan Iglesias",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/8686.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 660,
+      "name": "Arouna Sangante",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 661,
+      "name": "Nico Guillén",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 662,
+      "name": "Gabriel Suazo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050322/uploads/images/jugadores/ficha/12358.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 663,
+      "name": "Robbie Ure",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_17_local_campo.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 664,
+      "name": "Miguel Sierra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608110442/uploads/images/jugadores/ficha/16236.png",
+      "position": "MED",
+      "team": "Sevilla"
+    },
+    {
+      "id": 665,
+      "name": "Stole Dimitrievski",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607292149/uploads/images/jugadores/ficha/989.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 666,
+      "name": "Guido Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080002/uploads/images/jugadores/ficha/7676.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 667,
+      "name": "Jesús Vázquez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/8684.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 668,
+      "name": "José Gayà",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/663.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 669,
+      "name": "Justin de Haas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/18018.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 670,
+      "name": "Hugo Duro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/5019.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 671,
+      "name": "Pepelu",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607301204/uploads/images/jugadores/ficha/2715.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 672,
+      "name": "Filip Ugrinic",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/12025.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 673,
+      "name": "Ryunosuke Sato",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050411/uploads/images/jugadores/ficha/18031.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 674,
+      "name": "Javi Guerra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170030/uploads/images/jugadores/ficha/9927.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 675,
+      "name": "César Tárrega",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/9762.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 676,
+      "name": "Aliou Dieng",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/15928.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 677,
+      "name": "Dimitri Foulquier",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061237/uploads/images/jugadores/ficha/943.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 678,
+      "name": "Umar Sadiq",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111014/uploads/images/jugadores/ficha/8294.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 679,
+      "name": "Arnaut Danjuma",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/6174.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 680,
+      "name": "Mouctar Diakhaby",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607152151/uploads/images/jugadores/ficha/3607.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 681,
+      "name": "André Almeida",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608071209/uploads/images/jugadores/ficha/10533.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 682,
+      "name": "Luis Rioja",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051140/uploads/images/jugadores/ficha/6665.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 683,
+      "name": "Rubén Iranzo",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041123/uploads/images/jugadores/ficha/9796.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 684,
+      "name": "Iker Córdoba",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/14034.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 685,
+      "name": "Daniel Raba",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050319/uploads/images/jugadores/ficha/3732.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 686,
+      "name": "Cristian Rivero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/5080.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 687,
+      "name": "Alberto Mari",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041123/uploads/images/jugadores/ficha/11391.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 688,
+      "name": "Sergi Canós",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/9201.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 689,
+      "name": "José Manuel Copete",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041123/uploads/images/jugadores/ficha/9234.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 690,
+      "name": "Diego López",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/9304.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 691,
+      "name": "Guido Rodríguez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608080002/uploads/images/jugadores/ficha/7676.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 692,
+      "name": "Umar Sadiq",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608111014/uploads/images/jugadores/ficha/8294.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 693,
+      "name": "Aliou Dieng",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/15928.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 694,
+      "name": "Luis Rioja",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608051140/uploads/images/jugadores/ficha/6665.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 695,
+      "name": "Ryunosuke Sato",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050411/uploads/images/jugadores/ficha/18031.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 696,
+      "name": "Stole Dimitrievski",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607292149/uploads/images/jugadores/ficha/989.png",
+      "position": "POR",
+      "team": "Valencia"
+    },
+    {
+      "id": 697,
+      "name": "Justin de Haas",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061946/uploads/images/jugadores/ficha/18018.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 698,
+      "name": "Javi Guerra",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607170030/uploads/images/jugadores/ficha/9927.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 699,
+      "name": "César Tárrega",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/9762.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 700,
+      "name": "José Gayà",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607141031/uploads/images/jugadores/ficha/663.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 701,
+      "name": "Dimitri Foulquier",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608061237/uploads/images/jugadores/ficha/943.png",
+      "position": "MED",
+      "team": "Valencia"
+    },
+    {
+      "id": 702,
+      "name": "Pape Gueye",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121908/uploads/images/jugadores/ficha/8413.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 703,
+      "name": "Carlos Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/11172.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 704,
+      "name": "Renato Veiga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/10114.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 705,
+      "name": "Juan Foyth",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091246/uploads/images/jugadores/ficha/4705.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 706,
+      "name": "Santi Comesaña",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271427/uploads/images/jugadores/ficha/5549.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 707,
+      "name": "Gerard Moreno",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091246/uploads/images/jugadores/ficha/843.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 708,
+      "name": "Nicolas Pépé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/7209.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 709,
+      "name": "Alberto Moleiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9990.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 710,
+      "name": "Luiz Junior",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602141505/uploads/images/jugadores/ficha/14125.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 711,
+      "name": "Santiago Mouriño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604301202/uploads/images/jugadores/ficha/11678.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 712,
+      "name": "Georges Mikautadze",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604011155/uploads/images/jugadores/ficha/12139.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 713,
+      "name": "Pau Navarro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202603111433/uploads/images/jugadores/ficha/12860.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 714,
+      "name": "Ayoze Pérez",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050319/uploads/images/jugadores/ficha/4511.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 715,
+      "name": "Péter Gulácsi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608112349/uploads/images/jugadores/ficha/3106.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 716,
+      "name": "Carlos Macià",
+      "photo": "https://static.futbolfantasy.com/uploads/images/camisetas/2027_22_local_campo.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 717,
+      "name": "Tajon Buchanan",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/10638.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 718,
+      "name": "Alex Freeman",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607311919/uploads/images/jugadores/ficha/17275.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 719,
+      "name": "Tani Oluwaseyi",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607242213/uploads/images/jugadores/ficha/13440.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 720,
+      "name": "Sergi Cardona",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602161630/uploads/images/jugadores/ficha/9989.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 721,
+      "name": "Logan Costa",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607202125/uploads/images/jugadores/ficha/12354.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 722,
+      "name": "Más info",
+      "photo": "https://static.futbolfantasy.com/uploads/images/tiponoticia/lupa.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 723,
+      "name": "Alassane Diatta",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608060505/uploads/images/jugadores/ficha/14022.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 724,
+      "name": "Ilias Akhomach",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9763.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 725,
+      "name": "Willy Kambwala",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608041630/uploads/images/jugadores/ficha/12634.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 726,
+      "name": "Luiz Junior",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202602141505/uploads/images/jugadores/ficha/14125.png",
+      "position": "POR",
+      "team": "Villarreal"
+    },
+    {
+      "id": 727,
+      "name": "Santi Comesaña",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607271427/uploads/images/jugadores/ficha/5549.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 728,
+      "name": "Carlos Romero",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/11172.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 729,
+      "name": "Nicolas Pépé",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050320/uploads/images/jugadores/ficha/7209.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 730,
+      "name": "Juan Foyth",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091246/uploads/images/jugadores/ficha/4705.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 731,
+      "name": "Renato Veiga",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050323/uploads/images/jugadores/ficha/10114.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 732,
+      "name": "Gerard Moreno",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202607091246/uploads/images/jugadores/ficha/843.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 733,
+      "name": "Santiago Mouriño",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604301202/uploads/images/jugadores/ficha/11678.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 734,
+      "name": "Georges Mikautadze",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202604011155/uploads/images/jugadores/ficha/12139.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 735,
+      "name": "Alberto Moleiro",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608050321/uploads/images/jugadores/ficha/9990.png",
+      "position": "MED",
+      "team": "Villarreal"
+    },
+    {
+      "id": 736,
+      "name": "Pape Gueye",
+      "photo": "https://media.futbolfantasy.com/thumb/150x150/v202608121908/uploads/images/jugadores/ficha/8413.png",
+      "position": "MED",
+      "team": "Villarreal"
+    }
+  ]
+}

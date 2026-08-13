@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getTeamId } from '@/lib/teams';
+import fs from 'fs/promises';
+import path from 'path';
 
-// In-memory cache to avoid hitting rate limits (cache for 1 hour)
-const cache: Map<string, { data: any; expires: number }> = new Map();
-
-function translatePosition(pos: string): string {
-  if (!pos) return '';
-  const p = pos.toLowerCase();
-  if (p.includes('goalkeeper') || p === 'por' || p === 'g') return 'POR';
-  if (p.includes('defender') || p === 'def' || p === 'd') return 'DEF';
-  if (p.includes('midfielder') || p === 'med' || p === 'm') return 'MED';
-  if (p.includes('attacker') || p.includes('forward') || p === 'del' || p === 'a') return 'DEL';
-  return pos;
+// Helper to normalize strings for comparison (removes accents, lowercase, removes common words)
+function normalizeTeamName(name: string): string {
+  if (!name) return '';
+  return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    .replace('fc', '')
+    .replace('cf', '')
+    .replace('cd', '')
+    .replace('deportivo', '')
+    .replace('real', '')
+    .replace('athletic club', 'athletic')
+    .replace('vallecano', '')
+    .trim();
 }
 
 export async function GET(request: NextRequest) {
@@ -19,97 +21,42 @@ export async function GET(request: NextRequest) {
   const homeTeam = searchParams.get('home') ?? '';
   const awayTeam = searchParams.get('away') ?? '';
 
-  const cacheKey = `${homeTeam}|${awayTeam}`;
-  const cached = cache.get(cacheKey);
-  if (cached && cached.expires > Date.now()) {
-    return NextResponse.json(cached.data);
-  }
-
-  const homeId = getTeamId(homeTeam);
-  const awayId = getTeamId(awayTeam);
-
-  // If no API key or team IDs not found, return mock players
-  if (!process.env.RAPIDAPI_KEY || process.env.RAPIDAPI_KEY === 'your-rapidapi-key') {
-    const mockData = generateMockPlayers(homeTeam, awayTeam);
-    return NextResponse.json(mockData);
-  }
-
-  if (!homeId || !awayId) {
-    const mockData = generateMockPlayers(homeTeam, awayTeam);
-    return NextResponse.json(mockData);
-  }
-
-  const host = process.env.RAPIDAPI_HOST || 'v3.football.api-sports.io';
-  const apiKey = process.env.RAPIDAPI_KEY!;
-  const baseUrl = host.includes('rapidapi') ? `https://${host}/v3` : `https://${host}`;
-  const headers: Record<string, string> = host.includes('rapidapi')
-    ? { 'X-RapidAPI-Key': apiKey, 'X-RapidAPI-Host': host }
-    : { 'x-apisports-key': apiKey };
-
   try {
-    const [homeRes, awayRes] = await Promise.all([
-      fetch(`${baseUrl}/players/squads?team=${homeId}`, { headers }),
-      fetch(`${baseUrl}/players/squads?team=${awayId}`, { headers }),
-    ]);
+    // Read local players.json
+    const filePath = path.join(process.cwd(), 'src', 'data', 'players.json');
+    const fileContents = await fs.readFile(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
+    const allPlayers = data.players || [];
 
-    const [homeData, awayData] = await Promise.all([homeRes.json(), awayRes.json()]);
+    const homeNorm = normalizeTeamName(homeTeam);
+    const awayNorm = normalizeTeamName(awayTeam);
 
-    const homePlayers = (homeData.response?.[0]?.players ?? []).map((p: any) => ({
-      id: p.id,
-      name: p.name,
-      photo: p.photo,
-      position: translatePosition(p.position),
-      team: 'home',
-    }));
+    const homePlayers = [];
+    const awayPlayers = [];
 
-    const awayPlayers = (awayData.response?.[0]?.players ?? []).map((p: any) => ({
-      id: p.id,
-      name: p.name,
-      photo: p.photo,
-      position: translatePosition(p.position),
-      team: 'away',
-    }));
+    for (const player of allPlayers) {
+      const pTeamNorm = normalizeTeamName(player.team);
+      if (pTeamNorm && homeNorm.includes(pTeamNorm) || homeNorm === pTeamNorm) {
+        homePlayers.push({ ...player, team: 'home' });
+      } else if (pTeamNorm && awayNorm.includes(pTeamNorm) || awayNorm === pTeamNorm) {
+        awayPlayers.push({ ...player, team: 'away' });
+      }
+    }
+    
+    // Fallback logic for Real Madrid / Real Sociedad where "real" is stripped
+    // Let's do a more robust fallback just in case
+    if (homePlayers.length === 0) {
+      const fallback = allPlayers.filter((p: any) => p.team.toLowerCase().includes(homeTeam.toLowerCase().split(' ')[0]));
+      fallback.forEach((p: any) => homePlayers.push({ ...p, team: 'home' }));
+    }
+    if (awayPlayers.length === 0) {
+      const fallback = allPlayers.filter((p: any) => p.team.toLowerCase().includes(awayTeam.toLowerCase().split(' ')[0]));
+      fallback.forEach((p: any) => awayPlayers.push({ ...p, team: 'away' }));
+    }
 
-    const result = { players: [...homePlayers, ...awayPlayers] };
-
-    // Cache for 1 hour
-    cache.set(cacheKey, { data: result, expires: Date.now() + 60 * 60 * 1000 });
-
-    return NextResponse.json(result);
+    return NextResponse.json({ players: [...homePlayers, ...awayPlayers] });
   } catch (error) {
-    console.error('API-Football error:', error);
-    return NextResponse.json(generateMockPlayers(homeTeam, awayTeam));
+    console.error('Error reading players.json:', error);
+    return NextResponse.json({ players: [] });
   }
-}
-
-// Generate realistic mock players when API is not configured
-function generateMockPlayers(homeTeam: string, awayTeam: string) {
-  const MOCK_PLAYERS: Record<string, string[]> = {
-    'Real Madrid': ['Vinicius Jr.', 'Bellingham', 'Mbappé', 'Rodrygo', 'Valverde', 'Modric', 'Camavinga', 'Tchouaméni', 'Militão', 'Carvajal', 'Alaba', 'Rüdiger', 'Courtois', 'Lunin'],
-    'FC Barcelona': ['Lewandowski', 'Yamal', 'Raphinha', 'Pedri', 'Gavi', 'Dani Olmo', 'De Jong', 'Koundé', 'Cubarsí', 'Balde', 'Iñigo Martínez', 'ter Stegen', 'Flick'],
-    'Atlético de Madrid': ['Morata', 'Griezmann', 'Correa', 'De Paul', 'Koke', 'Llorente', 'Witsel', 'Hermoso', 'Giménez', 'Molina', 'Nahuel', 'Oblak'],
-    'Athletic Club': ['Williams I.', 'Williams N.', 'Guruzeta', 'Berenguer', 'Prados', 'Vesga', 'Jauregizar', 'De Marcos', 'Dani Vivian', 'Yeray', 'Paredes', 'Simón'],
-    'Málaga CF': ['Dioni', 'Larrubia', 'Kevin Medina', 'Alfonso Herrero', 'Manu Molina', 'Dani Lorenzo', 'Nelson Monte', 'Galilea', 'Víctor García', 'Gabilondo', 'Sangalli', 'Puga', 'Juanpe', 'Baturina'],
-  };
-
-  const getPlayers = (teamName: string, side: 'home' | 'away') => {
-    const names = MOCK_PLAYERS[teamName] ?? [
-      'Jugador 1', 'Jugador 2', 'Jugador 3', 'Jugador 4', 'Jugador 5',
-      'Jugador 6', 'Jugador 7', 'Jugador 8', 'Jugador 9', 'Jugador 10', 'Jugador 11',
-    ];
-    return names.map((name, i) => ({
-      id: side === 'home' ? i + 1 : i + 100,
-      name,
-      photo: '',
-      position: translatePosition(i === 0 ? 'Goalkeeper' : i < 4 ? 'Defender' : i < 7 ? 'Midfielder' : 'Attacker'),
-      team: side,
-    }));
-  };
-
-  return {
-    players: [
-      ...getPlayers(homeTeam, 'home'),
-      ...getPlayers(awayTeam, 'away'),
-    ],
-  };
 }
