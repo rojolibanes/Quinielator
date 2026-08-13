@@ -9,10 +9,12 @@ const BASE_URL = 'https://www.futbolfantasy.com';
 // but for now we'll just store whatever FutbolFantasy has, and fuzzy match in route.ts.
 
 function translatePosition(posClass) {
-  if (posClass.includes('por')) return 'POR';
-  if (posClass.includes('def')) return 'DEF';
-  if (posClass.includes('med')) return 'MED';
-  if (posClass.includes('del')) return 'DEL';
+  if (!posClass) return 'MED';
+  const pos = posClass.toLowerCase();
+  if (pos.includes('por')) return 'POR';
+  if (pos.includes('def')) return 'DEF';
+  if (pos.includes('med') || pos.includes('cen')) return 'MED';
+  if (pos.includes('del')) return 'DEL';
   return 'MED'; // default
 }
 
@@ -35,7 +37,7 @@ async function scrapePlayers() {
     
     console.log(`Se encontraron ${teams.length} equipos.`);
     
-    const allPlayers = [];
+    let allPlayers = [];
     let idCounter = 1;
 
     for (const team of teams) {
@@ -46,35 +48,88 @@ async function scrapePlayers() {
       
       const teamName = team.name;
 
-      $team('div[class*="jugador_"]').each((_, el) => {
-        const img = $team(el).find('img');
-        let playerName = img.attr('alt');
-        if (!playerName) {
-          playerName = $team(el).find('.name').text().trim();
-        }
-        const positionClass = $team(el).attr('class') || '';
-        const position = translatePosition(positionClass);
+      // Extract players from the list view to get profile links
+      $team('.jugador.tipo_lista').each((_, el) => {
+        const linkEl = $team(el).find('a[href*="/jugadores/"]').last();
+        const profileUrl = linkEl.attr('href');
+        let playerName = linkEl.text().trim();
         
-        if (playerName && playerName !== 'logo campeonato' && playerName !== 'FútbolFantasy') {
-          allPlayers.push({
-            id: idCounter++,
-            name: playerName,
-            photo: img.attr('data-src') || img.attr('src') || '',
-            position: position,
-            team: teamName
-          });
-        }
+        if (!playerName || !profileUrl) return;
+        
+        allPlayers.push({
+          name: playerName,
+          profileUrl: profileUrl.startsWith('http') ? profileUrl : BASE_URL + profileUrl,
+          team: teamName
+        });
       });
       
       // Delay to avoid overwhelming the server
       await new Promise(r => setTimeout(r, 500));
     }
+
+    // Deduplicate players by name
+    const uniquePlayersMap = new Map();
+    for (const p of allPlayers) {
+      if (!uniquePlayersMap.has(p.name)) {
+        uniquePlayersMap.set(p.name, p);
+      }
+    }
+    allPlayers = Array.from(uniquePlayersMap.values());
+    console.log(`Total de jugadores extraídos: ${allPlayers.length}. Obteniendo posiciones y fotos...`);
+
+    // Fetch profiles in batches to get position and photo
+    const BATCH_SIZE = 20;
+    const finalPlayers = [];
     
-    console.log(`Total de jugadores extraídos: ${allPlayers.length}`);
+    for (let i = 0; i < allPlayers.length; i += BATCH_SIZE) {
+      const batch = allPlayers.slice(i, i + BATCH_SIZE);
+      const promises = batch.map(async (player) => {
+        try {
+          const pRes = await fetch(player.profileUrl);
+          const pHtml = await pRes.text();
+          const $p = cheerio.load(pHtml);
+          
+          // Position
+          let pos = $p('.posicion').first().text().trim().toUpperCase();
+          if (!['POR', 'DEF', 'MED', 'DEL'].includes(pos)) pos = 'MED';
+          
+          // Photo
+          let photo = $p('.foto img').attr('src') || '';
+          if (photo && !photo.startsWith('http')) photo = BASE_URL + photo;
+          
+          return {
+            id: idCounter++,
+            name: player.name,
+            photo,
+            position: pos,
+            team: player.team
+          };
+        } catch (e) {
+          console.error(`Error fetching ${player.name}: ${e.message}`);
+          return {
+            id: idCounter++,
+            name: player.name,
+            photo: '',
+            position: 'MED',
+            team: player.team
+          };
+        }
+      });
+      
+      const results = await Promise.all(promises);
+      finalPlayers.push(...results);
+      
+      process.stdout.write(`Progreso: ${finalPlayers.length}/${allPlayers.length}\r`);
+      await new Promise(r => setTimeout(r, 300));
+    }
+    
+    console.log('\n✅ Posiciones obtenidas exitosamente.');
+    
+    console.log(`Total de jugadores extraídos (final): ${finalPlayers.length}`);
     
     const outputData = {
       updatedAt: new Date().toISOString(),
-      players: allPlayers
+      players: finalPlayers
     };
     
     const outputPath = path.join(process.cwd(), 'src', 'data', 'players.json');
