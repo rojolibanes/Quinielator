@@ -50,6 +50,10 @@ async function scrapePlayers() {
 
       $team('.wjugador').each((_, el) => {
         const $el = $team(el);
+        
+        // Skip loaned players (cedidos)
+        if ($el.closest('.cedidos').length > 0) return;
+        
         let playerName = $el.find('a.jugador').text().trim();
         // Remove squad numbers like "1. "
         playerName = playerName.replace(/^\d+\.\s*/, '');
