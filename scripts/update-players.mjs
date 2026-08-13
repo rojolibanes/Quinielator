@@ -42,29 +42,41 @@ async function scrapePlayers() {
 
     for (const team of teams) {
       console.log(`Extrayendo plantilla de: ${team.name}...`);
-      const teamRes = await fetch(team.link);
+      const teamRes = await fetch(`${team.link}/plantilla`);
       const teamHtml = await teamRes.text();
       const $team = cheerio.load(teamHtml);
       
       const teamName = team.name;
 
-      // Extract players from the list view to get profile links
-      $team('.jugador.tipo_lista').each((_, el) => {
-        const linkEl = $team(el).find('a[href*="/jugadores/"]').last();
-        const profileUrl = linkEl.attr('href');
-        let playerName = linkEl.text().trim();
+      $team('.wjugador').each((_, el) => {
+        const $el = $team(el);
+        let playerName = $el.find('a.jugador').text().trim();
+        // Remove squad numbers like "1. "
+        playerName = playerName.replace(/^\d+\.\s*/, '');
         
-        if (!playerName || !profileUrl) return;
+        let posText = $el.find('.posicion').text().trim().toLowerCase();
+        let pos = 'MED';
+        if (posText.includes('por')) pos = 'POR';
+        else if (posText.includes('def')) pos = 'DEF';
+        else if (posText.includes('med') || posText.includes('cen')) pos = 'MED';
+        else if (posText.includes('del')) pos = 'DEL';
+
+        let photo = $el.find('img').attr('data-src') || $el.find('img').attr('src') || '';
+        if (photo && !photo.startsWith('http')) photo = BASE_URL + photo;
         
-        allPlayers.push({
-          name: playerName,
-          profileUrl: profileUrl.startsWith('http') ? profileUrl : BASE_URL + profileUrl,
-          team: teamName
-        });
+        if (playerName) {
+          allPlayers.push({
+            id: idCounter++,
+            name: playerName,
+            photo,
+            position: pos,
+            team: teamName
+          });
+        }
       });
       
       // Delay to avoid overwhelming the server
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 200));
     }
 
     // Deduplicate players by name
@@ -74,56 +86,8 @@ async function scrapePlayers() {
         uniquePlayersMap.set(p.name, p);
       }
     }
-    allPlayers = Array.from(uniquePlayersMap.values());
-    console.log(`Total de jugadores extraídos: ${allPlayers.length}. Obteniendo posiciones y fotos...`);
-
-    // Fetch profiles in batches to get position and photo
-    const BATCH_SIZE = 20;
-    const finalPlayers = [];
-    
-    for (let i = 0; i < allPlayers.length; i += BATCH_SIZE) {
-      const batch = allPlayers.slice(i, i + BATCH_SIZE);
-      const promises = batch.map(async (player) => {
-        try {
-          const pRes = await fetch(player.profileUrl);
-          const pHtml = await pRes.text();
-          const $p = cheerio.load(pHtml);
-          
-          // Position
-          let pos = $p('.posicion').first().text().trim().toUpperCase();
-          if (!['POR', 'DEF', 'MED', 'DEL'].includes(pos)) pos = 'MED';
-          
-          // Photo
-          let photo = $p('.foto img').attr('src') || '';
-          if (photo && !photo.startsWith('http')) photo = BASE_URL + photo;
-          
-          return {
-            id: idCounter++,
-            name: player.name,
-            photo,
-            position: pos,
-            team: player.team
-          };
-        } catch (e) {
-          console.error(`Error fetching ${player.name}: ${e.message}`);
-          return {
-            id: idCounter++,
-            name: player.name,
-            photo: '',
-            position: 'MED',
-            team: player.team
-          };
-        }
-      });
-      
-      const results = await Promise.all(promises);
-      finalPlayers.push(...results);
-      
-      process.stdout.write(`Progreso: ${finalPlayers.length}/${allPlayers.length}\r`);
-      await new Promise(r => setTimeout(r, 300));
-    }
-    
-    console.log('\n✅ Posiciones obtenidas exitosamente.');
+    const finalPlayers = Array.from(uniquePlayersMap.values());
+    console.log(`\n✅ Posiciones obtenidas exitosamente.`);
     
     console.log(`Total de jugadores extraídos (final): ${finalPlayers.length}`);
     
