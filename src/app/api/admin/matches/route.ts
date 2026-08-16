@@ -120,13 +120,19 @@ export async function PATCH(request: Request) {
     matchday,
     home_team,
     away_team,
+    recalculate,
   } = body;
 
   if (!match_id) return NextResponse.json({ error: 'match_id requerido' }, { status: 400 });
 
   const updates: Record<string, any> = {};
 
-  if (status !== undefined) updates.status = status;
+  if (status !== undefined) {
+    updates.status = status;
+  } else if (home_score !== undefined && away_score !== undefined) {
+    updates.status = 'finished';
+  }
+
   if (home_score !== undefined) updates.home_score = home_score;
   if (away_score !== undefined) updates.away_score = away_score;
   if (scorers !== undefined) updates.scorers = scorers;
@@ -143,17 +149,31 @@ export async function PATCH(request: Request) {
     updates.away_team_logo = getTeamLogo(away_team);
   }
 
-  const { data: updatedMatch, error } = await supabaseAdmin
-    .from('matches')
-    .update(updates)
-    .eq('id', match_id)
-    .select()
-    .single();
+  let updatedMatch = null;
+  
+  if (Object.keys(updates).length > 0) {
+    const { data, error } = await supabaseAdmin
+      .from('matches')
+      .update(updates)
+      .eq('id', match_id)
+      .select()
+      .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    updatedMatch = data;
+  } else {
+    // If no updates, just fetch the current match to return it
+    const { data, error } = await supabaseAdmin
+      .from('matches')
+      .select()
+      .eq('id', match_id)
+      .single();
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    updatedMatch = data;
+  }
 
-  // Si se ha guardado un resultado finalizado, recalcular puntos
-  if (updates.status === 'finished' || (home_score !== undefined && away_score !== undefined)) {
+  // Si se ha guardado un resultado finalizado o se ha pedido recalcular
+  if (recalculate || updates.status === 'finished' || (home_score !== undefined && away_score !== undefined)) {
     const { error: rpcError } = await supabaseAdmin
       .rpc('recalculate_match_points', { p_match_id: match_id });
     if (rpcError) console.error('Error recalculando puntos:', rpcError);

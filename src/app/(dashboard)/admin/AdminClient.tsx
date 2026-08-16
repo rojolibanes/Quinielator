@@ -257,6 +257,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
         away_score: editForm.away_score,
         scorers: editForm.scorers,
         mvp: editForm.mvp,
+        status: 'finished',
       }),
     });
 
@@ -284,7 +285,7 @@ export default function AdminClient({ matches: initialMatches }: AdminClientProp
     const res = await fetch('/api/admin/matches', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ match_id: matchId }),
+      body: JSON.stringify({ match_id: matchId, recalculate: true }),
     });
     if (!res.ok) {
       toast.error('Error al recalcular puntos');
