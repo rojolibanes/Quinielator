@@ -239,30 +239,51 @@ BEGIN
     END IF;
   END IF;
 
-  -- 3. Scorers: count hits using min(predicted_count, real_count) per player
-  --    This mirrors the TypeScript calculatePoints logic exactly.
-  --    e.g. user predicts player X once, player X scores twice => 1 hit (not 2)
-  --    e.g. user predicts player X twice (doblete), player X scores once => 1 hit (not 2)
-  SELECT COALESCE(SUM(LEAST(pred_count, real_count)), 0)
-  INTO scorer_hits
-  FROM (
+  -- 3. Scorers: match by player_id first, then name as fallback
+  --    (needed because old predictions may have API-Football IDs while
+  --    current match scorers use local players.json IDs)
+  WITH real_scorers AS (
     SELECT
-      player_id,
-      COUNT(*) AS pred_count
-    FROM jsonb_array_elements(COALESCE(pred.predicted_scorers, '[]'::jsonb)) AS s(elem)
-    CROSS JOIN LATERAL (SELECT elem->>'player_id' AS player_id) AS p
-    GROUP BY player_id
-  ) pred_counts
-  JOIN (
-    SELECT
-      player_id,
-      COUNT(*) AS real_count
+      elem->>'player_id'           AS player_id,
+      LOWER(TRIM(elem->>'name'))   AS player_name,
+      COUNT(*)                     AS real_count
     FROM jsonb_array_elements(COALESCE(match.scorers, '[]'::jsonb)) AS s(elem)
-    CROSS JOIN LATERAL (SELECT elem->>'player_id' AS player_id) AS p
-    GROUP BY player_id
-  ) real_counts USING (player_id);
+    GROUP BY player_id, player_name
+  ),
+  pred_scorers AS (
+    SELECT
+      elem->>'player_id'           AS player_id,
+      LOWER(TRIM(elem->>'name'))   AS player_name,
+      COUNT(*)                     AS pred_count
+    FROM jsonb_array_elements(COALESCE(pred.predicted_scorers, '[]'::jsonb)) AS s(elem)
+    GROUP BY player_id, player_name
+  ),
+  -- ID matches (exact player_id match)
+  id_matches AS (
+    SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
+    FROM pred_scorers p
+    JOIN real_scorers r ON p.player_id = r.player_id
+  ),
+  -- Name matches for players NOT already matched by ID
+  name_matches AS (
+    SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
+    FROM pred_scorers p
+    JOIN real_scorers r ON LOWER(TRIM(p.player_name)) = LOWER(TRIM(r.player_name))
+    WHERE NOT EXISTS (
+      SELECT 1 FROM id_matches im WHERE im.player_id = p.player_id
+    ) AND NOT EXISTS (
+      SELECT 1 FROM id_matches im WHERE im.player_name = p.player_name
+    )
+  )
+  SELECT COALESCE(SUM(hits), 0) INTO scorer_hits
+  FROM (
+    SELECT hits FROM id_matches
+    UNION ALL
+    SELECT hits FROM name_matches
+  ) combined;
 
   points := points + (scorer_hits * (config->>'scorer_per_goal')::INTEGER);
+
 
   -- 4. MVP
   IF pred.predicted_mvp IS NOT NULL AND match.mvp IS NOT NULL THEN

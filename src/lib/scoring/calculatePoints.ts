@@ -56,25 +56,47 @@ export function calculatePoints(
     }
   }
 
-  // 2. Scorers (supports multiple goals per player)
+  // 2. Scorers: match by player_id first, then name as fallback
+  //    (needed because old predictions may have API-Football IDs while
+  //    current match scorers use local players.json IDs)
   if (config.enable_scorers !== false) {
-    const realScorerCounts = new Map<string, number>();
+    interface ScorerPool { id: string; name: string; remaining: number; }
+    const realPool: ScorerPool[] = [];
+
     for (const s of match.scorers || []) {
       const id = String(s.player_id);
-      realScorerCounts.set(id, (realScorerCounts.get(id) || 0) + 1);
-    }
-
-    const predScorerCounts = new Map<string, number>();
-    for (const s of prediction.predicted_scorers || []) {
-      const id = String(s.player_id);
-      predScorerCounts.set(id, (predScorerCounts.get(id) || 0) + 1);
+      const name = (s.name || '').toLowerCase().trim();
+      const existing = realPool.find(e => e.id === id);
+      if (existing) {
+        existing.remaining++;
+      } else {
+        realPool.push({ id, name, remaining: 1 });
+      }
     }
 
     let scorerHits = 0;
-    predScorerCounts.forEach((predCount, id) => {
-      const realCount = realScorerCounts.get(id) || 0;
-      scorerHits += Math.min(predCount, realCount);
-    });
+    for (const s of prediction.predicted_scorers || []) {
+      const id = String(s.player_id);
+      const name = (s.name || '').toLowerCase().trim();
+
+      // Try player_id match first
+      const byId = realPool.find(e => e.id === id && e.remaining > 0);
+      if (byId) {
+        byId.remaining--;
+        scorerHits++;
+        continue;
+      }
+
+      // Fallback: match by name (handles legacy API-Football IDs)
+      if (name) {
+        const byName = realPool.find(e => e.name === name && e.remaining > 0);
+        if (byName) {
+          byName.remaining--;
+          scorerHits++;
+        }
+      }
+    }
+
     breakdown.scorers = scorerHits * config.scorer_per_goal;
   } else {
     breakdown.scorers = 0;
