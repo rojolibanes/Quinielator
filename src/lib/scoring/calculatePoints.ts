@@ -41,13 +41,17 @@ export function calculatePoints(
   const realResult = getResult(realHome, realAway);
   const is1X2 = predResult === realResult;
 
-  // 1. Exact score / 1X2
+  // 1. Exact score / 1X2 / Individual goals
+  // - Exact score: only exact_score points (no individual bonus)
+  // - 1X2 correct: result_1x2 points + individual_goals for each team score that matches
+  // - Neither: only individual_goals for each team score that matches
   if (isExact) {
     breakdown.exact_score = config.exact_score;
-  } else if (is1X2) {
-    breakdown.result_1x2 = config.result_1x2;
   } else {
-    // Individual goals bonus (only if neither exact nor 1x2)
+    if (is1X2) {
+      breakdown.result_1x2 = config.result_1x2;
+    }
+    // Individual goals bonus applies when not exact (both 1X2 and miss cases)
     if (predHome === realHome) {
       breakdown.individual_goals += config.individual_goals;
     }

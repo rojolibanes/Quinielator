@@ -224,13 +224,17 @@ BEGIN
   END;
   is_1x2 := (pred_result = real_result);
 
-  -- Award points
+  -- Award points for score/result
+  -- - Exact: only exact_score (no individual bonus)
+  -- - 1X2 correct: result_1x2 + individual_goals for each matching team score
+  -- - Neither: only individual_goals for each matching team score
   IF is_exact THEN
     points := points + (config->>'exact_score')::INTEGER;
-  ELSIF is_1x2 THEN
-    points := points + (config->>'result_1x2')::INTEGER;
   ELSE
-    -- Individual goals bonus (only if neither exact nor 1x2)
+    IF is_1x2 THEN
+      points := points + (config->>'result_1x2')::INTEGER;
+    END IF;
+    -- Individual goals bonus applies whenever not exact
     IF pred.predicted_home_score = match.home_score THEN
       points := points + (config->>'individual_goals')::INTEGER;
     END IF;
@@ -238,6 +242,7 @@ BEGIN
       points := points + (config->>'individual_goals')::INTEGER;
     END IF;
   END IF;
+
 
   -- 3. Scorers: match by player_id first, then name as fallback
   --    (needed because old predictions may have API-Football IDs while
