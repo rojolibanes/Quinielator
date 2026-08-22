@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
 import fs from 'fs/promises';
 import path from 'path';
+import crypto from 'crypto';
 
 const BASE_URL = 'https://www.futbolfantasy.com';
 
@@ -16,6 +17,15 @@ function translatePosition(posClass) {
   if (pos.includes('med') || pos.includes('cen')) return 'MED';
   if (pos.includes('del')) return 'DEL';
   return 'MED'; // default
+}
+
+// Generate a stable numeric ID from a player's name.
+// This guarantees the same player always gets the same ID across scraper runs,
+// so existing predictions remain valid even after updates.
+function stableId(name) {
+  const hash = crypto.createHash('md5').update(name.toLowerCase().trim()).digest('hex');
+  // Take the first 8 hex chars and convert to a positive integer (max ~4 billion)
+  return parseInt(hash.substring(0, 8), 16);
 }
 
 async function scrapePlayers() {
@@ -38,7 +48,6 @@ async function scrapePlayers() {
     console.log(`Se encontraron ${teams.length} equipos.`);
     
     let allPlayers = [];
-    let idCounter = 1;
 
     for (const team of teams) {
       console.log(`Extrayendo plantilla de: ${team.name}...`);
@@ -73,7 +82,7 @@ async function scrapePlayers() {
         
         if (playerName) {
           allPlayers.push({
-            id: idCounter++,
+            id: stableId(playerName),
             name: playerName,
             photo,
             position: pos,
