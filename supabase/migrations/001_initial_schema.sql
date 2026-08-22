@@ -285,9 +285,11 @@ BEGIN
   points := points + (scorer_hits * (config->>'scorer_per_goal')::INTEGER);
 
 
-  -- 4. MVP
+  -- 4. MVP: match by player_id first, then name as fallback
+  --    (same legacy ID mismatch issue as scorers)
   IF pred.predicted_mvp IS NOT NULL AND match.mvp IS NOT NULL THEN
-    IF (pred.predicted_mvp->>'player_id') = (match.mvp->>'player_id') THEN
+    IF (pred.predicted_mvp->>'player_id') = (match.mvp->>'player_id')
+    OR LOWER(TRIM(pred.predicted_mvp->>'name')) = LOWER(TRIM(match.mvp->>'name')) THEN
       points := points + (config->>'mvp')::INTEGER;
     END IF;
   END IF;

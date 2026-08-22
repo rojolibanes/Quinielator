@@ -102,14 +102,22 @@ export function calculatePoints(
     breakdown.scorers = 0;
   }
 
-  // 3. MVP
-  if (
-    config.enable_mvp !== false &&
-    prediction.predicted_mvp?.player_id &&
-    match.mvp?.player_id &&
-    String(prediction.predicted_mvp.player_id) === String(match.mvp.player_id)
-  ) {
-    breakdown.mvp = config.mvp;
+  // 3. MVP: match by player_id first, then name as fallback
+  //    (same legacy ID mismatch issue as scorers)
+  if (config.enable_mvp !== false && prediction.predicted_mvp && match.mvp) {
+    const predMvpId = String(prediction.predicted_mvp.player_id);
+    const realMvpId = String(match.mvp.player_id);
+    const predMvpName = (prediction.predicted_mvp.name || '').toLowerCase().trim();
+    const realMvpName = (match.mvp.name || '').toLowerCase().trim();
+
+    const idMatch = predMvpId && realMvpId && predMvpId === realMvpId;
+    const nameMatch = predMvpName && realMvpName && predMvpName === realMvpName;
+
+    if (idMatch || nameMatch) {
+      breakdown.mvp = config.mvp;
+    } else {
+      breakdown.mvp = 0;
+    }
   } else {
     breakdown.mvp = 0;
   }
