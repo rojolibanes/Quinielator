@@ -239,18 +239,29 @@ BEGIN
     END IF;
   END IF;
 
-  -- 3. Scorers: count how many predicted scorers are in actual scorers
-  SELECT jsonb_agg(s->>'player_id')
-  INTO real_scorer_ids
-  FROM jsonb_array_elements(match.scorers) AS s;
+  -- 3. Scorers: count hits using min(predicted_count, real_count) per player
+  --    This mirrors the TypeScript calculatePoints logic exactly.
+  --    e.g. user predicts player X once, player X scores twice => 1 hit (not 2)
+  --    e.g. user predicts player X twice (doblete), player X scores once => 1 hit (not 2)
+  SELECT COALESCE(SUM(LEAST(pred_count, real_count)), 0)
+  INTO scorer_hits
+  FROM (
+    SELECT
+      player_id,
+      COUNT(*) AS pred_count
+    FROM jsonb_array_elements(COALESCE(pred.predicted_scorers, '[]'::jsonb)) AS s(elem)
+    CROSS JOIN LATERAL (SELECT elem->>'player_id' AS player_id) AS p
+    GROUP BY player_id
+  ) pred_counts
+  JOIN (
+    SELECT
+      player_id,
+      COUNT(*) AS real_count
+    FROM jsonb_array_elements(COALESCE(match.scorers, '[]'::jsonb)) AS s(elem)
+    CROSS JOIN LATERAL (SELECT elem->>'player_id' AS player_id) AS p
+    GROUP BY player_id
+  ) real_counts USING (player_id);
 
-  FOR pred_scorer_id IN
-    SELECT s->>'player_id' FROM jsonb_array_elements(pred.predicted_scorers) AS s
-  LOOP
-    IF real_scorer_ids @> to_jsonb(pred_scorer_id) THEN
-      scorer_hits := scorer_hits + 1;
-    END IF;
-  END LOOP;
   points := points + (scorer_hits * (config->>'scorer_per_goal')::INTEGER);
 
   -- 4. MVP
