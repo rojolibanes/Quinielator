@@ -751,6 +751,39 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
       {activeTab === 'join' && (
         <div className="space-y-4 animate-fade-in">
 
+          {/* Private league by code */}
+          <div className="glass-card p-5 space-y-4">
+            <div>
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Lock size={18} className="text-slate-400" />
+                Liga Privada por Código
+              </h2>
+              <p className="text-slate-400 text-sm mt-1">Introduce el código de 8 caracteres que te ha compartido el creador de la liga.</p>
+            </div>
+
+            <div>
+              <label className="block text-sm text-slate-400 mb-2">Código de invitación</label>
+              <input
+                type="text"
+                placeholder="Ej: A1B2C3D4"
+                value={joinCode}
+                onChange={e => setJoinCode(e.target.value.toUpperCase().slice(0, 8))}
+                className="input-field text-center text-xl font-mono font-bold tracking-widest"
+                maxLength={8}
+                id="join-code"
+              />
+            </div>
+
+            <button
+              onClick={handleJoin}
+              disabled={joiningLeague || joinCode.length < 6}
+              className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
+                joiningLeague || joinCode.length < 6 ? 'bg-slate-700 text-slate-500 cursor-not-allowed' : 'btn-primary'
+              }`}>
+              {joiningLeague ? 'Uniéndose...' : '🔑 Unirme con Código'}
+            </button>
+          </div>
+
           {/* Public leagues */}
           {publicLeagues.length > 0 && (
             <div className="glass-card p-5 space-y-4">
@@ -794,38 +827,6 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
             </div>
           )}
 
-          {/* Private league by code */}
-          <div className="glass-card p-5 space-y-4">
-            <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Lock size={18} className="text-slate-400" />
-                Liga Privada por Código
-              </h2>
-              <p className="text-slate-400 text-sm mt-1">Introduce el código de 8 caracteres que te ha compartido el creador de la liga.</p>
-            </div>
-
-            <div>
-              <label className="block text-sm text-slate-400 mb-2">Código de invitación</label>
-              <input
-                type="text"
-                placeholder="Ej: A1B2C3D4"
-                value={joinCode}
-                onChange={e => setJoinCode(e.target.value.toUpperCase().slice(0, 8))}
-                className="input-field text-center text-xl font-mono font-bold tracking-widest"
-                maxLength={8}
-                id="join-code"
-              />
-            </div>
-
-            <button
-              onClick={handleJoin}
-              disabled={joiningLeague || joinCode.length < 6}
-              className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
-                joiningLeague || joinCode.length < 6 ? 'bg-slate-700 text-slate-500 cursor-not-allowed' : 'btn-primary'
-              }`}>
-              {joiningLeague ? 'Uniéndose...' : '🔑 Unirme con Código'}
-            </button>
-          </div>
         </div>
       )}
 
