@@ -44,14 +44,27 @@ export default function LeaderboardClient({
     }
   }, []);
 
-  // Load global leaderboard from league_members
+  // Load global leaderboard from league_members (only users who made predictions in this league)
   const loadGlobalLeaderboard = useCallback(async (league: League) => {
     setLoading(true);
+    const { data: preds } = await supabase
+      .from('predictions')
+      .select('user_id')
+      .eq('league_id', league.id);
+
+    const userIdsWithPreds = Array.from(new Set((preds ?? []).map((p: any) => p.user_id as string)));
+
+    if (userIdsWithPreds.length === 0) {
+      setLeaderboard([]);
+      setLoading(false);
+      return;
+    }
+
     const { data } = await supabase
       .from('league_members')
       .select('user_id, total_points, profiles(nickname, avatar_url)')
       .eq('league_id', league.id)
-      .gt('total_points', 0)
+      .in('user_id', userIdsWithPreds)
       .order('total_points', { ascending: false });
 
     setLeaderboard(
@@ -60,7 +73,7 @@ export default function LeaderboardClient({
         user_id: row.user_id,
         nickname: row.profiles?.nickname ?? 'Anónimo',
         avatar_url: row.profiles?.avatar_url ?? null,
-        total_points: row.total_points,
+        total_points: row.total_points ?? 0,
       }))
     );
     setLoading(false);

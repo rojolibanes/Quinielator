@@ -21,19 +21,30 @@ export default async function LeaderboardPage() {
 
   let leaderboard: LeaderboardEntry[] = [];
   if (defaultLeague) {
-    const { data } = await supabase
-      .from('league_members')
-      .select('user_id, total_points, profiles(nickname, avatar_url)')
-      .eq('league_id', defaultLeague.id)
-      .order('total_points', { ascending: false });
+    // Find all users who have made at least one prediction in this league
+    const { data: preds } = await supabase
+      .from('predictions')
+      .select('user_id')
+      .eq('league_id', defaultLeague.id);
 
-    leaderboard = (data ?? []).map((row: any, i: number) => ({
-      rank: i + 1,
-      user_id: row.user_id,
-      nickname: row.profiles?.nickname ?? 'Anónimo',
-      avatar_url: row.profiles?.avatar_url ?? null,
-      total_points: row.total_points,
-    }));
+    const userIdsWithPreds = Array.from(new Set((preds ?? []).map((p: any) => p.user_id as string)));
+
+    if (userIdsWithPreds.length > 0) {
+      const { data } = await supabase
+        .from('league_members')
+        .select('user_id, total_points, profiles(nickname, avatar_url)')
+        .eq('league_id', defaultLeague.id)
+        .in('user_id', userIdsWithPreds)
+        .order('total_points', { ascending: false });
+
+      leaderboard = (data ?? []).map((row: any, i: number) => ({
+        rank: i + 1,
+        user_id: row.user_id,
+        nickname: row.profiles?.nickname ?? 'Anónimo',
+        avatar_url: row.profiles?.avatar_url ?? null,
+        total_points: row.total_points ?? 0,
+      }));
+    }
   }
 
   return (
