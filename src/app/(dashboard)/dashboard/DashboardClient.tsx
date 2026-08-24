@@ -220,7 +220,13 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
               league={selectedLeague}
               prediction={predictions[match.id] ?? null}
               userId={profile.id}
+              userLeagues={userLeagues}
               onPredictionSaved={prediction => handlePredictionSaved(match.id, prediction)}
+              onPredictionSavedAll={saved => {
+                // Update state for the current league's prediction if it was saved
+                const forCurrentLeague = saved.find(p => p.league_id === selectedLeague.id);
+                if (forCurrentLeague) handlePredictionSaved(match.id, forCurrentLeague);
+              }}
             />
           ))}
         </div>

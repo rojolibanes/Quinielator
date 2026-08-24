@@ -17,6 +17,8 @@ interface MatchCardProps {
   prediction: Prediction | null;
   userId: string;
   onPredictionSaved: (prediction: Prediction) => void;
+  userLeagues?: League[];
+  onPredictionSavedAll?: (predictions: Prediction[]) => void;
 }
 
 export default function MatchCard({
@@ -25,6 +27,8 @@ export default function MatchCard({
   prediction,
   userId,
   onPredictionSaved,
+  userLeagues = [],
+  onPredictionSavedAll,
 }: MatchCardProps) {
   const supabase = createClient();
   const [homeScore, setHomeScore] = useState<number | ''>(prediction?.predicted_home_score ?? '');
@@ -33,6 +37,7 @@ export default function MatchCard({
   const [selectedMvp, setSelectedMvp] = useState<MVPPlayer | null>(prediction?.predicted_mvp ?? null);
   const [expanded, setExpanded] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [savingAll, setSavingAll] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
 
   const isPast = new Date(match.match_date) < new Date();
@@ -65,43 +70,44 @@ export default function MatchCard({
   const showMvp = league.points_config.enable_mvp !== false;
   const hasSubSelection = showScorers || showMvp;
 
-  const handleSave = async () => {
+  const buildPayload = (leagueId: string) => ({
+    league_id: leagueId,
+    match_id: match.id,
+    predicted_home_score: Number(homeScore),
+    predicted_away_score: Number(awayScore),
+    predicted_scorers: selectedScorers,
+    predicted_mvp: selectedMvp,
+  });
+
+  const validate = () => {
     if (homeScore === '' || awayScore === '') {
       toast.error('Introduce el marcador antes de guardar.');
-      return;
+      return false;
     }
-
     if (showScorers && maxScorers > 0 && selectedScorers.length < maxScorers) {
       toast.error(`Debes indicar todos los goleadores (${selectedScorers.length}/${maxScorers} goles asignados).`);
       setExpanded(true);
-      return;
+      return false;
     }
-
     if (showMvp && !selectedMvp) {
       toast.error('Debes seleccionar el MVP del partido.');
       setExpanded(true);
-      return;
+      return false;
     }
+    return true;
+  };
 
+  const handleSave = async () => {
+    if (!validate()) return;
     setSaving(true);
-
     try {
       const res = await fetch('/api/predictions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          league_id: league.id,
-          match_id: match.id,
-          predicted_home_score: Number(homeScore),
-          predicted_away_score: Number(awayScore),
-          predicted_scorers: selectedScorers,
-          predicted_mvp: selectedMvp,
-        }),
+        body: JSON.stringify(buildPayload(league.id)),
       });
-
       const json = await res.json();
       setSaving(false);
-
       if (!res.ok) {
         toast.error('Error al guardar la predicción: ' + (json.error || 'Error desconocido'));
       } else {
@@ -112,6 +118,62 @@ export default function MatchCard({
     } catch {
       setSaving(false);
       toast.error('Error de red al guardar la predicción');
+    }
+  };
+
+  const handleSaveAll = async () => {
+    if (!validate()) return;
+    const otherLeagues = userLeagues.filter(l => l.id !== league.id);
+    if (otherLeagues.length === 0) {
+      // Only one league, behave like normal save
+      return handleSave();
+    }
+    setSavingAll(true);
+    try {
+      // Save for all leagues in parallel (current league + others)
+      const allLeagues = [league, ...otherLeagues];
+      const results = await Promise.allSettled(
+        allLeagues.map(l =>
+          fetch('/api/predictions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(buildPayload(l.id)),
+          }).then(r => r.json().then(json => ({ ok: r.ok, json, leagueName: l.name })))
+        )
+      );
+
+      const saved: Prediction[] = [];
+      const errors: string[] = [];
+
+      results.forEach(result => {
+        if (result.status === 'fulfilled') {
+          if (result.value.ok) {
+            saved.push(result.value.json.prediction as Prediction);
+          } else {
+            errors.push(`${result.value.leagueName}: ${result.value.json.error}`);
+          }
+        }
+      });
+
+      if (errors.length > 0) {
+        toast.error(`Guardado parcial. Errores en: ${errors.join(', ')}`);
+      } else {
+        toast.success(`✅ Predicción guardada en ${saved.length} liga${saved.length > 1 ? 's' : ''}`);
+      }
+
+      // Notify parent of saves
+      const currentLeaguePrediction = saved.find(p => p.league_id === league.id);
+      if (currentLeaguePrediction) {
+        onPredictionSaved(currentLeaguePrediction);
+      }
+      if (onPredictionSavedAll && saved.length > 0) {
+        onPredictionSavedAll(saved);
+      }
+      setHasChanges(false);
+    } catch {
+      toast.error('Error de red al guardar las predicciones');
+    } finally {
+      setSavingAll(false);
     }
   };
 
@@ -335,18 +397,31 @@ export default function MatchCard({
         </div>
       )}
 
-      {/* Save button (Only shown when there are pending unsaved changes) */}
+      {/* Save buttons (only shown when there are pending unsaved changes) */}
       {!isLocked && hasChanges && (
-        <div className="px-4 pb-4 animate-fade-in">
+        <div className="px-4 pb-4 animate-fade-in space-y-2">
+          {/* Save for all leagues button — only shown when user has more than 1 league */}
+          {userLeagues.length > 1 && (
+            <button
+              onClick={handleSaveAll}
+              disabled={savingAll || saving || homeScore === '' || awayScore === ''}
+              className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                homeScore !== '' && awayScore !== ''
+                  ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30'
+                  : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+              }`}>
+              {savingAll ? 'Guardando en todas las ligas...' : `🌐 Guardar para todas mis ligas (${userLeagues.length})`}
+            </button>
+          )}
           <button
             onClick={handleSave}
-            disabled={saving || homeScore === '' || awayScore === ''}
+            disabled={saving || savingAll || homeScore === '' || awayScore === ''}
             className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
               homeScore !== '' && awayScore !== ''
                 ? 'btn-primary'
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}>
-            {saving ? 'Guardando...' : 'Guardar predicción'}
+            {saving ? 'Guardando...' : userLeagues.length > 1 ? `Guardar solo para "${league.name}"` : 'Guardar predicción'}
           </button>
         </div>
       )}
