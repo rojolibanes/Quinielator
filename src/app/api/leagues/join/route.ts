@@ -17,21 +17,39 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { code } = body;
+  const { code, league_id } = body;
 
-  if (!code?.trim()) {
-    return NextResponse.json({ error: 'Código requerido' }, { status: 400 });
+  if (!code?.trim() && !league_id) {
+    return NextResponse.json({ error: 'Código o ID de liga requerido' }, { status: 400 });
   }
 
-  // Use admin client to find the league by code (bypasses RLS so private leagues are findable)
-  const { data: league, error: leagueError } = await supabaseAdmin
-    .from('leagues')
-    .select('*')
-    .eq('code_to_join', code.trim().toUpperCase())
-    .single();
+  let league: any;
 
-  if (leagueError || !league) {
-    return NextResponse.json({ error: 'Código de liga no encontrado. Comprueba que es correcto.' }, { status: 404 });
+  if (league_id) {
+    // Joining a public league directly by ID
+    const { data, error } = await supabaseAdmin
+      .from('leagues')
+      .select('*')
+      .eq('id', league_id)
+      .eq('is_private', false)
+      .single();
+
+    if (error || !data) {
+      return NextResponse.json({ error: 'Liga pública no encontrada.' }, { status: 404 });
+    }
+    league = data;
+  } else {
+    // Joining by invite code (private or public)
+    const { data, error } = await supabaseAdmin
+      .from('leagues')
+      .select('*')
+      .eq('code_to_join', code.trim().toUpperCase())
+      .single();
+
+    if (error || !data) {
+      return NextResponse.json({ error: 'Código de liga no encontrado. Comprueba que es correcto.' }, { status: 404 });
+    }
+    league = data;
   }
 
   // Check if user is already a member

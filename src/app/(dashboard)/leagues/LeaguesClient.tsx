@@ -9,6 +9,13 @@ import { DEFAULT_POINTS_CONFIG } from '@/types';
 import { SPANISH_TEAM_NAMES, getTeamLogo } from '@/lib/teams';
 import toast from 'react-hot-toast';
 
+interface PublicLeague {
+  id: string;
+  name: string;
+  football_league: string;
+  is_official: boolean;
+}
+
 interface LeaguesClientProps {
   userId: string;
   isAdmin?: boolean;
@@ -26,6 +33,7 @@ interface LeaguesClientProps {
     total_points: number;
     member_count: number;
   }>;
+  publicLeagues?: PublicLeague[];
 }
 
 const SCORING_OPTIONS = [
@@ -36,13 +44,14 @@ const SCORING_OPTIONS = [
   { key: 'mvp', label: 'MVP del partido', emoji: '⭐', min: 1, max: 15, step: 1 },
 ] as const;
 
-export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUserLeagues }: LeaguesClientProps) {
+export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUserLeagues, publicLeagues = [] }: LeaguesClientProps) {
   const router = useRouter();
   const supabase = createClient();
   const [activeTab, setActiveTab] = useState<'my' | 'create' | 'join'>('my');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [joinCode, setJoinCode] = useState('');
   const [joiningLeague, setJoiningLeague] = useState(false);
+  const [joiningPublicLeagueId, setJoiningPublicLeagueId] = useState<string | null>(null);
   const [userLeagues, setUserLeagues] = useState(initialUserLeagues);
   const [deletingLeagueId, setDeletingLeagueId] = useState<string | null>(null);
   const [leavingLeagueId, setLeavingLeagueId] = useState<string | null>(null);
@@ -245,6 +254,29 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
       toast.error('Error de red al unirse a la liga');
     }
     setJoiningLeague(false);
+  };
+
+  const handleJoinPublic = async (leagueId: string, leagueName: string) => {
+    setJoiningPublicLeagueId(leagueId);
+    try {
+      const res = await fetch('/api/leagues/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ league_id: leagueId }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        toast.error(json.error || 'Error al unirse a la liga');
+      } else {
+        toast.success(`✅ ¡Te has unido a "${leagueName}"!`);
+        router.refresh();
+        setActiveTab('my');
+      }
+    } catch {
+      toast.error('Error de red al unirse a la liga');
+    } finally {
+      setJoiningPublicLeagueId(null);
+    }
   };
 
   return (
@@ -717,31 +749,83 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
 
       {/* ── Tab: Join League ── */}
       {activeTab === 'join' && (
-        <div className="glass-card p-6 space-y-4 animate-fade-in">
-          <h2 className="text-lg font-bold text-white">Unirse a una Liga Privada</h2>
-          <p className="text-slate-400 text-sm">Introduce el código de 8 caracteres que te ha compartido el creador de la liga.</p>
+        <div className="space-y-4 animate-fade-in">
 
-          <div>
-            <label className="block text-sm text-slate-400 mb-2">Código de invitación</label>
-            <input
-              type="text"
-              placeholder="Ej: A1B2C3D4"
-              value={joinCode}
-              onChange={e => setJoinCode(e.target.value.toUpperCase().slice(0, 8))}
-              className="input-field text-center text-xl font-mono font-bold tracking-widest"
-              maxLength={8}
-              id="join-code"
-            />
+          {/* Public leagues */}
+          {publicLeagues.length > 0 && (
+            <div className="glass-card p-5 space-y-4">
+              <div>
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Globe size={18} className="text-emerald-400" />
+                  Ligas Públicas
+                </h2>
+                <p className="text-slate-400 text-sm mt-1">Únete a cualquiera de estas ligas con un solo clic.</p>
+              </div>
+              <div className="space-y-2">
+                {publicLeagues.map(pl => (
+                  <div key={pl.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                    <div className="flex items-center gap-3">
+                      {pl.is_official && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/20 font-medium">
+                          Oficial
+                        </span>
+                      )}
+                      <span className="text-white font-medium text-sm">{pl.name}</span>
+                    </div>
+                    <button
+                      onClick={() => handleJoinPublic(pl.id, pl.name)}
+                      disabled={joiningPublicLeagueId === pl.id}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 hover:bg-emerald-500/25 transition-all text-xs font-semibold">
+                      {joiningPublicLeagueId === pl.id
+                        ? <Loader2 size={13} className="animate-spin" />
+                        : <ChevronRight size={13} />
+                      }
+                      Unirme
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {publicLeagues.length === 0 && (
+            <div className="glass-card p-5 text-center text-slate-500 text-sm">
+              No hay ligas públicas disponibles por el momento.
+            </div>
+          )}
+
+          {/* Private league by code */}
+          <div className="glass-card p-5 space-y-4">
+            <div>
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Lock size={18} className="text-slate-400" />
+                Liga Privada por Código
+              </h2>
+              <p className="text-slate-400 text-sm mt-1">Introduce el código de 8 caracteres que te ha compartido el creador de la liga.</p>
+            </div>
+
+            <div>
+              <label className="block text-sm text-slate-400 mb-2">Código de invitación</label>
+              <input
+                type="text"
+                placeholder="Ej: A1B2C3D4"
+                value={joinCode}
+                onChange={e => setJoinCode(e.target.value.toUpperCase().slice(0, 8))}
+                className="input-field text-center text-xl font-mono font-bold tracking-widest"
+                maxLength={8}
+                id="join-code"
+              />
+            </div>
+
+            <button
+              onClick={handleJoin}
+              disabled={joiningLeague || joinCode.length < 6}
+              className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
+                joiningLeague || joinCode.length < 6 ? 'bg-slate-700 text-slate-500 cursor-not-allowed' : 'btn-primary'
+              }`}>
+              {joiningLeague ? 'Uniéndose...' : '🔑 Unirme con Código'}
+            </button>
           </div>
-
-          <button
-            onClick={handleJoin}
-            disabled={joiningLeague || joinCode.length < 6}
-            className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
-              joiningLeague || joinCode.length < 6 ? 'bg-slate-700 text-slate-500 cursor-not-allowed' : 'btn-primary'
-            }`}>
-            {joiningLeague ? 'Uniéndose...' : '🤝 Unirme a la Liga'}
-          </button>
         </div>
       )}
 

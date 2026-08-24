@@ -52,5 +52,20 @@ export default async function LeaguesPage() {
       member_count: countMap[m.leagues.id] || 1,
     }));
 
-  return <LeaguesClient userId={user.id} isAdmin={isAdmin} userLeagues={userLeagues} />;
+  // Fetch public leagues the user has NOT joined yet
+  const { data: publicLeaguesRaw } = await supabase
+    .from('leagues')
+    .select('id, name, football_league, is_official')
+    .eq('is_private', false)
+    .not('id', 'in', leagueIds.length > 0 ? `(${leagueIds.map(id => `"${id}"`).join(',')})` : '("")')
+    .order('name');
+
+  const publicLeagues = (publicLeaguesRaw ?? []).map((l: any) => ({
+    id: l.id,
+    name: l.name,
+    football_league: l.football_league,
+    is_official: l.is_official,
+  }));
+
+  return <LeaguesClient userId={user.id} isAdmin={isAdmin} userLeagues={userLeagues} publicLeagues={publicLeagues} />;
 }
