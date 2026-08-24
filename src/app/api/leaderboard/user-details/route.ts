@@ -29,17 +29,42 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Perfil no encontrado' }, { status: 404 });
   }
 
-  // 2. Fetch all-time stats for this user across finished predictions
-  const { data: allFinishedPreds } = await supabase
+  // 2. Fetch all-time predictions for this user to compute full stats
+  const { data: allPreds } = await supabase
     .from('predictions')
-    .select('points_earned, matches!inner(status)')
-    .eq('user_id', targetUserId)
-    .eq('matches.status', 'finished');
+    .select(`
+      points_earned,
+      predicted_home_score,
+      predicted_away_score,
+      matches ( home_score, away_score, status )
+    `)
+    .eq('user_id', targetUserId);
 
-  const validFinished = allFinishedPreds || [];
-  const totalFinished = validFinished.length;
-  const avgPoints = totalFinished > 0
-    ? Math.round((validFinished.reduce((acc: number, p: any) => acc + (p.points_earned ?? 0), 0) / totalFinished) * 10) / 10
+  const finishedPreds = (allPreds || []).filter((p: any) =>
+    p.matches &&
+    p.matches.status === 'finished' &&
+    p.matches.home_score !== null &&
+    p.matches.away_score !== null
+  );
+
+  const totalFinished = finishedPreds.length;
+
+  const exactCount = finishedPreds.filter((p: any) =>
+    p.predicted_home_score === p.matches.home_score &&
+    p.predicted_away_score === p.matches.away_score
+  ).length;
+  const exactPct = totalFinished > 0 ? Math.round((exactCount / totalFinished) * 100) : 0;
+
+  const result1X2Count = finishedPreds.filter((p: any) => {
+    const predSign = p.predicted_home_score > p.predicted_away_score ? 'H' : p.predicted_home_score < p.predicted_away_score ? 'A' : 'D';
+    const realSign = p.matches.home_score > p.matches.away_score ? 'H' : p.matches.home_score < p.matches.away_score ? 'A' : 'D';
+    return predSign === realSign;
+  }).length;
+  const result1X2Pct = totalFinished > 0 ? Math.round((result1X2Count / totalFinished) * 100) : 0;
+
+  const finishedWithPoints = finishedPreds.filter((p: any) => p.points_earned !== null && p.points_earned !== undefined);
+  const avgPoints = finishedWithPoints.length > 0
+    ? Math.round((finishedWithPoints.reduce((acc: number, p: any) => acc + (p.points_earned ?? 0), 0) / finishedWithPoints.length) * 10) / 10
     : 0;
 
   // 3. Fetch predictions in this specific league
@@ -112,6 +137,12 @@ export async function GET(request: Request) {
       ...profile,
       all_time_avg_points: avgPoints,
       total_finished_predictions: totalFinished,
+      all_time_stats: {
+        total_predictions: totalFinished,
+        avg_points: avgPoints,
+        exact_pct: exactPct,
+        result_1x2_pct: result1X2Pct,
+      },
     },
     selection_stats: {
       total_points: selectionTotalPoints,

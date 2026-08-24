@@ -70,45 +70,69 @@ export default function UserProfileModal({
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
       <div className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-scale-up">
         {/* Header */}
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between relative bg-gradient-to-b from-slate-800/60 to-slate-900">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 bg-gradient-to-tr from-emerald-500 to-teal-400 text-white shadow-lg overflow-hidden">
-              {userData?.profile?.avatar_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={userData.profile.avatar_url} alt={userData.profile.nickname} className="w-full h-full object-cover" />
-              ) : (
-                userData?.profile?.nickname?.charAt(0).toUpperCase() || '?'
-              )}
-            </div>
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="font-bold text-lg text-white">{userData?.profile?.nickname || 'Participante'}</h3>
-                {rank && (
-                  <span className={`text-[11px] px-2 py-0.5 rounded-full border font-semibold flex items-center gap-1 ${rank.badge}`}>
-                    <span>{rank.icon}</span> {rank.title}
-                  </span>
+        <div className="p-4 sm:p-5 border-b border-slate-800 bg-gradient-to-b from-slate-800/60 to-slate-900 flex-shrink-0">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg flex-shrink-0 bg-gradient-to-tr from-emerald-500 to-teal-400 text-white shadow-lg overflow-hidden">
+                {userData?.profile?.avatar_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={userData.profile.avatar_url} alt={userData.profile.nickname} className="w-full h-full object-cover" />
+                ) : (
+                  userData?.profile?.nickname?.charAt(0).toUpperCase() || '?'
                 )}
               </div>
-              <p className="text-xs text-slate-400 italic truncate max-w-[260px]">
-                {userData?.profile?.tagline ? `"${userData.profile.tagline}"` : 'Sin lema quinielero'}
-              </p>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-bold text-base sm:text-lg text-white truncate">{userData?.profile?.nickname || 'Participante'}</h3>
+                  {rank && (
+                    <span className={`text-[10px] sm:text-[11px] px-2 py-0.5 rounded-full border font-semibold flex items-center gap-1 ${rank.badge}`}>
+                      <span>{rank.icon}</span> {rank.title}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 italic truncate">
+                  {userData?.profile?.tagline ? `"${userData.profile.tagline}"` : 'Sin lema quinielero'}
+                </p>
+              </div>
             </div>
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors flex-shrink-0 ml-2">
+              <X size={20} />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
-            <X size={20} />
-          </button>
+
+          {/* Compact Global Stats Ribbon */}
+          {userData?.profile?.all_time_stats && (
+            <div className="mt-3 pt-3 border-t border-slate-800/80 grid grid-cols-4 gap-1 text-center bg-slate-950/40 p-2 rounded-xl border border-slate-800">
+              <div>
+                <p className="text-xs sm:text-sm font-black text-white">{userData.profile.all_time_stats.total_predictions}</p>
+                <p className="text-[10px] text-slate-400 font-medium">Predicciones</p>
+              </div>
+              <div className="border-l border-slate-800">
+                <p className="text-xs sm:text-sm font-black text-purple-400">{userData.profile.all_time_stats.avg_points}</p>
+                <p className="text-[10px] text-slate-400 font-medium">Media pts</p>
+              </div>
+              <div className="border-l border-slate-800">
+                <p className="text-xs sm:text-sm font-black text-amber-400">{userData.profile.all_time_stats.exact_pct}%</p>
+                <p className="text-[10px] text-slate-400 font-medium">% Plenos</p>
+              </div>
+              <div className="border-l border-slate-800">
+                <p className="text-xs sm:text-sm font-black text-blue-400">{userData.profile.all_time_stats.result_1x2_pct}%</p>
+                <p className="text-[10px] text-slate-400 font-medium">% 1X2</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* League & Matchday Scope Banner */}
-        <div className="px-5 py-2.5 bg-slate-950/60 border-b border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-          <span>Liga: <strong className="text-white">{leagueName}</strong></span>
-          <span>Vista: <strong className="text-emerald-400">{matchday === 'global' ? 'Global' : `Jornada ${matchday}`}</strong></span>
+        <div className="px-4 py-2 bg-slate-950/60 border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 flex-shrink-0">
+          <span className="truncate mr-2">Liga: <strong className="text-white">{leagueName}</strong></span>
+          <span className="flex-shrink-0">Vista: <strong className="text-emerald-400">{matchday === 'global' ? 'Global' : `Jornada ${matchday}`}</strong></span>
         </div>
 
         {/* Content Body */}
-        <div className="p-5 flex-1 overflow-y-auto space-y-4">
+        <div className="p-3.5 sm:p-5 flex-1 min-h-0 overflow-y-auto overscroll-contain space-y-3">
           {loading ? (
             <div className="py-12 flex flex-col items-center justify-center gap-3 text-slate-400">
               <Loader2 size={32} className="animate-spin text-emerald-400" />
@@ -118,35 +142,35 @@ export default function UserProfileModal({
             <div className="py-8 text-center text-rose-400 text-sm">{error}</div>
           ) : (
             <>
-              {/* Quick Summary Pill Row */}
-              <div className="grid grid-cols-2 gap-2 bg-slate-800/40 p-3 rounded-xl border border-slate-700/50 text-center">
+              {/* Quick Summary Pill Row for Current Selection */}
+              <div className="grid grid-cols-2 gap-2 bg-slate-800/40 p-2.5 rounded-xl border border-slate-700/50 text-center">
                 <div>
-                  <p className="text-xs text-slate-400 flex items-center justify-center gap-1">
-                    <Trophy size={12} className="text-amber-400" /> Puntos {matchday === 'global' ? 'totales' : `J${matchday}`}
+                  <p className="text-xs text-slate-400 flex items-center justify-center gap-1 font-medium">
+                    <Trophy size={12} className="text-amber-400" /> Puntos en esta vista
                   </p>
-                  <p className="text-lg font-black text-emerald-400 mt-0.5">
+                  <p className="text-base sm:text-lg font-black text-emerald-400 mt-0.5">
                     {userData.selection_stats.total_points} <span className="text-xs font-normal text-slate-400">pts</span>
                   </p>
                 </div>
                 <div className="border-l border-slate-700/60">
-                  <p className="text-xs text-slate-400 flex items-center justify-center gap-1">
-                    <TrendingUp size={12} className="text-purple-400" /> Media por partido
+                  <p className="text-xs text-slate-400 flex items-center justify-center gap-1 font-medium">
+                    <TrendingUp size={12} className="text-purple-400" /> Media en esta vista
                   </p>
-                  <p className="text-lg font-black text-purple-400 mt-0.5">
+                  <p className="text-base sm:text-lg font-black text-purple-400 mt-0.5">
                     {userData.selection_stats.avg_points} <span className="text-xs font-normal text-slate-400">pts</span>
                   </p>
                 </div>
               </div>
 
               {/* Predictions List */}
-              <div className="space-y-3">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  Pronósticos ({userData.predictions.length})
+              <div className="space-y-2.5 pb-2">
+                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">
+                  Partidos jugados ({userData.predictions.length})
                 </p>
 
                 {userData.predictions.length === 0 ? (
                   <div className="glass-card p-6 text-center text-slate-500 text-sm">
-                    No hay predicciones registradas para esta jornada.
+                    No hay partidos finalizados para esta selección.
                   </div>
                 ) : (
                   userData.predictions.map((p: any) => {
@@ -158,7 +182,7 @@ export default function UserProfileModal({
                     return (
                       <div
                         key={p.id}
-                        className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+                        className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
                         {/* Match Title & Points pill */}
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-slate-400 font-medium">Jornada {match.matchday}</span>
@@ -177,34 +201,38 @@ export default function UserProfileModal({
                           )}
                         </div>
 
-                        {/* Teams & Score Box */}
-                        <div className="flex items-center justify-between gap-2 py-1">
-                          {/* Home */}
-                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                        {/* Teams & Score Box (Wraps team names onto 2 lines, avoids clipping) */}
+                        <div className="flex items-center justify-between gap-1.5 py-1">
+                          {/* Home Team */}
+                          <div className="flex items-center justify-end gap-1.5 flex-1 min-w-0">
+                            <span className="text-[11px] sm:text-xs text-white font-semibold text-right leading-tight break-words line-clamp-2">
+                              {match.home_team}
+                            </span>
                             {homeLogo && (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={homeLogo} alt={match.home_team} className="w-5 h-5 object-contain flex-shrink-0" />
+                              <img src={homeLogo} alt={match.home_team} className="w-5 h-5 sm:w-6 sm:h-6 object-contain flex-shrink-0" />
                             )}
-                            <span className="text-xs text-white font-medium truncate">{match.home_team}</span>
                           </div>
 
-                          {/* Scores Comparison */}
-                          <div className="flex flex-col items-center px-3 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 min-w-[90px]">
-                            <div className="text-sm font-black text-emerald-400 tracking-wider">
+                          {/* Scores Comparison (Slimmer Central Pill) */}
+                          <div className="flex flex-col items-center px-2 py-1 rounded-lg bg-slate-800/90 border border-slate-700 min-w-[62px] flex-shrink-0">
+                            <div className="text-xs sm:text-sm font-black text-emerald-400 tracking-wider">
                               {p.predicted_home_score} - {p.predicted_away_score}
                             </div>
-                            <span className="text-[10px] text-slate-400">
+                            <span className="text-[9px] text-slate-400 font-medium leading-none mt-0.5">
                               {isFinished ? `Real: ${match.home_score}-${match.away_score}` : 'Pronóstico'}
                             </span>
                           </div>
 
-                          {/* Away */}
-                          <div className="flex items-center justify-end gap-2 flex-1 min-w-0 text-right">
-                            <span className="text-xs text-white font-medium truncate">{match.away_team}</span>
+                          {/* Away Team */}
+                          <div className="flex items-center justify-start gap-1.5 flex-1 min-w-0">
                             {awayLogo && (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={awayLogo} alt={match.away_team} className="w-5 h-5 object-contain flex-shrink-0" />
+                              <img src={awayLogo} alt={match.away_team} className="w-5 h-5 sm:w-6 sm:h-6 object-contain flex-shrink-0" />
                             )}
+                            <span className="text-[11px] sm:text-xs text-white font-semibold text-left leading-tight break-words line-clamp-2">
+                              {match.away_team}
+                            </span>
                           </div>
                         </div>
 
