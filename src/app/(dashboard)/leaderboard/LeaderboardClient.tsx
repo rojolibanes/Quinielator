@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { Trophy, Medal, Crown, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { League, LeaderboardEntry } from '@/types';
