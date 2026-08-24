@@ -135,10 +135,9 @@ export default function LeaderboardClient({
         <LeagueSelector leagues={leagues} selected={selectedLeague} onSelect={handleLeagueChange} />
       </div>
 
-      {/* Matchday selector — arrow style (like MatchdaySelector) */}
+      {/* Matchday selector — arrow style */}
       {availableMatchdays.length > 0 && (
         <div className="animate-fade-in">
-          <label className="block text-xs text-slate-500 mb-1.5 font-medium">Vista</label>
           <div
             className="flex items-center justify-between px-4 py-3 rounded-xl"
             style={{
