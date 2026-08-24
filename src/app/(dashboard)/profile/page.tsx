@@ -57,19 +57,21 @@ export default async function ProfilePage() {
 
   const result1X2Pct = totalFinished > 0 ? Math.round((result1X2Count / totalFinished) * 100) : 0;
 
-  // Total points sum across user's leagues
-  const { data: memberships } = await supabase
-    .from('league_members')
-    .select('total_points')
-    .eq('user_id', user.id);
+  // Total predictions made (all, not just finished)
+  const totalPredictions = preds.length;
 
-  const totalPoints = (memberships || []).reduce((acc: number, m: any) => acc + (m.total_points || 0), 0);
+  // Average points per finished prediction
+  const finishedWithPoints = finishedPreds.filter((p: any) => p.points_earned !== null && p.points_earned !== undefined);
+  const avgPoints = finishedWithPoints.length > 0
+    ? Math.round((finishedWithPoints.reduce((acc: number, p: any) => acc + (p.points_earned ?? 0), 0) / finishedWithPoints.length) * 10) / 10
+    : 0;
 
   return (
     <ProfileClient
       profile={profile as Profile}
       stats={{
-        totalPoints,
+        totalPredictions,
+        avgPoints,
         exactPct,
         result1X2Pct,
         totalFinished,

@@ -3,14 +3,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { User, Loader2, Target, Trophy, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { User, Loader2, Target, Trophy, CheckCircle2, AlertTriangle, TrendingUp } from 'lucide-react';
 import type { Profile } from '@/types';
 import toast from 'react-hot-toast';
 
 interface ProfileClientProps {
   profile: Profile;
   stats: {
-    totalPoints: number;
+    totalPredictions: number;
+    avgPoints: number;
     exactPct: number;
     result1X2Pct: number;
     totalFinished: number;
@@ -47,15 +48,15 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
   const [saving, setSaving] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
 
-  // Calculate Rank level
-  const getRank = (pts: number) => {
-    if (pts >= 500) return { title: 'Leyenda de Quinielator', icon: '👑', badge: 'bg-amber-500/20 text-amber-300 border-amber-500/40' };
-    if (pts >= 200) return { title: 'Maestro de LaLiga', icon: '🥇', badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
-    if (pts >= 50) return { title: 'Táctico Experto', icon: '🥈', badge: 'bg-blue-500/20 text-blue-300 border-blue-500/40' };
+  // Calculate Rank level based on average points per prediction
+  const getRank = (avg: number) => {
+    if (avg >= 15) return { title: 'Leyenda de Quinielator', icon: '👑', badge: 'bg-amber-500/20 text-amber-300 border-amber-500/40' };
+    if (avg >= 10) return { title: 'Maestro de LaLiga', icon: '🥇', badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' };
+    if (avg >= 5) return { title: 'Táctico Experto', icon: '🥈', badge: 'bg-blue-500/20 text-blue-300 border-blue-500/40' };
     return { title: 'Aspirante Quinielero', icon: '🥉', badge: 'bg-slate-700/60 text-slate-300 border-slate-600' };
   };
 
-  const rank = getRank(stats.totalPoints);
+  const rank = getRank(stats.avgPoints);
 
   const handleDeleteAccount = async () => {
     if (!window.confirm('¿ESTÁS SEGURO? Esta acción es irreversible. Se eliminará tu cuenta, tu perfil y todas tus predicciones para siempre.')) return;
@@ -159,9 +160,9 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
         {/* User Engagement Stats Row */}
         <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-slate-800">
           <div className="text-center">
-            <p className="text-2xl font-black text-emerald-400">{stats.totalPoints}</p>
+            <p className="text-2xl font-black text-emerald-400">{stats.totalPredictions}</p>
             <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
-              <Trophy size={13} className="text-amber-400" /> Puntos Totales
+              <Trophy size={13} className="text-amber-400" /> Total Predicciones
             </p>
           </div>
           <div className="text-center border-x border-slate-800">
@@ -176,6 +177,15 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
               <CheckCircle2 size={13} className="text-blue-400" /> % Acierto 1X2
             </p>
           </div>
+        </div>
+        {/* Second stats row: avg points */}
+        <div className="mt-3 pt-3 border-t border-slate-800/60 text-center">
+          <p className="text-xl font-black text-purple-400">
+            {stats.avgPoints} <span className="text-sm font-semibold text-slate-500">pts</span>
+          </p>
+          <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+            <TrendingUp size={13} className="text-purple-400" /> Media de puntos por predicción
+          </p>
         </div>
       </div>
 
