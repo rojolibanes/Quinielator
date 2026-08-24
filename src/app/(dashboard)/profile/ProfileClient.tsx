@@ -157,35 +157,41 @@ export default function ProfileClient({ profile, stats }: ProfileClientProps) {
           </div>
         </div>
 
-        {/* User Engagement Stats Row */}
-        <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-slate-800">
-          <div className="text-center">
-            <p className="text-2xl font-black text-emerald-400">{stats.totalPredictions}</p>
-            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
-              <Trophy size={13} className="text-amber-400" /> Total Predicciones
-            </p>
+        {/* User Engagement Stats */}
+        <div className="mt-6 pt-6 border-t border-slate-800 space-y-4">
+          {/* Top row: Total predictions on finished matches */}
+          <div className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
+            <span className="text-xs text-slate-300 flex items-center gap-2 font-medium">
+              <Trophy size={14} className="text-amber-400" /> Total Predicciones (finalizadas)
+            </span>
+            <span className="text-base font-black text-emerald-400">
+              {stats.totalPredictions}
+            </span>
           </div>
-          <div className="text-center border-x border-slate-800">
-            <p className="text-2xl font-black text-amber-400">{stats.exactPct}%</p>
-            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
-              <Target size={13} className="text-emerald-400" /> % Plenos Exactos
-            </p>
+
+          {/* Bottom 3 metrics grid */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="text-center">
+              <p className="text-2xl font-black text-purple-400">
+                {stats.avgPoints} <span className="text-xs font-semibold text-slate-500">pts</span>
+              </p>
+              <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+                <TrendingUp size={13} className="text-purple-400" /> Media puntos
+              </p>
+            </div>
+            <div className="text-center border-x border-slate-800">
+              <p className="text-2xl font-black text-amber-400">{stats.exactPct}%</p>
+              <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+                <Target size={13} className="text-emerald-400" /> % Plenos
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-black text-blue-400">{stats.result1X2Pct}%</p>
+              <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
+                <CheckCircle2 size={13} className="text-blue-400" /> % Acierto 1X2
+              </p>
+            </div>
           </div>
-          <div className="text-center">
-            <p className="text-2xl font-black text-blue-400">{stats.result1X2Pct}%</p>
-            <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
-              <CheckCircle2 size={13} className="text-blue-400" /> % Acierto 1X2
-            </p>
-          </div>
-        </div>
-        {/* Second stats row: avg points */}
-        <div className="mt-3 pt-3 border-t border-slate-800/60 text-center">
-          <p className="text-xl font-black text-purple-400">
-            {stats.avgPoints} <span className="text-sm font-semibold text-slate-500">pts</span>
-          </p>
-          <p className="text-xs text-slate-400 flex items-center justify-center gap-1 mt-0.5 font-medium">
-            <TrendingUp size={13} className="text-purple-400" /> Media de puntos por predicción
-          </p>
         </div>
       </div>
 

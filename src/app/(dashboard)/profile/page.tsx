@@ -57,8 +57,8 @@ export default async function ProfilePage() {
 
   const result1X2Pct = totalFinished > 0 ? Math.round((result1X2Count / totalFinished) * 100) : 0;
 
-  // Total predictions made (all, not just finished)
-  const totalPredictions = preds.length;
+  // Total predictions made on finished matches
+  const totalPredictions = finishedPreds.length;
 
   // Average points per finished prediction
   const finishedWithPoints = finishedPreds.filter((p: any) => p.points_earned !== null && p.points_earned !== undefined);
