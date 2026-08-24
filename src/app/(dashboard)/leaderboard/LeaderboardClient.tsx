@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import { Trophy, Medal, Crown, TrendingUp } from 'lucide-react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
+import { Trophy, Medal, Crown, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { League, LeaderboardEntry } from '@/types';
 import LeagueSelector from '@/components/predictions/LeagueSelector';
 import { createClient } from '@/lib/supabase/client';
@@ -102,6 +102,23 @@ export default function LeaderboardClient({
 
   const topThree = leaderboard.slice(0, 3);
 
+  // Ordered options: Global first, then matchdays descending (latest first)
+  const selectorOptions = useMemo<Array<'global' | number>>(() => {
+    const sorted = [...availableMatchdays].sort((a, b) => b - a); // descending
+    return ['global', ...sorted];
+  }, [availableMatchdays]);
+
+  const currentOptionIndex = selectorOptions.indexOf(selectedMatchday);
+
+  const goToPrev = () => {
+    const prev = selectorOptions[currentOptionIndex - 1];
+    if (prev !== undefined) handleMatchdaySelect(prev);
+  };
+  const goToNext = () => {
+    const next = selectorOptions[currentOptionIndex + 1];
+    if (next !== undefined) handleMatchdaySelect(next);
+  };
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
       {/* Header */}
@@ -118,39 +135,37 @@ export default function LeaderboardClient({
         <LeagueSelector leagues={leagues} selected={selectedLeague} onSelect={handleLeagueChange} />
       </div>
 
-      {/* Matchday selector — chips */}
+      {/* Matchday selector — arrow style (like MatchdaySelector) */}
       {availableMatchdays.length > 0 && (
         <div className="animate-fade-in">
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-            {/* Global chip */}
+          <label className="block text-xs text-slate-500 mb-1.5 font-medium">Vista</label>
+          <div
+            className="flex items-center justify-between px-4 py-3 rounded-xl"
+            style={{
+              background: 'rgba(15, 23, 42, 0.8)',
+              border: '1px solid rgba(51, 65, 85, 0.6)',
+            }}>
             <button
-              onClick={() => handleMatchdaySelect('global')}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                selectedMatchday === 'global'
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700'
-              }`}>
-              Global
+              onClick={goToPrev}
+              disabled={currentOptionIndex <= 0}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+              <ChevronLeft size={18} />
             </button>
-            {/* Jornada chips */}
-            {availableMatchdays.map(j => (
-              <button
-                key={j}
-                onClick={() => handleMatchdaySelect(j)}
-                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                  selectedMatchday === j
-                    ? 'bg-emerald-500 text-white'
-                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700'
-                }`}>
-                J{j}
-              </button>
-            ))}
+            <div className="text-center">
+              <span className="text-sm font-semibold text-white">
+                {selectedMatchday === 'global' ? 'Clasificación Global' : `Jornada ${selectedMatchday}`}
+              </span>
+              {selectedMatchday !== 'global' && (
+                <p className="text-xs text-slate-500 mt-0.5">Puntos de esta jornada</p>
+              )}
+            </div>
+            <button
+              onClick={goToNext}
+              disabled={currentOptionIndex >= selectorOptions.length - 1}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+              <ChevronRight size={18} />
+            </button>
           </div>
-          {selectedMatchday !== 'global' && (
-            <p className="text-xs text-slate-500 mt-2">
-              Puntos obtenidos en la Jornada {selectedMatchday} (partidos finalizados)
-            </p>
-          )}
         </div>
       )}
 
