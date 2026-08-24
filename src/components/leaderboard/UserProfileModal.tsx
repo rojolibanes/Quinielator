@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Trophy, TrendingUp, Lock, Loader2, Sparkles, Star } from 'lucide-react';
 import { getTeamLogo } from '@/lib/teams';
 
@@ -26,9 +27,14 @@ export default function UserProfileModal({
   matchday,
   onClose,
 }: UserProfileModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -58,8 +64,10 @@ export default function UserProfileModal({
     ? getRank(userData.profile.all_time_avg_points)
     : null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
       <div className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-scale-up">
         {/* Header */}
         <div className="p-5 border-b border-slate-800 flex items-center justify-between relative bg-gradient-to-b from-slate-800/60 to-slate-900">
@@ -238,6 +246,7 @@ export default function UserProfileModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Users, Loader2, Star, Sparkles, Trophy, Target } from 'lucide-react';
 import { getTeamLogo } from '@/lib/teams';
 import type { Match, League } from '@/types';
@@ -16,6 +17,7 @@ export default function MatchCommunityModal({
   league,
   onClose,
 }: MatchCommunityModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [predictions, setPredictions] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +25,10 @@ export default function MatchCommunityModal({
   const homeLogo = getTeamLogo(match.home_team);
   const awayLogo = getTeamLogo(match.away_team);
   const isFinished = match.status === 'finished';
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchCommunityPredictions = async () => {
@@ -48,8 +54,10 @@ export default function MatchCommunityModal({
     fetchCommunityPredictions();
   }, [match.id, league.id]);
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
       <div className="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-lg w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden animate-scale-up">
         {/* Match Header */}
         <div className="p-4 sm:p-5 border-b border-slate-800 bg-gradient-to-b from-slate-800/80 to-slate-900 flex-shrink-0">
@@ -210,6 +218,7 @@ export default function MatchCommunityModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
