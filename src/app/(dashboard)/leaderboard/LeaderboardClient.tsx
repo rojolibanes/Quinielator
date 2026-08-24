@@ -1,10 +1,9 @@
-'use client';
-
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { Trophy, Medal, Crown, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { League, LeaderboardEntry } from '@/types';
 import LeagueSelector from '@/components/predictions/LeagueSelector';
 import { createClient } from '@/lib/supabase/client';
+import UserProfileModal from '@/components/leaderboard/UserProfileModal';
 
 interface LeaderboardClientProps {
   leagues: League[];
@@ -32,6 +31,7 @@ export default function LeaderboardClient({
   const [loading, setLoading] = useState(false);
   const [selectedMatchday, setSelectedMatchday] = useState<'global' | number>('global');
   const [availableMatchdays, setAvailableMatchdays] = useState<number[]>([]);
+  const [selectedUserIdForModal, setSelectedUserIdForModal] = useState<string | null>(null);
 
   // Load matchdays with at least 1 finished match for current league
   const loadAvailableMatchdays = useCallback(async (league: League) => {
@@ -193,9 +193,11 @@ export default function LeaderboardClient({
         <div className="flex items-end justify-center gap-3 pt-4 animate-fade-in relative z-10">
           {/* 2nd place */}
           {topThree[1] && (
-            <div className="flex flex-col items-center gap-2 flex-1">
+            <div
+              onClick={() => setSelectedUserIdForModal(topThree[1].user_id)}
+              className="flex flex-col items-center gap-2 flex-1 cursor-pointer group hover:scale-[1.02] transition-transform">
               <Avatar entry={topThree[1]} size="md" isMe={topThree[1].user_id === currentUserId} />
-              <p className="text-xs font-semibold text-slate-300 truncate max-w-[80px] text-center">{topThree[1].nickname}</p>
+              <p className="text-xs font-semibold text-slate-300 truncate max-w-[80px] text-center group-hover:text-emerald-400 transition-colors">{topThree[1].nickname}</p>
               <p className="text-sm font-bold text-slate-200">{topThree[1].total_points} <span className="text-slate-500 text-xs">pts</span></p>
               <div className="w-full h-16 rounded-t-lg flex items-center justify-center"
                 style={{ background: 'linear-gradient(180deg, rgba(192,192,192,0.15) 0%, rgba(192,192,192,0.05) 100%)', border: '1px solid rgba(192,192,192,0.2)', borderBottom: 'none' }}>
@@ -205,10 +207,12 @@ export default function LeaderboardClient({
           )}
           {/* 1st place */}
           {topThree[0] && (
-            <div className="flex flex-col items-center gap-2 flex-1">
+            <div
+              onClick={() => setSelectedUserIdForModal(topThree[0].user_id)}
+              className="flex flex-col items-center gap-2 flex-1 cursor-pointer group hover:scale-[1.02] transition-transform">
               <Crown size={20} className="text-amber-400" />
               <Avatar entry={topThree[0]} size="lg" isMe={topThree[0].user_id === currentUserId} />
-              <p className="text-xs font-semibold text-white truncate max-w-[80px] text-center">{topThree[0].nickname}</p>
+              <p className="text-xs font-semibold text-white truncate max-w-[80px] text-center group-hover:text-emerald-400 transition-colors">{topThree[0].nickname}</p>
               <p className="text-base font-black text-emerald-400">{topThree[0].total_points} <span className="text-slate-400 text-xs">pts</span></p>
               <div className="w-full h-24 rounded-t-lg flex items-center justify-center"
                 style={{ background: 'linear-gradient(180deg, rgba(255,215,0,0.15) 0%, rgba(255,165,0,0.05) 100%)', border: '1px solid rgba(255,215,0,0.25)', borderBottom: 'none' }}>
@@ -218,9 +222,11 @@ export default function LeaderboardClient({
           )}
           {/* 3rd place */}
           {topThree[2] && (
-            <div className="flex flex-col items-center gap-2 flex-1">
+            <div
+              onClick={() => setSelectedUserIdForModal(topThree[2].user_id)}
+              className="flex flex-col items-center gap-2 flex-1 cursor-pointer group hover:scale-[1.02] transition-transform">
               <Avatar entry={topThree[2]} size="md" isMe={topThree[2].user_id === currentUserId} />
-              <p className="text-xs font-semibold text-slate-400 truncate max-w-[80px] text-center">{topThree[2].nickname}</p>
+              <p className="text-xs font-semibold text-slate-400 truncate max-w-[80px] text-center group-hover:text-emerald-400 transition-colors">{topThree[2].nickname}</p>
               <p className="text-sm font-bold text-slate-300">{topThree[2].total_points} <span className="text-slate-500 text-xs">pts</span></p>
               <div className="w-full h-12 rounded-t-lg flex items-center justify-center"
                 style={{ background: 'linear-gradient(180deg, rgba(205,127,50,0.15) 0%, rgba(180,100,30,0.05) 100%)', border: '1px solid rgba(205,127,50,0.2)', borderBottom: 'none' }}>
@@ -239,7 +245,8 @@ export default function LeaderboardClient({
             return (
               <div
                 key={entry.user_id}
-                className={`glass-card p-4 flex items-center gap-4 transition-all ${
+                onClick={() => setSelectedUserIdForModal(entry.user_id)}
+                className={`glass-card p-4 flex items-center gap-4 transition-all cursor-pointer hover:border-slate-700 hover:bg-slate-850/80 active:scale-[0.99] ${
                   entry.rank === 1 ? 'rank-1' : entry.rank === 2 ? 'rank-2' : entry.rank === 3 ? 'rank-3' : ''
                 } ${isMe ? 'ring-1 ring-emerald-500/30' : ''}`}>
                 <div className="w-8 flex items-center justify-center flex-shrink-0">
@@ -250,6 +257,7 @@ export default function LeaderboardClient({
                   <p className={`font-semibold text-sm truncate ${isMe ? 'text-emerald-400' : 'text-white'}`}>
                     {entry.nickname} {isMe && <span className="text-xs text-slate-500">(tú)</span>}
                   </p>
+                  <p className="text-[11px] text-slate-500">Toca para ver pronósticos</p>
                 </div>
                 <div className="text-right">
                   <p className={`font-black text-lg ${isMe ? 'text-emerald-400' : entry.rank <= 3 ? 'text-white' : 'text-slate-300'}`}>
@@ -261,6 +269,17 @@ export default function LeaderboardClient({
             );
           })}
         </div>
+      )}
+
+      {/* User Profile & Predictions Modal */}
+      {selectedUserIdForModal && selectedLeague && (
+        <UserProfileModal
+          userId={selectedUserIdForModal}
+          leagueId={selectedLeague.id}
+          leagueName={selectedLeague.name}
+          matchday={selectedMatchday}
+          onClose={() => setSelectedUserIdForModal(null)}
+        />
       )}
     </div>
   );

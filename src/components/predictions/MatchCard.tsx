@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Clock, CheckCircle, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Clock, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import type { Match, League, Prediction, Scorer, MVPPlayer } from '@/types';
 import { createClient } from '@/lib/supabase/client';
 import { getMaxScorers, calculatePoints } from '@/lib/scoring/calculatePoints';
 import ScorerSelector from './ScorerSelector';
 import MVPSelector from './MVPSelector';
+import MatchCommunityModal from './MatchCommunityModal';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -39,6 +40,7 @@ export default function MatchCard({
   const [saving, setSaving] = useState(false);
   const [savingAll, setSavingAll] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
+  const [showCommunityModal, setShowCommunityModal] = useState(false);
 
   const isPast = new Date(match.match_date) < new Date();
   const isLocked = match.status !== 'pending' || isPast;
@@ -465,6 +467,27 @@ export default function MatchCard({
             <span className="text-emerald-400">+{pointsBreakdown.total} pts</span>
           </div>
         </div>
+      )}
+
+      {/* Community Predictions Button (only visible once the match is started / locked) */}
+      {isLocked && (
+        <div className="px-4 pb-3.5 pt-1">
+          <button
+            onClick={() => setShowCommunityModal(true)}
+            className="w-full py-2 px-3 rounded-xl bg-slate-800/60 hover:bg-slate-750 border border-slate-700/70 text-xs font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+            <Users size={14} className="text-emerald-400" />
+            <span>Predicciones de la liga</span>
+          </button>
+        </div>
+      )}
+
+      {/* Match Community Predictions Modal */}
+      {showCommunityModal && (
+        <MatchCommunityModal
+          match={match}
+          league={league}
+          onClose={() => setShowCommunityModal(false)}
+        />
       )}
     </div>
   );
