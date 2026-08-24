@@ -163,8 +163,8 @@ export default function UserProfileModal({
                               +{p.points_earned ?? 0} pts
                             </span>
                           ) : (
-                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-                              {match.status === 'live' ? 'En vivo' : 'Pendiente'}
+                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 font-medium">
+                              En juego
                             </span>
                           )}
                         </div>
@@ -182,21 +182,12 @@ export default function UserProfileModal({
 
                           {/* Scores Comparison */}
                           <div className="flex flex-col items-center px-3 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 min-w-[90px]">
-                            {p.is_hidden ? (
-                              <div className="flex items-center gap-1 text-slate-400 text-xs py-0.5">
-                                <Lock size={12} className="text-amber-400" />
-                                <span>Oculto</span>
-                              </div>
-                            ) : (
-                              <>
-                                <div className="text-sm font-black text-emerald-400 tracking-wider">
-                                  {p.predicted_home_score} - {p.predicted_away_score}
-                                </div>
-                                <span className="text-[10px] text-slate-400">
-                                  {isFinished ? `Real: ${match.home_score}-${match.away_score}` : 'Pronóstico'}
-                                </span>
-                              </>
-                            )}
+                            <div className="text-sm font-black text-emerald-400 tracking-wider">
+                              {p.predicted_home_score} - {p.predicted_away_score}
+                            </div>
+                            <span className="text-[10px] text-slate-400">
+                              {isFinished ? `Real: ${match.home_score}-${match.away_score}` : 'Pronóstico'}
+                            </span>
                           </div>
 
                           {/* Away */}
@@ -209,8 +200,8 @@ export default function UserProfileModal({
                           </div>
                         </div>
 
-                        {/* Scorers & MVP (if visible) */}
-                        {!p.is_hidden && (
+                        {/* Scorers & MVP */}
+                        {(p.predicted_mvp || (p.predicted_scorers && p.predicted_scorers.length > 0)) && (
                           <div className="pt-1.5 border-t border-slate-800/60 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-400">
                             {p.predicted_mvp && (
                               <span className="flex items-center gap-1">
@@ -236,6 +227,15 @@ export default function UserProfileModal({
               </div>
             </>
           )}
+        </div>
+
+        {/* Modal Footer with Close Button */}
+        <div className="p-3.5 border-t border-slate-800 bg-slate-900/90 flex justify-end">
+          <button
+            onClick={onClose}
+            className="w-full sm:w-auto px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs transition-colors border border-slate-700">
+            Cerrar
+          </button>
         </div>
       </div>
     </div>

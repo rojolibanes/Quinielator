@@ -82,39 +82,26 @@ export async function GET(request: Request) {
     return new Date(b.matches.match_date).getTime() - new Date(a.matches.match_date).getTime();
   });
 
+  // Only include matches that have already started or finished
   const now = new Date();
-  const isOwner = currentUser.id === targetUserId;
-
-  // Mask predictions for unstarted matches if not the owner
-  const sanitizedPreds = sortedPreds.map((p: any) => {
-    const matchDate = new Date(p.matches.match_date);
-    const isStartedOrFinished = p.matches.status !== 'pending' || matchDate <= now;
-
-    if (!isStartedOrFinished && !isOwner) {
-      return {
-        id: p.id,
-        match_id: p.match_id,
-        is_hidden: true,
-        match: p.matches,
-        points_earned: null,
-      };
-    }
-
-    return {
+  const visiblePreds = sortedPreds
+    .filter((p: any) => {
+      const matchDate = new Date(p.matches.match_date);
+      return p.matches.status !== 'pending' || matchDate <= now;
+    })
+    .map((p: any) => ({
       id: p.id,
       match_id: p.match_id,
-      is_hidden: false,
       predicted_home_score: p.predicted_home_score,
       predicted_away_score: p.predicted_away_score,
       predicted_scorers: p.predicted_scorers,
       predicted_mvp: p.predicted_mvp,
       points_earned: p.points_earned,
       match: p.matches,
-    };
-  });
+    }));
 
   // Calculate points in this specific selection
-  const selectionFinished = sanitizedPreds.filter((p: any) => p.match.status === 'finished');
+  const selectionFinished = visiblePreds.filter((p: any) => p.match.status === 'finished');
   const selectionTotalPoints = selectionFinished.reduce((acc: number, p: any) => acc + (p.points_earned ?? 0), 0);
   const selectionAvgPoints = selectionFinished.length > 0
     ? Math.round((selectionTotalPoints / selectionFinished.length) * 10) / 10
@@ -129,9 +116,9 @@ export async function GET(request: Request) {
     selection_stats: {
       total_points: selectionTotalPoints,
       avg_points: selectionAvgPoints,
-      total_matches: sanitizedPreds.length,
+      total_matches: visiblePreds.length,
       finished_matches: selectionFinished.length,
     },
-    predictions: sanitizedPreds,
+    predictions: visiblePreds,
   });
 }
