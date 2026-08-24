@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Trophy, Medal, Crown, TrendingUp } from 'lucide-react';
 import type { League, LeaderboardEntry } from '@/types';
 import LeagueSelector from '@/components/predictions/LeagueSelector';
@@ -30,13 +30,26 @@ export default function LeaderboardClient({
   const [selectedLeague, setSelectedLeague] = useState<League | null>(initialLeague);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>(initialLeaderboard);
   const [loading, setLoading] = useState(false);
+  const [selectedMatchday, setSelectedMatchday] = useState<'global' | number>('global');
+  const [availableMatchdays, setAvailableMatchdays] = useState<number[]>([]);
 
-  const loadLeaderboard = useCallback(async (league: League) => {
+  // Load matchdays with at least 1 finished match for current league
+  const loadAvailableMatchdays = useCallback(async (league: League) => {
+    const res = await fetch(`/api/leaderboard?league_id=${league.id}&matchday=available`);
+    if (res.ok) {
+      const json = await res.json();
+      setAvailableMatchdays(json.matchdays ?? []);
+    }
+  }, []);
+
+  // Load global leaderboard from league_members
+  const loadGlobalLeaderboard = useCallback(async (league: League) => {
     setLoading(true);
     const { data } = await supabase
       .from('league_members')
       .select('user_id, total_points, profiles(nickname, avatar_url)')
       .eq('league_id', league.id)
+      .gt('total_points', 0)
       .order('total_points', { ascending: false });
 
     setLeaderboard(
@@ -51,13 +64,43 @@ export default function LeaderboardClient({
     setLoading(false);
   }, [supabase]);
 
+  // Load matchday leaderboard from new API
+  const loadMatchdayLeaderboard = useCallback(async (league: League, matchday: number) => {
+    setLoading(true);
+    const res = await fetch(`/api/leaderboard?league_id=${league.id}&matchday=${matchday}`);
+    if (res.ok) {
+      const json = await res.json();
+      setLeaderboard(json.leaderboard ?? []);
+    }
+    setLoading(false);
+  }, []);
+
+  // When league changes, reset to global and reload matchdays
   const handleLeagueChange = (league: League) => {
     setSelectedLeague(league);
-    loadLeaderboard(league);
+    setSelectedMatchday('global');
+    loadGlobalLeaderboard(league);
+    loadAvailableMatchdays(league);
   };
 
+  // When matchday selector changes
+  const handleMatchdaySelect = (matchday: 'global' | number) => {
+    setSelectedMatchday(matchday);
+    if (!selectedLeague) return;
+    if (matchday === 'global') {
+      loadGlobalLeaderboard(selectedLeague);
+    } else {
+      loadMatchdayLeaderboard(selectedLeague, matchday);
+    }
+  };
+
+  // Load available matchdays on mount
+  useEffect(() => {
+    if (initialLeague) loadAvailableMatchdays(initialLeague);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const topThree = leaderboard.slice(0, 3);
-  const rest = leaderboard.slice(3);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
@@ -75,6 +118,42 @@ export default function LeaderboardClient({
         <LeagueSelector leagues={leagues} selected={selectedLeague} onSelect={handleLeagueChange} />
       </div>
 
+      {/* Matchday selector — chips */}
+      {availableMatchdays.length > 0 && (
+        <div className="animate-fade-in">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {/* Global chip */}
+            <button
+              onClick={() => handleMatchdaySelect('global')}
+              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                selectedMatchday === 'global'
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700'
+              }`}>
+              Global
+            </button>
+            {/* Jornada chips */}
+            {availableMatchdays.map(j => (
+              <button
+                key={j}
+                onClick={() => handleMatchdaySelect(j)}
+                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  selectedMatchday === j
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700'
+                }`}>
+                J{j}
+              </button>
+            ))}
+          </div>
+          {selectedMatchday !== 'global' && (
+            <p className="text-xs text-slate-500 mt-2">
+              Puntos obtenidos en la Jornada {selectedMatchday} (partidos finalizados)
+            </p>
+          )}
+        </div>
+      )}
+
       {loading && (
         <div className="space-y-3">
           {[1, 2, 3, 4, 5].map(i => (
@@ -86,7 +165,11 @@ export default function LeaderboardClient({
       {!loading && leaderboard.length === 0 && (
         <div className="glass-card p-12 text-center">
           <TrendingUp size={40} className="text-slate-600 mx-auto mb-3" />
-          <p className="text-slate-400">Esta liga aún no tiene clasificación.</p>
+          <p className="text-slate-400">
+            {selectedMatchday === 'global'
+              ? 'Esta liga aún no tiene clasificación.'
+              : `Nadie tiene predicciones puntuadas en la Jornada ${selectedMatchday}.`}
+          </p>
           <p className="text-slate-500 text-sm">¡Las predicciones aún no se han puntuado!</p>
         </div>
       )}
@@ -186,3 +269,4 @@ function Avatar({ entry, size, isMe }: { entry: LeaderboardEntry; size: 'sm' | '
     </div>
   );
 }
+
