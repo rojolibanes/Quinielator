@@ -25,6 +25,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Nombre requerido' }, { status: 400 });
   }
 
+  // Check that the name is not already taken (case-insensitive)
+  const { data: existing } = await supabaseAdmin
+    .from('leagues')
+    .select('id')
+    .ilike('name', name.trim())
+    .single();
+
+  if (existing) {
+    return NextResponse.json({ error: `Ya existe una liga con el nombre "${name.trim()}". Elige otro nombre.` }, { status: 409 });
+  }
+
   const { data, error } = await supabaseAdmin
     .from('leagues')
     .insert({

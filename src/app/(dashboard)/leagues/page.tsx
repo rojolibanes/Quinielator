@@ -52,19 +52,32 @@ export default async function LeaguesPage() {
       member_count: countMap[m.leagues.id] || 1,
     }));
 
-  // Fetch public leagues the user has NOT joined yet
+  // Fetch public leagues the user has NOT joined yet (with full details)
   const { data: publicLeaguesRaw } = await supabase
     .from('leagues')
-    .select('id, name, football_league, is_official')
+    .select('id, name, football_league, is_official, points_config')
     .eq('is_private', false)
     .not('id', 'in', leagueIds.length > 0 ? `(${leagueIds.map(id => `"${id}"`).join(',')})` : '("")')
     .order('name');
+
+  // Get member counts for public leagues
+  const publicLeagueIds = (publicLeaguesRaw ?? []).map((l: any) => l.id);
+  const { data: publicMemberCounts } = publicLeagueIds.length > 0
+    ? await supabase.from('league_members').select('league_id').in('league_id', publicLeagueIds)
+    : { data: [] };
+
+  const publicCountMap = (publicMemberCounts ?? []).reduce((acc: Record<string, number>, row: any) => {
+    acc[row.league_id] = (acc[row.league_id] || 0) + 1;
+    return acc;
+  }, {});
 
   const publicLeagues = (publicLeaguesRaw ?? []).map((l: any) => ({
     id: l.id,
     name: l.name,
     football_league: l.football_league,
     is_official: l.is_official,
+    points_config: l.points_config,
+    member_count: publicCountMap[l.id] || 0,
   }));
 
   return <LeaguesClient userId={user.id} isAdmin={isAdmin} userLeagues={userLeagues} publicLeagues={publicLeagues} />;

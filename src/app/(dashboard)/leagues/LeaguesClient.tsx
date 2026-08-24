@@ -14,6 +14,8 @@ interface PublicLeague {
   name: string;
   football_league: string;
   is_official: boolean;
+  points_config: PointsConfig;
+  member_count: number;
 }
 
 interface LeaguesClientProps {
@@ -795,28 +797,73 @@ export default function LeaguesClient({ userId, isAdmin, userLeagues: initialUse
                 <p className="text-slate-400 text-sm mt-1">Únete a cualquiera de estas ligas con un solo clic.</p>
               </div>
               <div className="space-y-2">
-                {publicLeagues.map(pl => (
-                  <div key={pl.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                    <div className="flex items-center gap-3">
-                      {pl.is_official && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/20 font-medium">
-                          Oficial
+                {publicLeagues.map(pl => {
+                  const cfg = pl.points_config || {};
+                  const filterTeams: string[] = cfg.filter_teams || (cfg.filter_team ? [cfg.filter_team] : []);
+                  const matchdayType = cfg.matchday_type || 'all';
+                  return (
+                    <div key={pl.id} className="flex flex-col gap-2 p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+                      {/* Name + join button */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {pl.is_official && (
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/20 font-medium">
+                              Oficial
+                            </span>
+                          )}
+                          <span className="text-white font-semibold text-sm">{pl.name}</span>
+                        </div>
+                        <button
+                          onClick={() => handleJoinPublic(pl.id, pl.name)}
+                          disabled={joiningPublicLeagueId === pl.id}
+                          className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 hover:bg-emerald-500/25 transition-all text-xs font-semibold">
+                          {joiningPublicLeagueId === pl.id
+                            ? <Loader2 size={13} className="animate-spin" />
+                            : <ChevronRight size={13} />
+                          }
+                          Unirme
+                        </button>
+                      </div>
+                      {/* Details row */}
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-400">
+                        <span className="flex items-center gap-1">
+                          <Users size={11} className="text-slate-500" />
+                          {pl.member_count} {pl.member_count === 1 ? 'participante' : 'participantes'}
                         </span>
-                      )}
-                      <span className="text-white font-medium text-sm">{pl.name}</span>
+                        {matchdayType === 'single' && cfg.start_matchday && (
+                          <span className="flex items-center gap-1">
+                            <Calendar size={11} className="text-slate-500" />
+                            Jornada {cfg.start_matchday}
+                          </span>
+                        )}
+                        {matchdayType === 'range' && cfg.start_matchday && cfg.end_matchday && (
+                          <span className="flex items-center gap-1">
+                            <Calendar size={11} className="text-slate-500" />
+                            Jornadas {cfg.start_matchday}–{cfg.end_matchday}
+                          </span>
+                        )}
+                        {matchdayType === 'all' && (
+                          <span className="flex items-center gap-1">
+                            <Calendar size={11} className="text-slate-500" />
+                            Todas las jornadas
+                          </span>
+                        )}
+                        {filterTeams.length > 0 && (
+                          <span className="flex items-center gap-1">
+                            <Filter size={11} className="text-slate-500" />
+                            {filterTeams.length === 1 ? filterTeams[0] : `${filterTeams.length} equipos`}
+                          </span>
+                        )}
+                        <span className="flex items-center gap-1">
+                          <Trophy size={11} className="text-slate-500" />
+                          Exacto: {cfg.exact_score ?? 20}pts · 1X2: {cfg.result_1x2 ?? 10}pts
+                          {cfg.enable_scorers !== false && ` · Gol: ${cfg.scorer_per_goal ?? 2}pts`}
+                          {cfg.enable_mvp !== false && ` · MVP: ${cfg.mvp ?? 5}pts`}
+                        </span>
+                      </div>
                     </div>
-                    <button
-                      onClick={() => handleJoinPublic(pl.id, pl.name)}
-                      disabled={joiningPublicLeagueId === pl.id}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 hover:bg-emerald-500/25 transition-all text-xs font-semibold">
-                      {joiningPublicLeagueId === pl.id
-                        ? <Loader2 size={13} className="animate-spin" />
-                        : <ChevronRight size={13} />
-                      }
-                      Unirme
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
