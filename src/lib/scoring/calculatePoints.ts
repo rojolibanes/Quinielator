@@ -161,3 +161,36 @@ export function previewPoints(
     max: config.exact_score + maxScorerPoints + config.mvp,
   };
 }
+
+// ────────────────────────────────────────────────────────────
+// VALIDATION: Check if a match applies to a league configuration
+// ────────────────────────────────────────────────────────────
+export function isMatchApplicableToLeague(
+  match: { matchday: number; home_team: string; away_team: string; football_league?: string },
+  league: { football_league?: string; points_config?: PointsConfig | any }
+): boolean {
+  if (league.football_league && match.football_league && league.football_league !== match.football_league) {
+    return false;
+  }
+
+  const cfg = (league.points_config as any) || {};
+
+  // 1. Check matchday range / single
+  const matchdayType = cfg.matchday_type || 'all';
+  if (matchdayType === 'single' && cfg.start_matchday) {
+    if (match.matchday !== cfg.start_matchday) return false;
+  } else if (matchdayType === 'range') {
+    const minJ = cfg.start_matchday || 1;
+    const maxJ = cfg.end_matchday || 38;
+    if (match.matchday < minJ || match.matchday > maxJ) return false;
+  }
+
+  // 2. Check team filter
+  const filterTeams: string[] = cfg.filter_teams || (cfg.filter_team ? [cfg.filter_team] : []);
+  if (filterTeams.length > 0) {
+    const matchesTeam = filterTeams.includes(match.home_team) || filterTeams.includes(match.away_team);
+    if (!matchesTeam) return false;
+  }
+
+  return true;
+}

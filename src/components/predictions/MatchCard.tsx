@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Clock, CheckCircle, AlertCircle, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import type { Match, League, Prediction, Scorer, MVPPlayer } from '@/types';
 import { createClient } from '@/lib/supabase/client';
-import { getMaxScorers, calculatePoints } from '@/lib/scoring/calculatePoints';
+import { getMaxScorers, calculatePoints, isMatchApplicableToLeague } from '@/lib/scoring/calculatePoints';
 import ScorerSelector from './ScorerSelector';
 import MVPSelector from './MVPSelector';
 import MatchCommunityModal from './MatchCommunityModal';
@@ -123,19 +123,19 @@ export default function MatchCard({
     }
   };
 
+  const applicableLeagues = userLeagues.filter(l => isMatchApplicableToLeague(match, l));
+
   const handleSaveAll = async () => {
     if (!validate()) return;
-    const otherLeagues = userLeagues.filter(l => l.id !== league.id);
-    if (otherLeagues.length === 0) {
-      // Only one league, behave like normal save
+    if (applicableLeagues.length <= 1) {
+      // Only one league applicable, behave like normal save
       return handleSave();
     }
     setSavingAll(true);
     try {
-      // Save for all leagues in parallel (current league + others)
-      const allLeagues = [league, ...otherLeagues];
+      // Save only for leagues where this match is applicable
       const results = await Promise.allSettled(
-        allLeagues.map(l =>
+        applicableLeagues.map(l =>
           fetch('/api/predictions', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -402,8 +402,8 @@ export default function MatchCard({
       {/* Save buttons (only shown when there are pending unsaved changes) */}
       {!isLocked && hasChanges && (
         <div className="px-4 pb-4 animate-fade-in space-y-2">
-          {/* Save for all leagues button — only shown when user has more than 1 league */}
-          {userLeagues.length > 1 && (
+          {/* Save for all compatible leagues button — only shown when user has more than 1 compatible league for this match */}
+          {applicableLeagues.length > 1 && (
             <button
               onClick={handleSaveAll}
               disabled={savingAll || saving || homeScore === '' || awayScore === ''}
@@ -412,7 +412,7 @@ export default function MatchCard({
                   ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30'
                   : 'bg-slate-800 text-slate-500 cursor-not-allowed'
               }`}>
-              {savingAll ? 'Guardando en todas las ligas...' : `🌐 Guardar para todas mis ligas (${userLeagues.length})`}
+              {savingAll ? 'Guardando en ligas compatibles...' : `🌐 Guardar para mis ligas compatibles (${applicableLeagues.length})`}
             </button>
           )}
           <button
@@ -423,7 +423,7 @@ export default function MatchCard({
                 ? 'btn-primary'
                 : 'bg-slate-800 text-slate-500 cursor-not-allowed'
             }`}>
-            {saving ? 'Guardando...' : userLeagues.length > 1 ? `Guardar solo para "${league.name}"` : 'Guardar predicción'}
+            {saving ? 'Guardando...' : applicableLeagues.length > 1 ? `Guardar solo para "${league.name}"` : 'Guardar predicción'}
           </button>
         </div>
       )}

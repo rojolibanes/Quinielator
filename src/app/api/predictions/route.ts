@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createClient as createAdminClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
+import { isMatchApplicableToLeague } from '@/lib/scoring/calculatePoints';
+
 const supabaseAdmin = createAdminClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -26,10 +28,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'El límite máximo de goles por equipo es 9.' }, { status: 400 });
   }
 
-  // Check match deadline using admin client
+  // Check match deadline & data using admin client
   const { data: match, error: matchError } = await supabaseAdmin
     .from('matches')
-    .select('status, match_date')
+    .select('id, status, match_date, matchday, home_team, away_team, football_league')
     .eq('id', match_id)
     .single();
 
@@ -39,6 +41,21 @@ export async function POST(request: Request) {
 
   if (match.status !== 'pending' || new Date(match.match_date) < new Date()) {
     return NextResponse.json({ error: 'El plazo para guardar predicciones para este partido ha finalizado.' }, { status: 400 });
+  }
+
+  // Check league configuration
+  const { data: leagueData, error: leagueError } = await supabaseAdmin
+    .from('leagues')
+    .select('id, football_league, points_config')
+    .eq('id', league_id)
+    .single();
+
+  if (leagueError || !leagueData) {
+    return NextResponse.json({ error: 'Liga no encontrada.' }, { status: 404 });
+  }
+
+  if (!isMatchApplicableToLeague(match, leagueData)) {
+    return NextResponse.json({ error: 'Este partido no corresponde a la configuración de jornadas o equipos de esta liga.' }, { status: 400 });
   }
 
   // Upsert prediction using admin client to guarantee session permissions
