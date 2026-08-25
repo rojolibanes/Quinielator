@@ -11,13 +11,29 @@ import MatchdaySelector from '@/components/predictions/MatchdaySelector';
 interface DashboardClientProps {
   profile: Profile;
   officialLeague: League | null;
+  defaultMatchday?: number;
 }
 
-export default function DashboardClient({ profile, officialLeague }: DashboardClientProps) {
+export default function DashboardClient({ profile, officialLeague, defaultMatchday = 1 }: DashboardClientProps) {
   const supabase = createClient();
   const [selectedLeague, setSelectedLeague] = useState<League | null>(officialLeague);
   const [userLeagues, setUserLeagues] = useState<League[]>(officialLeague ? [officialLeague] : []);
-  const [matchday, setMatchday] = useState(1);
+
+  // Compute initial matchday based on league configuration and latest loaded matchday
+  const getInitialMatchday = (league: League | null) => {
+    const cfg = (league?.points_config as any) || {};
+    if (cfg.matchday_type === 'single' && cfg.start_matchday) {
+      return cfg.start_matchday;
+    }
+    if (cfg.matchday_type === 'range') {
+      const minJ = cfg.start_matchday || 1;
+      const maxJ = cfg.end_matchday || 38;
+      return Math.max(minJ, Math.min(maxJ, defaultMatchday));
+    }
+    return defaultMatchday;
+  };
+
+  const [matchday, setMatchday] = useState<number>(() => getInitialMatchday(officialLeague));
   const [matches, setMatches] = useState<Match[]>([]);
   const [predictions, setPredictions] = useState<Record<string, Prediction>>({});
   const [loading, setLoading] = useState(true);
@@ -40,10 +56,7 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
         if (!selectedLeague && allLeagues.length > 0) {
           const first = allLeagues[0];
           setSelectedLeague(first);
-          const cfg = first.points_config || {};
-          if (cfg.matchday_type === 'single' && cfg.start_matchday) {
-            setMatchday(cfg.start_matchday);
-          }
+          setMatchday(getInitialMatchday(first));
         }
       }
     };
@@ -53,13 +66,13 @@ export default function DashboardClient({ profile, officialLeague }: DashboardCl
 
   const handleLeagueSelect = (league: League) => {
     setSelectedLeague(league);
-    const cfg = league.points_config || {};
+    const cfg = (league.points_config as any) || {};
     if (cfg.matchday_type === 'single' && cfg.start_matchday) {
       setMatchday(cfg.start_matchday);
     } else if (cfg.matchday_type === 'range') {
       const minJ = cfg.start_matchday || 1;
       const maxJ = cfg.end_matchday || 38;
-      setMatchday(prev => Math.max(minJ, Math.min(maxJ, prev)));
+      setMatchday((prev: number) => Math.max(minJ, Math.min(maxJ, prev)));
     }
   };
 
