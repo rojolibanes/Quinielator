@@ -5,13 +5,9 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key';
 
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
-
   const { pathname } = request.nextUrl;
 
-  // Fast check: look for Supabase auth cookie directly from request
+  // Fast check: look for Supabase auth cookie directly from request headers
   const allCookies = request.cookies.getAll();
   const hasAuthCookie = allCookies.some(c => c.name.startsWith('sb-') && c.name.includes('-auth-token'));
 
@@ -36,35 +32,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // If user has auth cookie, sync cookies via getSession() (local JWT verification without slow remote network call)
-  if (hasAuthCookie) {
-    try {
-      const supabase = createServerClient(
-        supabaseUrl,
-        supabaseAnonKey,
-        {
-          cookies: {
-            getAll() {
-              return request.cookies.getAll();
-            },
-            setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
-              cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-              supabaseResponse = NextResponse.next({
-                request,
-              });
-              cookiesToSet.forEach(({ name, value, options }) =>
-                supabaseResponse.cookies.set(name, value, options)
-              );
-            },
-          },
-        }
-      );
-
-      await supabase.auth.getSession();
-    } catch {
-      // Ignore background sync errors on edge
-    }
-  }
-
-  return supabaseResponse;
+  return NextResponse.next({
+    request,
+  });
 }
