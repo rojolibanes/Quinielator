@@ -35,8 +35,7 @@ export default function LoginPage() {
         : error.message);
     } else {
       toast.success('¡Bienvenido de vuelta!');
-      router.push('/dashboard');
-      router.refresh();
+      window.location.href = '/dashboard';
     }
     setLoading(false);
   };
