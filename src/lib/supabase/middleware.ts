@@ -9,28 +9,11 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
-  const supabase = createServerClient(
-    supabaseUrl,
-    supabaseAnonKey,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          supabaseResponse = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
-
   const { pathname } = request.nextUrl;
+
+  // Fast check: look for Supabase auth cookie directly from request
+  const allCookies = request.cookies.getAll();
+  const hasAuthCookie = allCookies.some(c => c.name.startsWith('sb-') && c.name.includes('-auth-token'));
 
   const protectedPaths = ['/dashboard', '/leagues', '/leaderboard', '/admin', '/profile'];
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
@@ -38,22 +21,49 @@ export async function updateSession(request: NextRequest) {
   const authPaths = ['/login', '/register'];
   const isAuthPage = authPaths.some((path) => pathname.startsWith(path));
 
-  // IMPORTANT: Do not run auth queries on static or background routes
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user && isProtected) {
+  // If user has no auth cookie and tries to access protected route, redirect to /login instantly
+  if (!hasAuthCookie && isProtected) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/login';
     redirectUrl.searchParams.set('redirectTo', pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (user && isAuthPage) {
+  // If user already has auth cookie and tries to access login/register, redirect to /dashboard instantly
+  if (hasAuthCookie && isAuthPage) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = '/dashboard';
     return NextResponse.redirect(redirectUrl);
+  }
+
+  // If user has auth cookie, sync cookies via getSession() (local JWT verification without slow remote network call)
+  if (hasAuthCookie) {
+    try {
+      const supabase = createServerClient(
+        supabaseUrl,
+        supabaseAnonKey,
+        {
+          cookies: {
+            getAll() {
+              return request.cookies.getAll();
+            },
+            setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
+              cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+              supabaseResponse = NextResponse.next({
+                request,
+              });
+              cookiesToSet.forEach(({ name, value, options }) =>
+                supabaseResponse.cookies.set(name, value, options)
+              );
+            },
+          },
+        }
+      );
+
+      await supabase.auth.getSession();
+    } catch {
+      // Ignore background sync errors on edge
+    }
   }
 
   return supabaseResponse;
