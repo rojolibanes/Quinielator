@@ -58,6 +58,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Este partido no corresponde a la configuración de jornadas o equipos de esta liga.' }, { status: 400 });
   }
 
+  // Sanitize scorers and MVP based on league configuration
+  const cfg = (leagueData.points_config as any) || {};
+  const cleanScorers = cfg.enable_scorers !== false ? (predicted_scorers || []) : [];
+  const cleanMvp = cfg.enable_mvp !== false ? (predicted_mvp || null) : null;
+
   // Upsert prediction using admin client to guarantee session permissions
   const { data: prediction, error: predError } = await supabaseAdmin
     .from('predictions')
@@ -68,8 +73,8 @@ export async function POST(request: Request) {
         match_id,
         predicted_home_score: Number(predicted_home_score),
         predicted_away_score: Number(predicted_away_score),
-        predicted_scorers: predicted_scorers || [],
-        predicted_mvp: predicted_mvp || null,
+        predicted_scorers: cleanScorers,
+        predicted_mvp: cleanMvp,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'user_id,league_id,match_id' }

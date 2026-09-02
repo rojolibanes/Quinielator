@@ -244,58 +244,57 @@ BEGIN
   END IF;
 
 
-  -- 3. Scorers: match by player_id first, then name as fallback
-  --    (needed because old predictions may have API-Football IDs while
-  --    current match scorers use local players.json IDs)
-  WITH real_scorers AS (
-    SELECT
-      elem->>'player_id'           AS player_id,
-      LOWER(TRIM(elem->>'name'))   AS player_name,
-      COUNT(*)                     AS real_count
-    FROM jsonb_array_elements(COALESCE(match.scorers, '[]'::jsonb)) AS s(elem)
-    GROUP BY player_id, player_name
-  ),
-  pred_scorers AS (
-    SELECT
-      elem->>'player_id'           AS player_id,
-      LOWER(TRIM(elem->>'name'))   AS player_name,
-      COUNT(*)                     AS pred_count
-    FROM jsonb_array_elements(COALESCE(pred.predicted_scorers, '[]'::jsonb)) AS s(elem)
-    GROUP BY player_id, player_name
-  ),
-  -- ID matches (exact player_id match)
-  id_matches AS (
-    SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
-    FROM pred_scorers p
-    JOIN real_scorers r ON p.player_id = r.player_id
-  ),
-  -- Name matches for players NOT already matched by ID
-  name_matches AS (
-    SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
-    FROM pred_scorers p
-    JOIN real_scorers r ON LOWER(TRIM(p.player_name)) = LOWER(TRIM(r.player_name))
-    WHERE NOT EXISTS (
-      SELECT 1 FROM id_matches im WHERE im.player_id = p.player_id
-    ) AND NOT EXISTS (
-      SELECT 1 FROM id_matches im WHERE im.player_name = p.player_name
+  -- 3. Scorers: only if enable_scorers is not false
+  IF (config->>'enable_scorers')::BOOLEAN IS NOT FALSE THEN
+    WITH real_scorers AS (
+      SELECT
+        elem->>'player_id'           AS player_id,
+        LOWER(TRIM(elem->>'name'))   AS player_name,
+        COUNT(*)                     AS real_count
+      FROM jsonb_array_elements(COALESCE(match.scorers, '[]'::jsonb)) AS s(elem)
+      GROUP BY player_id, player_name
+    ),
+    pred_scorers AS (
+      SELECT
+        elem->>'player_id'           AS player_id,
+        LOWER(TRIM(elem->>'name'))   AS player_name,
+        COUNT(*)                     AS pred_count
+      FROM jsonb_array_elements(COALESCE(pred.predicted_scorers, '[]'::jsonb)) AS s(elem)
+      GROUP BY player_id, player_name
+    ),
+    id_matches AS (
+      SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
+      FROM pred_scorers p
+      JOIN real_scorers r ON p.player_id = r.player_id
+    ),
+    name_matches AS (
+      SELECT p.player_id, p.player_name, LEAST(p.pred_count, r.real_count) AS hits
+      FROM pred_scorers p
+      JOIN real_scorers r ON LOWER(TRIM(p.player_name)) = LOWER(TRIM(r.player_name))
+      WHERE NOT EXISTS (
+        SELECT 1 FROM id_matches im WHERE im.player_id = p.player_id
+      ) AND NOT EXISTS (
+        SELECT 1 FROM id_matches im WHERE im.player_name = p.player_name
+      )
     )
-  )
-  SELECT COALESCE(SUM(hits), 0) INTO scorer_hits
-  FROM (
-    SELECT hits FROM id_matches
-    UNION ALL
-    SELECT hits FROM name_matches
-  ) combined;
+    SELECT COALESCE(SUM(hits), 0) INTO scorer_hits
+    FROM (
+      SELECT hits FROM id_matches
+      UNION ALL
+      SELECT hits FROM name_matches
+    ) combined;
 
-  points := points + (scorer_hits * (config->>'scorer_per_goal')::INTEGER);
+    points := points + (scorer_hits * (config->>'scorer_per_goal')::INTEGER);
+  END IF;
 
 
-  -- 4. MVP: match by player_id first, then name as fallback
-  --    (same legacy ID mismatch issue as scorers)
-  IF pred.predicted_mvp IS NOT NULL AND match.mvp IS NOT NULL THEN
-    IF (pred.predicted_mvp->>'player_id') = (match.mvp->>'player_id')
-    OR LOWER(TRIM(pred.predicted_mvp->>'name')) = LOWER(TRIM(match.mvp->>'name')) THEN
-      points := points + (config->>'mvp')::INTEGER;
+  -- 4. MVP: only if enable_mvp is not false
+  IF (config->>'enable_mvp')::BOOLEAN IS NOT FALSE THEN
+    IF pred.predicted_mvp IS NOT NULL AND match.mvp IS NOT NULL THEN
+      IF (pred.predicted_mvp->>'player_id') = (match.mvp->>'player_id')
+      OR LOWER(TRIM(pred.predicted_mvp->>'name')) = LOWER(TRIM(match.mvp->>'name')) THEN
+        points := points + (config->>'mvp')::INTEGER;
+      END IF;
     END IF;
   END IF;
 

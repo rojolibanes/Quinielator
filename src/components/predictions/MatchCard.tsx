@@ -72,13 +72,13 @@ export default function MatchCard({
   const showMvp = league.points_config.enable_mvp !== false;
   const hasSubSelection = showScorers || showMvp;
 
-  const buildPayload = (leagueId: string) => ({
-    league_id: leagueId,
+  const buildPayload = (targetLeague: League) => ({
+    league_id: targetLeague.id,
     match_id: match.id,
     predicted_home_score: Number(homeScore),
     predicted_away_score: Number(awayScore),
-    predicted_scorers: selectedScorers,
-    predicted_mvp: selectedMvp,
+    predicted_scorers: targetLeague.points_config?.enable_scorers !== false ? selectedScorers : [],
+    predicted_mvp: targetLeague.points_config?.enable_mvp !== false ? selectedMvp : null,
   });
 
   const validate = () => {
@@ -106,7 +106,7 @@ export default function MatchCard({
       const res = await fetch('/api/predictions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(buildPayload(league.id)),
+        body: JSON.stringify(buildPayload(league)),
       });
       const json = await res.json();
       setSaving(false);
@@ -139,7 +139,7 @@ export default function MatchCard({
           fetch('/api/predictions', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(buildPayload(l.id)),
+            body: JSON.stringify(buildPayload(l)),
           }).then(r => r.json().then(json => ({ ok: r.ok, json, leagueName: l.name })))
         )
       );
